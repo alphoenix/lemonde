@@ -1,0 +1,152 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css" />
+	<link rel="stylesheet" type="text/css" href="./lemonde.css" />
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<style type='text/css'>
+	body {
+		background: #fff;
+	}
+	  .wax-legend .legend-title {
+	    text-align: left;
+	    margin-bottom: 8px;
+	    font-weight: bold;
+	    font-size: 90%;
+	    }
+	  .wax-legend .legend-scale ul {
+	    margin: 0;
+	    padding: 0;
+	    float: left;
+	    list-style: none;
+	    }
+	  .wax-legend .legend-scale ul li {
+	    display: block;
+	    float: left;
+	    width: 50px;
+	    margin-bottom: 6px;
+	    text-align: left;
+	    font-size: 80%;
+	    list-style: none;
+	    }
+	  .wax-legend ul.legend-labels li span {
+	    display: block;
+	    float: left;
+	    height: 15px;
+	    width: 50px;
+	    }
+	  .wax-legend .legend-source {
+	    font-size: 70%;
+	    color: #999;
+	    clear: both;
+	    }
+	.wax-legend a {
+		color: #777;
+	}
+	p {
+		padding-top: 5px;
+	}
+</style>
+</head>
+<body style="width:999px">	
+	<iframe width='999' height='530' frameborder='0' src='map.html'></iframe>
+	<p style="font-size:x-small;text-align:right" class="normal">Données : <a href="http://dataninja.it/" target="_blank">dataninja.it</a> à partir du travail de <a href="http://fortresseurope.blogspot.it/" target="_blank">Gabriele del Grande</a></p>
+	<div class="container_18">
+	<div class="col_droite grid_6 omega" style="width:25%;float:right;clear:both">
+		<div class="col_droite bloc_base" style="margin-top:20px">
+			<h4 class="entete">Des migrations en hausse au centre de la Méditerranée</h4>
+			<div class="contenu_bloc_droit">
+				<div id="container" style="width:100%;height:150px;"></div>
+				<p>Nombre de migrants arrivant en Europe par le centre de la Méditerranée entre 2008 et 2009 <a href="http://www.frontex.europa.eu/news/update-on-central-mediterranean-route-5wQPyW" target="_blank">selon Frontex</a>. Les données pour 2013 s'arrêtent en septembre.</p> 
+				<script>
+				$(function () {
+				Highcharts.setOptions({
+		lang: {
+			thousandsSep: " ",
+		}
+	});
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+			credits: {
+				enabled: false,
+			},
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+			legend:{
+				enabled: false,
+			},
+            xAxis: {
+                categories: [
+                    '2008',
+                    '2009',
+                    '2010',
+                    '2011',
+                    '2012',
+                    '2013'
+                ],
+				labels:{
+				style:{
+                        fontFamily: 'Arial'
+                }}
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                },
+				labels:{
+				style:{
+                        fontFamily: 'Arial'
+                }}
+            },
+            tooltip: {
+				formatter: function() {
+					return "<strong>"+this.x+"</strong><br />"+this.point.y+" franchissements" ;
+				},
+				style:{
+                        fontFamily: 'Arial'
+                }
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Franchissements illégaux',
+				color: '#FF5C00',
+                data: [39800,11000,4500,64300,15900,31000]
+    
+            }]
+        });
+    });
+    
+</script>
+				
+			</div>
+		</div>
+	</div>
+	<div class="article grid_12 alpha txt15_140" style="clear:left">
+		<p>Plus de 800 personnes sont mortes depuis la fin de l'été 2009 pour avoir voulu entrer en Europe par l'île italienne de Lampedusa. Au total, 4 000 migrants ont péri en Méditerranée depuis quatre ans, selon des chiffres recueillis par <a href="http://daily.wired.it/news/politica/2013/10/04/lampedusa-naufragio-migranti-immigrazione-mappa-564632.html" target="_blank">des journalistes italiens</a>.  Le naufrage, le 3 octobre, d'un bateau contenant un demi-millier d'Africains ajoute une ligne de plus à ce lourd bilan.</p>
+		
+		<p>Sur la carte ci-dessus, chaque cercle représente la mort d'un ou plusieurs migrants. Plus le cercle est grand, plus le nombre de morts est important. Les cercles tirent vers le rouge lorsqu'il y a un grand nombre d'événements dans la même zone.</p>
+				
+		<p class="lire">Lire notre reportage : "<a href="http://www.lemonde.fr/europe/article/2013/10/06/lamedusa-une-ile-pleine-de-douleur-pleure-le-naufrage-des-migrants_3490717_3214.html" target="_blank">Lampedusa, 'une île pleine de douleur', pleure le naufrage des migrants</a>"
+			
+		<p>L'agence chargée de la coopération aux frontières extérieures de l'Europe, Frontex, <a href="http://www.frontex.europa.eu/news/update-on-central-mediterranean-route-5wQPyW" target="_blank">estime que 31&nbsp;0000 migrants</a> ont traversé la Méditerranée vers l'Italie ou Malte depuis le début de l'année 2013. Il s'agit principalement d'Erythréens, de Somaliens et de Syriens. Cette route de migration avait été massivement empruntée en 2011 à la suite de la révolution en Tunisie et de l'expulsion de Libye d'un nombre important de migrants subsahariens par Tripoli.</p>
+	
+		<p>Ces migrants tentent souvent la traversée sur des bateaux de pêche en bois. Surpeuplés, ils quittent les rives de la Libye vers l'île de Lampedusa et la Sicile en Italie ou Malte. Frontex annonce avoir participé entre 2011 et 2013 à près de 900 opérations de sauvetage de ces embarcations peu adaptées à la haute mer.</p>
+		
+		<p class="lire">Lire également : "<a href="http://bugbrother.blog.lemonde.fr/2013/10/07/3300-migrants-sont-morts-a-lampedusa-depuis-2002/" target="_blank">3&nbsp;300 migrants sont morts à Lampedusa depuis 2002</a>"
+	</div>
+	</div>
+</body>
+</html>

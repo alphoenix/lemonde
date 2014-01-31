@@ -1,0 +1,40 @@
+id,nom_simple,nom,parti,fonction,maastricht,tce,lisbonne,traite,total_amount
+1,Dupont-Aignan,Nicolas Dupont-Aignan,DLR,député de l'Essonne,contre,contre,contre,contre,100
+4,Rugy,François de Rugy,EELV,député de Loire-Atlantique,pour,pour,pour,contre,100
+5,Duflot,Cécile Duflot,EELV,ministre de l'égalité des territoires et du logement,,pour,pour,abstention,100
+3,Cohn-Bendit,Daniel Cohn-Bendit,EELV,député européen,pour,pour,pour,pour,100
+6,Le Pen,Marine Le Pen,FN,députée européenne et présidente du Front national,contre,contre,contre,contre,100
+7,Bayrou,François Bayrou,MoDem,président du MoDem,pour,pour,pour,pour,100
+8,Morin,Hervé Morin,NC,député de l'Eure et président du Nouveau centre,pour,pour,pour,pour,100
+9,Besancenot,Olivier Besancenot,NPA,ancien candidat à l'élection présidentielle,contre,contre,contre,contre,100
+10,Laurent,Pierre Laurent,PC,secrétaire national du Parti communiste,contre,contre,contre,contre,100
+11,Mélenchon,Jean-Luc Mélenchon,PG,député européen,pour,contre,contre,contre,100
+12,Borloo,Jean-Louis Borloo,PRV,député du Nord et président du Parti radical,pour,pour,pour,pour,100
+18,Dray,Julien Dray ,PS,conseiller régional d'Île-de-France,pour,pour,contre,contre,100
+19,Lienemann,Marie-Noëlle Lienemann,PS,sénatrice de Paris,pour,contre,contre,contre,100
+17,Emmanuelli,Henri Emmanuelli,PS,député des Landes,pour,contre,contre,abstention,100
+24,Hamon,Benoît Hamon,PS,ministre délégué à l'économie sociale et solidaire,pour,contre,contre,abstention,100
+13,Hollande,François Hollande,PS,président de la République,pour,pour,pour,pour,100
+14,Ayrault,Jean-Marc Ayrault,PS,premier ministre,pour,pour,pour,pour,100
+15,Montebourg,Arnaud Montebourg,PS,ministre du redressement productif,pour,contre,abstention,pour,100
+16,Fabius,Laurent Fabius,PS,ministre des affaires étrangères,pour,contre,abstention,pour,100
+20,Moscovici,Pierre Moscovici,PS,ministre de l'économie et des finances,pour,pour,pour,pour,100
+21,Peillon,Vincent Peillon,PS,minsitre de l'Éducation nationale,pour,contre,pour,pour,100
+22,Sapin,Michel Sapin,PS,ministre du travail,pour,pour,pour,pour,100
+23,Cazeneuve,Bernard Cazeneuve,PS,ministre délégué aux affaires européennes,pour,contre,contre,pour,100
+37,Valls,Manuel Valls,PS,,pour,pour,pour,pour,100
+38,Désir,Harlem Désir,PS,,pour,pour,pour,pour,100
+39,Cambadélis,Jean-Christophe Cambadélis,PS,,pour,pour,pour,pour,100
+25,Villepin,Dominique de Villepin,RS,président de République Solidaire,pour,pour,pour,pour,100
+26,Fillon,François Fillon,UMP,député de Paris et ancien premier ministre,contre,pour,pour,pour,100
+27,Bertrand,Xavier Bertrand,UMP,député de l'Aisne,contre,pour,pour,pour,100
+28,Copé,Jean-François Copé,UMP,député de Seine-et-Marne,pour,pour,pour,pour,100
+29,Juppé,Alain Juppé,UMP,maire de Bordeaux,pour,pour,pour,pour,100
+30,Alliot-Marie,Michèle Alliot-Marie,UMP,ancienne ministre de l'intérieur,pour,pour,pour,pour,100
+31,Raffarin,Jean-Pierre Raffarin,UMP,sénateur de la Vienne,pour,pour,pour,pour,100
+32,Sarkozy,Nicolas Sarkozy,UMP,ancien président de la République,pour,pour,pour,pour,100
+33,Kosciusko-Morizet,Nathalie Kosciusko-Morizet,UMP,député de l'Essonne,contre,pour,pour,pour,100
+34,Le Maire,Bruno Le Maire,UMP,député de l'Eure,pour,pour,pour,pour,100
+35,Hortefeux,Brice Hortefeux,UMP,député européen,pour,pour,pour,pour,100
+41,Guaino,Henri Guaino,UMP,,contre,contre,pour,pour,100
+36,Taubira,Christiane Taubira,Walwari,ministre de la justice,,contre,contre,,100

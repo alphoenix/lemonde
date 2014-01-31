@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Médias</title>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link href="css/mycss.css" rel="stylesheet" type="text/css">
+		<script src="./js/jquery.dataTables.js"></script>
+		<script src="./js/data.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		//fonction pour séparer les milliers (ne pas toucher)
+			function format(valeur,decimal,separateur) {
+			// formate un chiffre avec 'decimal' chiffres après la virgule et un separateur
+				var deci=Math.round( Math.pow(10,decimal)*(Math.abs(valeur)-Math.floor(Math.abs(valeur)))) ; 
+				var val=Math.floor(Math.abs(valeur));
+				if ((decimal==0)||(deci==Math.pow(10,decimal))) {val=Math.floor(Math.abs(valeur)); deci=0;}
+				var val_format=val+"";
+				var nb=val_format.length;
+				for (var i=1;i<4;i++) {
+					if (val>=Math.pow(10,(3*i))) {
+						val_format=val_format.substring(0,nb-(3*i))+separateur+val_format.substring(nb-(3*i));
+					}
+				}
+				if (decimal>0) {
+					var decim=""; 
+					for (var j=0;j<(decimal-deci.toString().length);j++) {decim+="0";}
+					deci=decim+deci.toString();
+					val_format=val_format+"."+deci;
+				}
+				if (parseFloat(valeur)<0) {val_format="-"+val_format;}
+				return val_format;
+			} 
+		
+		
+		function scroller(id,event) {
+			event.preventDefault();
+			$(window.parent.document).find('body').stop().animate( {scrollTop : $(id).offset().top+100},500);
+			$(window.parent.document).find('html').stop().animate( {scrollTop : $(id).offset().top+100},500)
+		}
+		
+		 $(function () {
+			jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+				"currency-pre": function ( a ) {
+					a = (a==="-") ? 0 : a.replace( /[^\d\-\.]/g, "" );
+					return parseFloat( a );
+				},
+				"currency-asc": function (a,b) {
+					return a - b;
+				},
+				"currency-desc": function (a,b) {
+					return b - a;
+				}
+			});			
+			
+		$('#tableau').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableautable"></table>' );
+		$('#tableautable').dataTable({
+			"aaData": poleemploi.aaData,
+			"aoColumns": [
+				{ "sTitle": "Média","sType": "string","bSearchable":true},
+				{ "sTitle": "Emplois menacés","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],0,'');
+				}},
+				{ "sTitle": "Emplois dans le média","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],0,'');
+				}},
+				{ "sTitle": "Part d'emplois menacés","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ]*100,2,'')+' %';
+				}},
+				{ "sTitle": "Date de l'annonce","sType": "string","bSearchable":false,"bVisible":false},
+				{ "sTitle": "Type","sType": "string","bSearchable":false},
+				{ "sTitle": "Titres concernés","sType": "string","bSearchable":false,"bVisible":false},
+				{ "sTitle": "Statut","sType": "string","bSearchable":false},
+				{ "sTitle": "Lien","sType": "string","bSearchable":false,
+					"fnRender": function(obj) {
+						return "<a href='"+obj.aData[obj.iDataColumn]+"' target='_blank'>Source</a>";
+				}}
+			],
+			"bSort": true,
+			"aaSorting": [[1,'asc']],
+			"sScrollY": "540px",
+			"bPaginate":false,
+			"bScrollInfinite": true,
+	        "bScrollCollapse": true,
+			"bFilter": false,
+			"oLanguage": {
+				"sZeroRecords": "Pas de données disponibles avec cette recherche",
+				"sLengthMenu": "_MENU_ entrées affichées",
+				"sInfo": "",
+				"sSearch": "Cliquez sur l'intitulé d'une colonne pour trier les informations selon les critères.",
+				"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+				"sInfoFiltered": ""
+			}
+		});
+		});	
+		</script>
+
+
+		</head>
+<body>
+			<div class="article grid_12">
+
+			<div id="tableau"></div>
+			
+				<p style="width:80%"></p>
+
+</body>
+</html>

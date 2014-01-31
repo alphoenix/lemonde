@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>JQVMap - World Map</title>
+    <link href="./lemonde.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="./jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type='text/css'>
+  .wax-legend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .wax-legend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .wax-legend .legend-scale ul li {
+	display: block;
+	float: left;
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+	padding-right: 5px;
+    }
+  .wax-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .wax-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+    }
+  .wax-legend a {
+    color: #777;
+    }
+#vmap_desc {
+	clear:both;
+	margin:5px;
+	height: 200px;
+	overflow: auto;
+}
+.wax-legend {
+	margin: 5px;
+}
+</style>
+	
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="./jqvmap/jquery.vmap.js" type="text/javascript"></script>
+    <script src="./jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+    <script src="./jqvmap/maps/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <script src="./data.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<style>body{background:#fff}</style>
+	
+    <script type="text/javascript">
+	function carte(annee) {
+	$("#vmap").html('')
+		jQuery('#vmap').vectorMap(
+		{
+			map: 'europe_en',
+			backgroundColor: '#D1E5F0',
+			borderColor: '#F7F7F7',
+			borderOpacity: 1,
+			borderWidth: 0,
+			color: '#F7F7F7',
+			enableZoom: false,
+			hoverColor: '#D1E5F0',
+			hoverOpacity: 0.8,
+			normalizeFunction: 'linear',
+			scaleColors: ['#b6d6ff', '#005ace'],
+			selectedColor: '#E0E0E0',
+			selectedRegion: null,
+			showTooltip: false
+		});
+		couleurs = {};
+		$.each(data, function(index,value) {
+			if(value[annee] == null)
+				couleurs[index] = "#D73027";
+			else if(value[annee] < 0)
+				couleurs[index] = "#1A9850";
+			else if(value[annee] == 0)
+				couleurs[index] = "#FFFFBF";
+			else 
+				couleurs[index] = "#D73027";
+		});
+		$("#vmap").vectorMap('set','colors',couleurs);
+		
+		html = "Evolution des crimes racistes entre "+annee+" et "+(parseInt(annee)+1)
+		
+		$("#annee").html(html);
+			}
+	
+	
+    jQuery(document).ready(function() {
+	    $( "#slider" ).slider({
+			value:2011,
+			min:2001,
+			max:2011,
+			step:1,
+			slide: function(event,ui) {
+				carte(ui.value)
+			}
+		});			
+		
+	carte("2011");
+	});
+    </script>
+
+  </head>
+  <body>
+    <div id="vmap" style="width: 534px; height: 415px;clear:both"></div>
+
+<div id="slider" style="width:500px;margin:15px;"></div>
+
+<div id="annee" style="font-weight:bold"></div>
+
+	</body>
+</html>

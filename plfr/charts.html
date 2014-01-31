@@ -1,0 +1,85 @@
+<!--
+You are free to copy and use this sample in accordance with the terms of the
+Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+      Google Visualization API Sample
+    </title>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['treemap']});
+    </script>
+    <script type="text/javascript">
+      function drawVisualization() {
+        // Create and populate the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Mesure');
+        data.addColumn('string', 'Parent');
+        data.addColumn('number', 'Chiffrage');
+        data.addRows([
+          ["Plan de finances rectificatives (État - 4,8 milliards)",null,0],
+          ["Remise en cause de l'exonération sociale des heures supplémentaires (156 millions)","Plan de finances rectificatives (État - 4,8 milliards)",0.156],
+          ["Contribution exceptionnelle sur la fortune en 2012 (2,3 milliards)","Plan de finances rectificatives (État - 4,8 milliards)",2.325],
+          ["Retour sur les allégements des droits de succession (140 millions)","Plan de finances rectificatives (État - 4,8 milliards)",0.14],
+          ["Taxation des opérations financières (170 millions)","Plan de finances rectificatives (État - 4,8 milliards)",0.17],
+          ["Contribution du secteur bancaire (550 millions)","Plan de finances rectificatives (État - 4,8 milliards)",0.55],
+          ["Contribution exceptionnelle du secteur pétrolier (550 millions)","Plan de finances rectificatives (État - 4,8 milliards)",0.55],
+          ["Versement anticipé de la majoration exceptionnelle de 5% d'IS sur les grandes entreprises","Plan de finances rectificatives (État - 4,8 milliards)",0.8],
+          ["Mesures anti-abus en matière de fiscalité des entreprises","Plan de finances rectificatives (État - 4,8 milliards)",0.2],
+     	]);
+      
+        // Create and draw the visualization.
+        var treemap = new google.visualization.TreeMap(document.getElementById('visualization'));
+        treemap.draw(data, {
+           minColor: '#fb0',
+          midColor: '#f70',
+          maxColor: '#f00',
+		  fontFamily: 'Arial',
+          headerHeight: 15,
+          fontSize: 10,		
+          fontColor: 'black',
+          showScale: false});
+      }
+      function drawVisualization_2() {
+        // Create and populate the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Mesure');
+        data.addColumn('string', 'Parent');
+        data.addColumn('number', 'Chiffrage');
+        data.addRows([
+          ["Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",null,0],
+          ["Hausse des cotisations sur les revenus du capital (800 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.8],
+          ["Remise en cause de l'exonération sociale des heures supplémentaires (824 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.824],
+          ["Imposition des revenus immobiliers des non-résidents (50 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.050],
+          ["Taxation des stocks options (50 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.075],
+          ["Contribution du secteur bancaire (550 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.55],
+          ["Limitation des niches fiscales sur l'épargne salariale (550 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.55],
+     	]);
+
+        // Create and draw the visualization.
+        var treemap_2 = new google.visualization.TreeMap(document.getElementById('visualization_2'));
+        treemap_2.draw(data, {
+           minColor: '#fb0',
+          midColor: '#f70',
+          maxColor: '#f00',
+		  fontFamily: 'Arial',
+          headerHeight: 15,
+          fontSize: 10,		
+          fontColor: 'black',
+          showScale: false});
+      }
+
+      google.setOnLoadCallback(drawVisualization);
+      google.setOnLoadCallback(drawVisualization_2);
+    </script>
+  </head>
+  <body style="font-family:Arial,sans-serif;border:0;margin:0;padding:0;width:990px;height:400px">
+    <div id="visualization" style="width: 670px; height: 400px;float:left;"></div>
+	<div id="visualization_2" style="width: 320px; height:400px;float:right;"></div>
+  </body>
+</html>

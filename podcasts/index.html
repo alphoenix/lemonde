@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta charset="UTF-8">
+		<title>All Podcasts</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js" >
+</script>
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">		
+	<link href="./lemonde.css" rel="stylesheet">	
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">	
+	</head>
+<body>
+<div class="article container_18">
+<div id="results"></div>
+<div id="hiddenDiv"></div>
+
+<script type="text/javascript">
+var podcasts=[];
+function addtoPodcastList(feed,nbr,name){
+    url = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num='+nbr+'&output=json_xml&callback=?&q=' 
+            + encodeURIComponent(feed);
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'jsonp',
+        cache: false,
+        success: function(feeds) { 
+		//alert(JSON.stringify(feeds));
+		var  xmlData= feeds.responseData.xmlString;
+		$('#hiddenDiv').empty();
+		$('#hiddenDiv').append(xmlData); 
+		//$xml = $( xmlData )
+		//alert(JSON.stringify(jsonObj));
+		var f= feeds.responseData.feed;
+    $('#results').append('<h4 class="tt17">'+name+'</h4>');
+   // $('#results').append('<tr> <th>#</th><th>Sound</th> <th>Title</th></tr>');
+    for(var i=0; i<f.entries.length; i++){
+		var entry = f.entries[i];
+		//alert(JSON.stringify(entry));
+
+		var podcastUrl = $('#hiddenDiv').get(0).getElementsByTagName('enclosure')[i].getAttribute('url');
+
+		var jour = new Date(entry['publishedDate'])
+	   
+		//$('#results').append('<tr><td>'+i+'</td><td><audio controls><source src="'+podcastUrl+'" type=\'audio/mpeg\' /></audio></td><td>'+entry['title']+'</td></tr>');
+		$('#results').append('<audio controls><source src="'+podcastUrl+'" type=\'audio/mpeg\' /></audio>&nbsp;'+entry['title']+' (' +jour.getDate()+'/'+(jour.getMonth()+1)+')<br/>');
+
+
+        }
+   // $('#results').append('</table>');
+          $('#hiddenDiv').empty();
+       
+		        },
+        error: function(s,x) { alert(x); }
+    });    
+}
+
+	$(document).ready(function() {
+    
+    addtoPodcastList('http://radiofrance-podcast.net/podcast09/rss_10238.xml',2,"France Inter - L'invité");
+    addtoPodcastList('http://radiofrance-podcast.net/podcast09/rss_10239.xml',2,"France Inter - Inter Activ");
+    addtoPodcastList('http://radiofrance-podcast.net/podcast09/rss_11638.xml',2,"France Culture - L'invité des matins");
+    addtoPodcastList('http://radiofrance-podcast.net/podcast09/rss_11614.xml',2,"France Info - L'invité du matin");
+    addtoPodcastList('http://www.rtl.fr/podcast/linvite-de-rtl-en-video.xml',2,"RTL - L'invité");
+    addtoPodcastList('http://www.europe1.fr/podcasts/interview-8h20.xml',1,"Europe 1 - L'interview");
+    addtoPodcastList('http://podcast.rmc.fr/channel38/RMCInfochannel38.xml',2,"RMC - L'invité de Bourdin");
+});
+</script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+
+<p class="lire">Voir aussi : <a href="http://www.france2.fr/emissions/telematin/actu/les-4-verites">Les 4 vérités</a> et <a href="http://www.itele.fr/chroniques/invite-bruce-toussaint" target="_blank">L'invité de Bruce Toussaint</a></p>
+</div>
+</body>
+</html>

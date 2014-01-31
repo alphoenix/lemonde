@@ -1,0 +1,54 @@
+<!--
+You are free to copy and use this sample in accordance with the terms of the
+Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+      Google Visualization API Sample
+    </title>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['treemap']});
+    </script>
+    <script type="text/javascript">
+      function drawVisualization() {
+        // Create and populate the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Mesure');
+        data.addColumn('string', 'Parent');
+        data.addColumn('number', 'Chiffrage');
+        data.addRows([
+          ["Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",null,0],
+          ["Hausse des cotisations sur les revenus du capital (800 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.8],
+          ["Remise en cause de l'exonération sociale des heures supplémentaires (824 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.824],
+          ["Imposition des revenus immobiliers des non-résidents (50 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.050],
+          ["Taxation des stocks options (50 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.075],
+          ["Contribution du secteur bancaire (550 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.55],
+          ["Limitation des niches fiscales sur l'épargne salariale (550 millions)","Plan de finances rectificatives (Sécurité sociale - 2,3 milliards)",0.55],
+     	]);
+      
+        // Create and draw the visualization.
+        var treemap = new google.visualization.TreeMap(document.getElementById('visualization'));
+        treemap.draw(data, {
+           minColor: '#fb0',
+          midColor: '#f70',
+          maxColor: '#f00',
+		  fontFamily: 'Arial',
+          headerHeight: 15,
+          fontSize: 10,		
+          fontColor: 'black',
+          showScale: false});
+      }
+      
+
+      google.setOnLoadCallback(drawVisualization);
+    </script>
+  </head>
+  <body style="font-family: Arial;border: 0 none;">
+    <div id="visualization" style="width: 534px; height: 191px;"></div>
+  </body>
+</html>

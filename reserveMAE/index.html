@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Réserve parlementaire</title>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link href="css/mycss.css" rel="stylesheet" type="text/css">
+		<script src="./js/jquery.dataTables.js"></script>
+		<script src="./js/data.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		//fonction pour séparer les milliers (ne pas toucher)
+			function format(valeur,decimal,separateur) {
+			// formate un chiffre avec 'decimal' chiffres après la virgule et un separateur
+				var deci=Math.round( Math.pow(10,decimal)*(Math.abs(valeur)-Math.floor(Math.abs(valeur)))) ; 
+				var val=Math.floor(Math.abs(valeur));
+				if ((decimal==0)||(deci==Math.pow(10,decimal))) {val=Math.floor(Math.abs(valeur)); deci=0;}
+				var val_format=val+"";
+				var nb=val_format.length;
+				for (var i=1;i<4;i++) {
+					if (val>=Math.pow(10,(3*i))) {
+						val_format=val_format.substring(0,nb-(3*i))+separateur+val_format.substring(nb-(3*i));
+					}
+				}
+				if (decimal>0) {
+					var decim=""; 
+					for (var j=0;j<(decimal-deci.toString().length);j++) {decim+="0";}
+					deci=decim+deci.toString();
+					val_format=val_format+"."+deci;
+				}
+				if (parseFloat(valeur)<0) {val_format="-"+val_format;}
+				return val_format;
+			} 
+		
+		
+		function scroller(id,event) {
+			event.preventDefault();
+			$(window.parent.document).find('body').stop().animate( {scrollTop : $(id).offset().top+100},500);
+			$(window.parent.document).find('html').stop().animate( {scrollTop : $(id).offset().top+100},500)
+		}
+		
+		 $(function () {
+			jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+				"currency-pre": function ( a ) {
+					a = (a==="-") ? 0 : a.replace( /[^\d\-\.]/g, "" );
+					return parseFloat( a );
+				},
+				"currency-asc": function (a,b) {
+					return a - b;
+				},
+				"currency-desc": function (a,b) {
+					return b - a;
+				}
+			});			
+			
+			$('#tableau').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableautable"></table>' );
+		$('#tableautable').dataTable({
+			"aaData": deputes.aaData,
+			"aoColumns": [
+				{ "sTitle": "Parlementaire","sType": "string"},
+				{ "sTitle": "Association","sType": "string"},
+				{ "sTitle": "Pays","sType": "string"},
+				{ "sTitle": "Subvention allouée", "bSearchable":false, 	"sType": "currency",
+					"fnRender": function(obj) { 
+						return format(obj.aData[ obj.iDataColumn ],0,' ')+' €';
+				}},
+				{ "sTitle": "Programme","sType": "string","bVisible":false},
+				{ "sTitle": "Programme","sType": "string","bVisible":false},
+				{ "sTitle": "Origine","sType": "string","bVisible":true,"bSearchable":false},
+				{ "sTitle": "Année","sType": "string","bSearchable":false}
+			],
+			"bSort": true,
+			"aaSorting": [[0,'asc']],
+			"sScrollY": "400px",
+			"bScrollInfinite": true,
+	        "bScrollCollapse": true,
+			"oLanguage": {
+				"sZeroRecords": "Pas de données disponibles avec cette recherche",
+				"sLengthMenu": "_MENU_ entrées affichées",
+				"sInfo": "",
+				"sSearch": "Cliquez sur l'intitulé d'une colonne pour trier selon ce critère.<br />Recherchez une subvention (parlementaire, association, pays) :",
+				"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+				"sInfoFiltered": ""
+			}
+		});
+		});	
+		</script>
+
+
+		</head>
+<body>
+			<div id="tableau"></div>
+			<div id="credits" style="font-size:0.8em;clear:both;float:right;margin-right:3px;">Source : ministère des affaires étrangères. <a href="./donnees.csv" target="_blank">Téléchargez les données</a></div>
+</body>
+</html>

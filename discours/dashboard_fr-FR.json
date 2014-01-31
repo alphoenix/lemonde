@@ -1,0 +1,111 @@
+{
+  "verbatims":"discours",  
+  "verbatim":"discours",
+  "points":"points",  
+  "point":"point",
+  "no_f":"aucune",
+  "no_m":"aucun",
+  "colon":" : ",
+  "at":"à",
+  
+  "control":{
+    "TimeNavigator":{
+      "days":"jours",
+      "day":"jour",
+      "hours":"heures",
+      "hour":"heure"
+    },
+    "Search":{
+      "advanced_search":"Recherche avancée",
+      "popup_title":"Rechercher dans les mots clés ou les titres...",
+      "search":"Rechercher un tag",
+      "launch_search":"Lancer la recherche",
+      "all_expressions":"Toutes les expressions suivantes",
+      "at_least_one":"Au moins une des expressions suivantes",
+      "expert_mode":"(Mode de recherche expert)",
+      "in_fields":"...dans les champs:",
+      "missing_parenthesis":"Il manque une parenthèse.",
+      "missing_quote":"Il manque un guillement.",
+      "char_in_excess":"Il y a un caractère en trop dans un terme.",
+      "following_operators":"Deux opérateurs se suivent.",
+      "starts_with_operator":"La requête commence par un opérateur.",
+      "ends_with_operator":"La requête se termine par un opérateur."
+    },
+    "Filters":{
+      "filter":"filtre",
+      "filters":"filtres",
+      "without":"sans",
+      "full_text":"plein texte",
+      "delete_all":"Supprimer tous les filtres"
+    },
+    "Weight":{
+      "weight_by":"Pondération",
+      "no_weight":"Aucune pondération"
+    },
+    "Layout":{
+      "automatic":"Automatique",
+      "column":"Colonne",
+      "columns":"Colonnes",
+      "columns_count":"Nombre de colonnes"
+    },
+    "Error":{
+      "loading":"Chargement...",
+      "loading_error":"Impossible de charger le fichier",
+      "unvalid_json_file":"Erreurs dans le fichier JSON",
+      "unvalid_yaml_file":"Erreurs dans le fichier YAML"
+    },
+    "Editorial":{
+      "newswatches":"Notes de veille",
+      "newswatch":"Note de veille",
+      "note":"note",
+      "download_complete_newswatch":"Télécharger la note complète",
+      "available_newswatch":"note disponible",
+      "available_newswatches":"notes disponibles",
+      "set_time_frame":"Synchroniser les données avec la période concernée",
+      "next_note":"Note suivante",
+      "previous_note":"Note précédente",
+      "tooltip_message":"Cliquez ici pour accéder aux notes de veille"
+    }
+  },
+  
+  "modules":{
+    "PostsNavigator":{
+      "previous_verbatim":"Discours précédent",
+      "next_verbatim":"Discours suivant",
+      "reverse":"Inverser l'ordre",
+      "view_the_content":"Voir le début du discours",
+      "close":"Fermer",
+      "posts_ordered_by":"Discours classés par ",
+      "copy":"Copier l'URL",
+      "open":"Ouvrir l'URL",
+      "hide_module":"Réduire",
+      "show_module":"Agrandir",
+      "open_new_window":"Ouvrir l'URL dans un nouvel onglet"
+    },
+    "GridModule":{
+      "score":"Score"
+    },
+    "AdvancedTagCloud":{
+      "show":"Voir toutes les valeurs",
+      "hide":"Masquer",
+      "title_start":"Liste complète des",
+      "title_end":"valeurs"
+    },
+    "BarChart":{
+      "desactivated_field":"Champ désactivé."
+    },
+    "SpiderChart":{
+      "show_others":"Détail",
+      "others":"Autres"
+    }
+  },
+  
+  "context":{
+    "enlarge":"Agrandir",
+    "reduce":"Réduire",
+    "get_info":"Voir la description du module",
+    "export_graphic":"Exporter le graphique",
+    "copy_data":"Copier les données dans le presse-papier"
+  }
+  
+}

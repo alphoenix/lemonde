@@ -1,0 +1,23 @@
+data = {
+"de":{"pays":"Allemagne","notation":"AAA","taux":1.69,"couleur":20},
+"dk":{"pays":"Danemark","notation":"AAA","taux":1.83,"couleur":20},
+"fi":{"pays":"Finlande","notation":"AAA","taux":1.97,"couleur":20},
+"nl":{"pays":"Pays-Bas","notation":"AAA","taux":2.03,"couleur":20},
+"gb":{"pays":"Royaume-Uni","notation":"AAA","taux":2.78,"couleur":20},
+"se":{"pays":"Suède","notation":"AAA","taux":2.35,"couleur":20},
+"at":{"pays":"Autriche","notation":"AA+","taux":2.11,"couleur":19},
+"be":{"pays":"Belgique","notation":"AA","taux":2.46,"couleur":18},
+"fr":{"pays":"France","notation":"AA","taux":2.39,"couleur":18},
+"cz":{"pays":"République Tchèque","notation":"AA","taux":2.38,"couleur":18},
+"pl":{"pays":"Pologne","notation":"A","taux":4.38,"couleur":15},
+"si":{"pays":"Slovénie","notation":"A-","taux":6.18,"couleur":14},
+"ie":{"pays":"Irlande","notation":"BBB+","taux":3.55,"couleur":13},
+"it":{"pays":"Italie","notation":"BBB","taux":4.12,"couleur":12},
+"lt":{"pays":"Lituanie","notation":"BBB","taux":4,"couleur":12},
+"bg":{"pays":"Bulgarie","notation":"BBB","taux":3.65,"couleur":12},
+"es":{"pays":"Espagne","notation":"BBB-","taux":4.07,"couleur":11},
+"ro":{"pays":"Roumanie","notation":"BB+","taux":5.35,"couleur":10},
+"hu":{"pays":"Hongrie","notation":"BB","taux":5.79,"couleur":9},
+"pt":{"pays":"Portugal","notation":"BB","taux":5.81,"couleur":9},
+"gr":{"pays":"Grèce","notation":"B-","taux":7.89,"couleur":5}
+}

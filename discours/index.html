@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xml:lang="fr" lang="fr">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Observatoire des discours de François Hollande (2012-2013)</title>
+    <link rel="stylesheet" type="text/css" media="all" href="http://blog.lemonde.fr/wp-content/themes/lemonde/style.css?1326101403" />
+    <link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/bootstrap/list-blog.css" />
+    <style>
+      body{
+        margin: 0;
+        padding: 0;
+        background-color: #FFF;
+      }
+      div.maincontent{
+        position: absolute;
+        background-color: #FFF;
+        width: 990px;
+        left: 50%;
+        margin-left: -495px;
+      }
+      div#radar_flash{
+        position: relative;
+        width: 990px;
+        height: 650px;
+        /* border: 1px #ccc solid; */
+        margin-bottom: 1em;
+      }
+      div#radar_flash_container{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      p.liste {
+        margin: 0;
+      }
+      h1, h2 {
+        margin: 1em 0;
+      }
+      ul { 
+        list-style-position: inside;
+        list-style-type: square;
+      }
+    </style>
+
+  </head>
+  <body style="margin:0;padding:0;">
+    <div class="maincontent">
+<p>L'Observatoire des discours est un outil sémantique, fruit de la collaboration entre les entreprises Linkfluence et Jean Véronis Technologies, pour Le Monde.fr.
+Il permet d'explorer les textes des interventions publiques de Nicolas Sarkozy de 2004 à 2012 en proposant différentes pistes d'analyse.
+Il est complété par deux autres observatoires&nbsp;: l'<a href="http://www.lemonde.fr/election-presidentielle-2012/visuel/2012/03/06/explorez-les-discours-des-candidats-a-la-presidentielle-2007_1652570_1471069.html" target="_parent">observatoire des discours des candidats à la présidentielle 2007</a>, et l'<a href="http://www.lemonde.fr/international/visuel/2012/03/06/explorez-les-discours-des-candidats-a-la-presidentielle-2012_1652568_3210.html" target="_parent">observatoire des discours des candidats à la présidentielle 2012</a>.</p>
+  <p>L'icone <img src="images/info.png" alt="(i)" /> vous permet de consulter une explication détaillée de chaque module, et une description détaillée de notre méthodologie est proposée <a href="http://politicosphere.blog.lemonde.fr/2012/03/05/presentation-observatoire-des-discours/" target="_parent">sur notre blog</a>.</p>
+    	<div style="text-align: right"><input type="button" id="fs_switch" style="display: inline-block;" value="Mode plein-écran" onclick="linkfluence.fullScreen()"/></div>
+      <div id="radar_flash">
+        <div id="radar_flash_container">
+          <object width="100%" height="100%">
+            <param name="allowScriptAccess" value="sameDomain" />
+            <param name="allowFullScreen" value="false" />
+            <param name="movie" value="dashboard.swf?configFile=environment.json&verbatimsFile=discours.zip&mainColor=0x9999bb&langPath=dashboard_fr-FR.json&lang=fr-FR&initialRange=365" />
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#ffffff" />  
+            <embed src="dashboard.swf?configFile=environment.json&verbatimsFile=discours.zip&mainColor=0x9999bb&langPath=dashboard_fr-FR.json&lang=fr-FR&initialRange=365" quality="high" bgcolor="#ffffff" width="100%" height="100%" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" />
+          </object>
+        </div>
+      </div>
+      <!-- (Vérifier si jQuery est déjà là) -->
+      <script type="text/javascript" src="jquery-1.6.2.min.js"></script>
+      <script type="text/javascript" src="jquery.mousewheel.js"></script>
+      <script type="text/javascript">
+        // Package dédié:
+        var linkfluence = {};
+
+        $(document).ready(function(){
+          $("#radar_flash_container").bind("mousewheel",function(e,delta){
+            return false;
+          });
+
+          linkfluence.leaveFullscreen = function(){
+            $('body').css('overflow', 'auto');
+            $('#fs_radar_flash').remove();
+            $("#radar_flash_container").css('visibility','visible');
+          };
+
+          linkfluence.fullScreen = function(){
+            // On insert une balise dans le body qui contiendra le radar en plein écran (HTML):
+            var fsRadar = $(
+              '<div id="fs_radar_flash">' +
+              '<div id="fs_radar_flash_header" style="height:30px; line-height: 36px; width:100%; position: absolute; border-bottom: 1px #ccc solid;vertical-align: top;background: #fff;">' +
+              '<input type="button" id="fs_leave" style="position: absolute; display: inline-block; right: 10px; top: 2px;" value="Quitter le plein-écran" />' +
+              '</div>' +
+              '<div id="fs_radar_flash_container" style="position:absolute; top:31px; left:0; right:0; bottom:0">' +
+              '<object width="100%" height="100%">' +
+              '<param name="allowScriptAccess" value="sameDomain" />' +
+              '<param name="allowFullScreen" value="false" />' +
+              '<param name="movie" value="dashboard.swf?configFile=environment.json&verbatimsFile=discours.zip&mainColor=0x9999bb&langPath=dashboard_fr-FR.json&lang=fr-FR&initialRange=365" />' +
+              '<param name="quality" value="high" />' +
+              '<param name="bgcolor" value="#ffffff" />  ' +
+              '<embed src="dashboard.swf?configFile=environment.json&verbatimsFile=discours.zip&mainColor=0x9999bb&langPath=dashboard_fr-FR.json&lang=fr-FR&initialRange=365" quality="high" bgcolor="#ffffff" width="100%" height="100%" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" />' +
+              '</object>' +
+              '</div>' +
+            '</div>'
+            );
+
+            // La CSS pour qu'il prenne tout l'écran:
+            fsRadar.css({
+              'position': 'fixed',
+              'z-index': 10000,
+              'width': '100%',
+              'height': '100%'
+            });
+
+            // La CSS pour que la page ne soit plus scrollable:
+            $('body').css('overflow', 'hidden');
+            $("#radar_flash_container").css('visibility','hidden');
+
+            $('body').append(fsRadar);
+            $('#fs_leave').click(linkfluence.leaveFullscreen);
+            };
+        });
+      </script>
+  <p class="liste">Vous pouvez&nbsp;:</p>
+  <ul>
+    <li>Consulter la liste des discours et les filtrer par candidats (à gauche)&nbsp;;</li>
+    <li>Choisir des thèmes abordés, des mot-clefs ou des personnes citées (à droite)&nbsp;;</li>
+    <li>&Eacute;tudier les discours d'une période de votre choix (faire glisser l'intervalle de sélection en bas)&nbsp;;</li>
+    <li>Comparer la présence des pronoms "je", "nous" et "vous" dans les textes, ainsi que leur longueur (en haut)&nbsp;;</li>
+    <li>Cliquer sur n'importe quel élément de l'interface pour filtrer tous les discours qui lui correspondent.</li>
+  </ul>
+
+  <p><strong>NB</strong>&nbsp;: Nous travaillons constamment à l'amélioration de cette base, la liste des discours sera mise à jour <em>a minima</em> tous les 15 jours. Si  vous possédez des retranscriptions de discours non présents, merci de nous contacter à l'adresse <em>jean [at] veronis [point] fr</em>.</p>
+  <p><em>Dernière mise à jour le 19 avril 2012.</em></p>
+    </div>
+  </body>
+</html>

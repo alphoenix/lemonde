@@ -1,0 +1,48 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="./lemonde.css" media="all" rel="stylesheet" type="text/css" ></link>
+	<link href="./jquery-jvectormap-1.2.2.css" media="all" rel="stylesheet" type="text/css" ></link>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://jvectormap.com/js/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="./EPHAD.js"></script>
+	<script src="./jquery-jvectormap-fr-merc-en.js"></script>
+</head>
+<body style="background:#fff">
+	<div id="carte" style="width:534px;height:500px;"></div>
+
+	<input type="radio" name="critere" value="deces_hopital" id="deces_hopital"  checked="checked" onChange="changeData(this.value)"/><label for="deces_hopital">% de décès à l'hôpital</label><br />
+	<input type="radio" name="critere" value="hospitalisation" id="hospitalisation" onChange="changeData(this.value)"/><label for="hospitalisation">% d'hospitalisation en urgence dans les 15 derniers jours</label><br />
+	<input type="radio" name="critere" value="inconfort" id="inconfort" onChange="changeData(this.value)"/><label for="inconfort">% de réel inconfort physique dans la dernière semaine</label><br />
+	<script type="text/javascript">
+		var series = "deces_hopital";
+		var minMax = jvm.values.apply({}, jvm.values(aaData[series]));
+		$('#carte').vectorMap({
+			  map: 'fr_merc_en',
+			  backgroundColor: '#fff',
+			  regionStyle:{
+				initial:{
+					fill:'#b9c0c5'
+				}
+			},
+			  series: {
+				regions: [{
+					values: aaData[series],
+					scale: ['#41c8f5','#129af0','#003366'],
+					attribute:'fill',
+				}]
+			  },
+			onRegionLabelShow: function(e, el, code){
+				el.html(el.html()+' '+(Math.floor(aaData[series][code]*10000)/100)+' %');
+			}
+		});
+		function changeData(newSeries){
+			series = newSeries;
+			minMax = jvm.values.apply({}, jvm.values(aaData[series]));
+			var mapObject = $('#carte').vectorMap('get', 'mapObject');
+			mapObject.series.regions[0].clear()
+			mapObject.series.regions[0].setValues(aaData[series]);		
+		}
+	</script>
+</body>
+</html>

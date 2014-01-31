@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>JQVMap - World Map</title>
+    <link href="./lemonde.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="./jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+
+<style type='text/css'>
+  .wax-legend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .wax-legend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .wax-legend .legend-scale ul li {
+	display: block;
+	float: left;
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+	padding-right: 5px;
+    }
+  .wax-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .wax-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+    }
+  .wax-legend a {
+    color: #777;
+    }
+</style>
+	
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="./jqvmap/jquery.vmap.js" type="text/javascript"></script>
+    <script src="./jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+    <script src="./data.js" type="text/javascript"></script>
+
+	<style>body{background:#fff}</style>
+	
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+		jQuery('#vmap').vectorMap(
+		{
+			map: 'world_merc_en',
+			backgroundColor: '#EDF8FB',
+			borderColor: '#EDF8FB',
+			borderOpacity: 0.25,
+			borderWidth: 1,
+			color: '#ccc',
+			enableZoom: true,
+			hoverColor: '#ccc',
+			hoverOpacity: 0.2,
+			normalizeFunction: 'linear',
+			scaleColors: ['#b6d6ff', '#005ace'],
+			selectedColor: '#ccc',
+			selectedRegion: null,
+			showTooltip: false,
+			onRegionClick: function(element, code, region)
+			{
+				if(data[code.toUpperCase()]) {
+					html = "<h2 class=\"tt26_capital\">"+data[code.toUpperCase()].pays+'</h2>'
+					html += "<p><em>Demande : "+data[code.toUpperCase()].demande+' - '+data[code.toUpperCase()].reponse+'</em></p>'
+					html += "<p>"+data[code.toUpperCase()].precision+'</p>'
+				}
+				else {
+					html = "Aucune demande dans ce pays."
+				}
+				$("#vmap_desc").html(html)
+			}
+		});
+		couleurs = {};
+		$.each(data, function(index,value) {
+			if(value.reponse_courte == "non")
+				couleurs[index.toLowerCase()] = "#B35806";
+			else if(value.reponse_courte == "muet")
+				couleurs[index.toLowerCase()] = "#F1A340";
+			else if(value.reponse_courte == "ineligible")
+				couleurs[index.toLowerCase()] = "#FEE0B6";
+			else
+				couleurs[index.toLowerCase()] = "#542788";
+		});
+		$("#vmap").vectorMap('set','colors',couleurs);
+		
+		
+	});
+    </script>
+  </head>
+  <body>
+
+<div class='wax-legend' >
+<div class='legend-scale'>
+  <ul class='legend-labels'>
+    <li><span style='background:#B35806;'></span>Réponse négative</li>
+    <li><span style='background:#F1A340;'></span>Aucune réponse</li>
+    <li><span style='background:#FEE0B6;'></span>Demande non valide</li>
+    <li><span style='background:#542788;'></span>Réponse positive</li>
+  </ul>
+</div>
+</div>
+    <div id="vmap" style="width: 100%; height: 400px;clear:both"></div>
+	<div id="vmap_desc"></div>
+
+	</body>
+</html>

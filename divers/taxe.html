@@ -1,0 +1,22 @@
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+var html;
+function milliers(nombre) {
+	return nombre.toLocaleString();
+}
+function calculTaxe(salaire) {
+	if(salaire <= 1000000) {
+		html = "Votre entreprise n'a pas à payer de taxe sur votre salaire de ";
+	}
+	else {
+		var salaire = parseFloat(salaire);
+		var taxe = (salaire - 1000000)*0.75;
+		var total = salaire+taxe;
+		html = "Votre entreprise devra payer "+milliers(taxe)+" euros de taxe sur votre salaire de "+milliers(salaire)+" euros, soit un total de "+milliers(total)+" euros.";
+	}
+	$("#explication").html(html);
+}
+</script>
+<p id="explication"></p>
+<p>La simulation peut également être testée avec <label for="revenus">la rémunération annuelle de votre choix : </label>
+<input id="revenus" name="revenus" type="text" value="0" /><input onclick="calculTaxe($('#revenus').val())" name="Calculer" size="11" type="button" value="Calculer" /></p>

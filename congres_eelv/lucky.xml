@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<characters>
+	<character group="7" id="0" name="Noël Mamère"/>
+	<character group="7" id="1" name="Dany Cohn-Bendit"/>
+	<character group="7" id="2" name="Alima Boumediene"/>
+	<character group="8" id="3" name="Jean-Paul Besset"/>
+	<character group="4" id="4" name="Jean-Marc Brulé"/>
+	<character group="7" id="5" name="José Bové"/>
+	<character group="5" id="6" name="Laurence Vichnievsky"/>
+	<character group="6" id="7" name="Martine Billard"/>
+	<character group="5" id="8" name="Pierre Larroutourrou"/>
+	<character group="2" id="9" name="Jacques Boutault"/>
+	<character group="2" id="10" name="Karima Delli"/>
+	<character group="2" id="11" name="Sergio Coronado"/>
+	<character group="11" id="12" name="Jérôme Gleizes"/>
+	<character group="11" id="13" name="Elise Lowy"/>
+	<character group="10" id="14" name="Alain Lipietz"/>
+	<character group="2" id="15" name="Lucile Schmid"/>
+	<character group="12" id="16" name="Yves Cochet"/>
+	<character group="3" id="17" name="Julien Bayou"/>
+	<character group="3" id="18" name="Eva Joly"/>
+	<character group="3" id="19" name="Isabelle Attard"/>
+	<character group="1" id="20" name="Eric Loiselet"/>
+	<character group="1" id="21" name="Yves Contassot"/>
+	<character group="11" id="22" name="Jean-Vincent Placé"/>
+	<character group="11" id="23" name="Catherine Grèze"/>
+	<character group="11" id="24" name="Cécile Duflot"/>
+	<character group="10" id="25" name="Jean-Philippe Magnen"/>
+	<character group="10" id="26" name="François de Rugy"/>
+	<character group="10" id="27" name="Dominique Voynet"/>
+	<character group="10" id="28" name="Mickaël Marie"/>
+	<character group="10" id="29" name="Jean-Louis Roumégas"/>
+	<character group="1" id="30" name="Denis Baupin"/>
+	<character group="1" id="31" name="Pascal Canfin"/>
+	<character group="1" id="32" name="Eva Sas"/>
+	<character group="1" id="33" name="Barbara Pompili"/>
+	<character group="1" id="34" name="Yannick Jadot"/>
+	<character group="1" id="35" name="Sandrine Bélier"/>
+	<character group="1" id="36" name="Pascal Durand"/>
+	<character group="1" id="37" name="Philippe Merieu"/>
+	<character group="1" id="38" name="Emmanuelle Cosse"/>
+	<character group="4" id="39" name="Stéphane Gatignon"/>
+	<character group="4" id="40" name="Jean Dessessard"/>
+	<character group="4" id="41" name="Marie Bové"/>
+</characters>

@@ -1,0 +1,130 @@
+<html>
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://medias.lemonde.fr/mmpub/xml/flash/jquery.dataTables.js"></script>
+	<style>
+		@import "js/jquery.dataTables.css";
+		*{font-family:Arial, Helvetica, sans-serif}
+		body{width:534px;font-size: 15px;line-height: 20px;}
+		#chart{height:250px;width:534px}
+		h2{font-size:15px;text-transform:uppercase;}
+		#names{width:534px;font-size:12px}
+		#names_filter {font-size:12px} 
+		#names_info, #names_paginate, #names_length {display:none}
+	</style>
+	<script type="text/javascript">
+	var chart,liste;
+	
+	var fonction = "parlementaires";
+
+	var cope=0,fillon=0,copeS=0,fillonS=0,copeAN=0,fillonAN=0;
+	
+	function push(parl) {
+		if(parl == "senat") {
+			fonction = "sénateurs"
+			chart.series[0].setData([["Jean-François Copé",copeS],["François Fillon",fillonS]]);
+		}
+		else if(parl == "an") {
+			fonction = "députés"
+			chart.series[0].setData([["Jean-François Copé",copeAN],["François Fillon",fillonAN]]);
+		}
+		else {
+			fonction = "parlementaires"
+			chart.series[0].setData([["Jean-François Copé",cope],["François Fillon",fillon]]);
+		}
+	}
+
+	$(document).ready(function() {
+		liste="<thead><tr><th>Nom</th><th>Fonction</th><th>Département</th><th>Soutien de</th></tr></thead></tbody>",
+		$.getJSON("data/parlementaires.json",function(parlementaires) {
+			for(i=0;i<parlementaires.length;i++) {
+				parlementaire = parlementaires[i];
+				if(parlementaire.Soutient == "Jean-François Copé") {
+					cope++;
+					if(parlementaire.Fonction == "sénateur" ||parlementaire.Fonction == "sénatrice") copeS++;
+					if(parlementaire.Fonction == "député" ||parlementaire.Fonction == "députée") copeAN++;
+				}
+				if(parlementaire.Soutient == "François Fillon") {
+					fillon++;
+					if(parlementaire.Fonction == "sénateur" ||parlementaire.Fonction == "sénatrice") fillonS++;
+					if(parlementaire.Fonction == "député" ||parlementaire.Fonction == "députée") fillonAN++;
+				}
+				liste += "<tr><td>"+parlementaire.Nom+"</td><td>"+parlementaire.Fonction+"</td>";
+				liste += "<td>"+parlementaire.Département+"</td><td>"+parlementaire.Soutient+"</td></tr>";
+			}
+
+			$("#names").html(liste+"</tbody></table>")
+
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'chart',
+					plotBackgroundColor: null,
+					plotBorderWidth: null,
+					plotShadow: false
+				},
+				colors: ['#4292C6','#2171B5'],
+				credits: {
+					enabled: false
+				},
+				title: {
+					text: '',
+					style: {
+						fontFamily: "Arial,Helvetica,sans-serif",
+						color: "#000"
+					}
+				},
+				tooltip: {
+					enabled: false
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							color: '#000000',
+							connectorColor: '#000000',
+							formatter: function() {
+								return '<b>'+ this.point.name +'</b><br />'+ this.y + ' ' + fonction;
+							},
+							style: {
+								fontFamily: "Arial,Helvetica,sans-serif",
+								fontSize: "14px"
+							}
+						}
+					}
+				},
+				series: [{
+					type: 'pie',
+					name: 'Soutien',
+					data: [{
+						"name":"Jean-François Copé",
+						y:cope
+					},
+					{
+						"name":"François Fillon",
+						y:fillon
+					}]
+				}]
+				});
+				$("#names").dataTable( {
+					"bPaginate": false,
+				    "aoColumnDefs": [
+						{"bSearchable":false,"aTargets":[1]},
+						{"bSearchable":false,"aTargets":[3]},
+				    ]});
+			});
+		});
+	</script>
+</head>
+<body>
+	<input type="radio" name="fonction" id="parlementaire" checked="true" onclick="push('parl')"/><label for="parlementaire"> parlementaires</label>
+	<input type="radio" name="fonction" id="senateur" onclick="push('senat')"/><label for="senateur"> sénateurs</label> 
+	<input type="radio" name="fonction" id="depute" onclick="push('an')"/><label for="depute"> députés</label> 
+	<div id="chart"></div>
+	<h2>Liste complète</h2>
+	<p>Utilisez le champ de recherche pour filtrer la liste et trouver le parlementaire de votre choix (par nom ou département)</p>
+	<table id="names"></table>
+</body>
+</html>

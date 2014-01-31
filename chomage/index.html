@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+	<script src="js/d3.v2.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
+	<style type="text/css" media="screen">
+	* {margin:0; padding:0;}
+	.credits {font-size:x-small;text-align:right;clear:both;margin-top:10px}
+	a{text-decoration:none;color:#0045a3;}
+	a:hover{text-decoration:underline;color:#900;}
+	body {width:980px;font:normal 15px arial,helvetica,freeSans,sans-serif;line-height:20px;color:#222}
+	h1,h2,h3,h4 {font-weight:bolder;text-transform:uppercase;font-size:1em}
+	p,div {margin:25px 0;width:970px;margin-left:auto;margin-right:auto}
+	#ensemble {width:534px;height:300px;}
+	#halo {width:534px;height:470px;margin:0}
+	</style>
+	<title>Trois millions de chômeurs</title>
+	<script type="text/javascript">
+	var halo;
+	var control = 0;
+	$(document).ready(function() {
+		ensemble = new Highcharts.Chart({
+			chart: {
+				renderTo: 'ensemble',
+				type: 'area',
+				zoomType: 'x'
+			},
+			title: {
+				text: '',
+				style: {
+					color: "#222",
+					font: '15px Arial, Helvetica, sans-serif'
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			subtitle: {
+				text: '',
+				style: {
+					color: "#666",
+					font: '12px Arial, Helvetica, sans-serif'
+				}
+			},
+			xAxis: {
+				title: '',
+				categories: ['janv 1999','fev 1999','mar 1999','avr 1999','mai 1999','jun 1999','jui 1999','août 1999','sep 1999','oct 1999','nov 1999','dec 1999','janv 2000','fev 2000','mar 2000','avr 2000','mai 2000','jun 2000','jui 2000','août 2000','sep 2000','oct 2000','nov 2000','dec 2000','janv 2001','fev 2001','mar 2001','avr 2001','mai 2001','jun 2001','jui 2001','août 2001','sep 2001','oct 2001','nov 2001','dec 2001','janv 2002','fev 2002','mar 2002','avr 2002','mai 2002','jun 2002','jui 2002','août 2002','sept 2002','oct 2002','nov 2002','dec 2002','janv 2003','fev 2003','mar 2003','avr 2003','mai 2003','jun 2003','jui 2003','août 2003','sep 2003','oct 2003','nov 2003','dec 2003','janv 2004','fev 2004','mar 2004','avr 2004','mai 2004','jun 2004','jui 2004','août 2004','sep 2004','oct 2004','nov 2004','dec 2004','janv 2005','fev 2005','mar 2005','avr 2005','mai 2005','jun 2005','jui 2005','août 2005','sep 2005','oct 2005','nov 2005','dec 2005','janv 2006','fev 2006','mar 2006','avr 2006','mai 2006','jun 2006','jui 2006','août 2006','sep 2006','oct 2006','nov 2006','dec 2006','janv 2007','fev 2007','mar 2007','avr 2007','mai 2007','jun 2007','jui 2007','août 2007','sept 2007','oct 2007','nov 2007','dec 2007','janv 2008','fev 2008','mar 2008','avr 2008','mai 2008','jun 2008','jui 2008','août 2008','sep 2008','oct 2008','nov 2008','dec 2008','janv 2009','fev 2009','mar 2009','avr 2009','mai 2009','jun 2009','jui 2009','août 2009','sep 2009','oct 2009','nov 2009','dec 2009','janv 2010','fev 2010','mar 2010','avr 2010','mai 2010','jun 2010','jui 2010','août 2010','sep 2010','oct 2010','nov 2010','dec 2010','janv 2011','fev 2011','mar 2011','avr 2011','mai 2011','jun 2011','jui 2011','août 2011','sep 2011','oct 2011','nov 2011','dec 2011','janv 2012','fev 2012','mar 2012','avr 2012','mai 2012','jun 2012','jui 2012','août 2012'],
+				labels: {
+					rotation: -45,
+					style: {
+						color: "#222",
+						font: '12px Arial, Helvetica, sans-serif'
+					},
+					formatter: function() {
+						if(this.value.indexOf("janv") == -1) return null;
+						else return this.value.slice(-4);
+					}
+				},
+				plotBands: [{
+					from: 0,
+					to: 40,
+					color: 'rgba(250,159,181,0.1)',
+					label: {
+						text: 'L. Jospin'						
+					}
+				},{
+					from: 40,
+					to: 76,
+					color: 'rgba(66,146,198,0.1)',
+					label: {
+						text: 'J.-P. Raffarin'
+					}
+				},{
+					from: 76,
+					to: 100,
+					color: 'rgba(107,174,214,0.1)',
+					label: {
+						text: 'D. de Villepin'
+					}
+				},{
+					from: 100,
+					to: 160,
+					color: 'rgba(66,146,198,0.1)',
+					label: {
+						text: 'F. Fillon'
+					}
+				},{
+					from: 160,
+					to: 166,
+					color: 'rgba(250,159,181,0.1)',
+					label: {
+						text: 'J.-M. Ayrault'
+					}
+				}]
+			},
+			yAxis: {
+				title: {
+					text: ''
+				},
+				min: 1500,
+				labels: {
+					style: {
+						color: "#222",
+						font: '12px Arial, Helvetica, sans-serif'
+					},
+					formatter: function() {
+						if(this.value == 0) return 0;
+						else return this.value+'000';
+					}
+				}
+			},
+			point: {
+				color: null,
+			},
+			credits: {
+				enabled: false
+			},
+			plotOptions: {
+				area: {
+					stacking: 'normal',
+					lineColor: '#999999',
+					lineWidth: 1,
+					marker: {
+						enabled: false
+					},
+					color: ''
+				}
+			},
+			tooltip: {
+				borderWidth: 0,
+				borderRadius: 0,
+				style: {
+					color: "#000000",
+					font: '12px Arial, Helvetica, sans-serif'
+				},
+				formatter: function() {
+					return '<b>'+this.x+' : '+ this.y*1000 +'<\/b> milliers de chômeurs';
+				}
+			},
+			series: [{
+				name: 'Catégorie A',
+				data: [3073.2,3068.4,3072.9,3052.6,3035.9,3030.1,2965.7,2946.6,2900.8,2876.3,2849.4,2822.6,2800.1,2771.7,2735.3,2691.8,2674.9,2642.1,2623.0,2607.8,2551.3,2508.9,2455.2,2443.6,2391.7,2377.3,2361.4,2354.9,2364.7,2363.2,2392.4,2398.7,2406.6,2435.9,2468.5,2477.3,2474.1,2483.7,2500.8,2517.6,2522.7,2530.7,2555.5,2551.9,2548.7,2555.2,2570.7,2586.2,2609.1,2628.6,2641.0,2649.0,2644.9,2663.5,2677.1,2667.5,2714.7,2717.1,2704.0,2717.6,2684.9,2676.7,2672.7,2664.8,2674.1,2683.2,2685.7,2699.7,2694.8,2686.9,2703.3,2704.1,2708.8,2706.9,2709.8,2708.2,2713.4,2692.9,2669.2,2651.8,2629.4,2608.6,2586.9,2565.9,2552.1,2530.8,2502.3,2459.2,2421.7,2396.2,2366.0,2352.0,2320.9,2315.9,2289.5,2263.2,2231.7,2202.8,2170.7,2149.4,2137.6,2115.0,2116.6,2098.4,2090.8,2065.3,2040.2,2020.5,2005.3,1984.1,1985.1,1996.2,1996.4,2014.2,2031.4,2042.8,2077.0,2107.8,2164.9,2220.3,2286.6,2361.7,2427.2,2481.1,2516.9,2517.5,2544.5,2575.0,2601.3,2635.3,2645.2,2633.6,2660.4,2664.4,2667.4,2676.6,2690.6,2687.8,2680.0,2694.7,2698.1,2679.2,2692.3,2701.2,2695.2,2699.8,2691.2,2687.6,2706.4,2732.9,2752.3,2757.1,2778.6,2805.6,2828.0,2848.3,2861.7,2867.9,2884.5,2888.8,2922.1,2945.8,2987.1]
+				}]
+			});
+
+/**			halo = d3.select("#halo")
+				.append("svg")
+				.attr("width", 534)
+				.attr("height", 470);    
+
+			var data = [
+				{"id":"france","name":"catégories A,B,C avec les DOM","size":4733,"color":"#FFFFB2"},
+				{"id":"abc","name":"catégories A,B,C","size":4453.8,"color":"#FECC5C"},
+				{"id":"ab","name":"catégories A,B","size":3587.2,"color":"#FD8D3C"},
+				{"id":"a","name":"catégorie A","size":2987.1,"color":"#E31A1C"},
+			];
+
+			var circle = halo.selectAll("circle")
+				.data(data)
+				.enter().append("circle")
+					.attr("id",function(d){return "circle_"+d.id})
+					.attr("fill",function(d){return d.color})
+					.attr("stroke","transparent")
+					.attr("cy", 140)
+				    .attr("cx", 140)
+					.attr("fill-opacity",function(d){
+						if(d.id == "a") return 1;
+						else return 0;
+					})
+				    .attr("r", function(d){return Math.sqrt(d.size)*1.9})
+
+			var labels = halo.selectAll("text")
+				.data(data)
+				.enter().append("text")
+					.attr("id",function(d){return "legende_"+d.id})
+					.attr("x",140)
+					.attr("y",function(d,i){return (4-i)*25+160})
+					.attr("fill-opacity",function(d){
+						if(d.id == "a") return 1;
+						else return 0;
+					})
+					.text(function(d){return Math.floor(d.size/100)/10+' millions de chômeurs ('+d.name+')'});
+
+			function animate() {
+			    circle.transition()
+					.delay(5000)
+					.duration(1000)
+					.attr("fill-opacity",function(d){
+						if(d.id == "ab") return 1;
+						if(d.id == "a") return 0.8;
+						else return 0;
+					})
+				.transition()
+					.delay(6000)
+					.duration(1000)
+					.attr("fill-opacity",function(d){
+						if(d.id == "abc") return 1;
+						if(d.id == "a" || d.id == "ab") return 0.8;
+						else return 0;
+					})
+				.transition()
+					.delay(7000)
+					.duration(1000)
+					.attr("fill-opacity",function(d){
+						if(d.id == "france") return 1;
+						if(d.id == "a" || d.id == "ab" || d.id == "abc") return 0.8;
+						else return 0;
+					})
+			labels.transition()
+				.delay(5000)
+				.duration(1000)
+				.attr("fill-opacity",function(d){
+					if(d.id == "ab") return 1;
+					if(d.id == "a") return 0.2;
+					else return 0;	
+				})
+			.transition()
+				.delay(6000)
+				.duration(1000)
+				.attr("fill-opacity",function(d){
+					if(d.id == "abc") return 1;
+					if(d.id == "a" || d.id == "ab" ) return 0.2;
+					else return 0;	
+				})
+			.transition()
+				.delay(7000)
+				.duration(1000)
+				.attr("fill-opacity",function(d){
+					if(d.id == "france") return 1;
+					else return 0.2;	
+				})
+			}
+			animate();**/
+
+	});
+	</script>
+</head>
+<body>
+<!--<h2>Le halo du chômage</h2>
+	<div id="halo"></div>-->
+	<h2>De 1999 à 2012 : 3 millions de chômeurs</h2>
+	<div id="ensemble"></div>
+	<script type="text/javascript">
+	
+	</script>
+</body>
+</html>

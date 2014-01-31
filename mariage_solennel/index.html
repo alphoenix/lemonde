@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Le "mariage pour tous" et les parlementaires</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+	<link rel="stylesheet" type="text/css" href="./lemonde.css">
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js" type="text/javascript" ></script>
+	<script src="./jquery.dataTables.min.js" type="text/javascript" ></script>
+	<script type="text/javascript" src="./tooltip.js"></script>
+	<script type="text/javascript" src="./class.Gselper.js"></script>
+	<script type="text/javascript" src="./data.js"></script>
+
+	<script type="text/javascript">
+		var lastGroupe = "";
+			function toggle(groupe) {
+				if(lastGroupe != groupe) {
+					$(".GDR").hide();
+					$(".ECOLO").hide();
+					$(".SRC").hide();
+					$(".RRDP").hide();
+					$(".UDI").hide();
+					$(".UMP").hide();
+					$(".NI").hide();
+					$("."+groupe).show();
+					lastGroupe = groupe;
+				}
+				else {
+					$(".GDR").show();
+					$(".ECOLO").show();
+					$(".SRC").show();
+					$(".RRDP").show();
+					$(".UDI").show();
+					$(".UMP").show();
+					$(".NI").show();
+					lastGroupe = "";
+				}
+			}
+	
+			$(document).ready(function() {
+			$('#container').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
+			$('#example').dataTable( {
+				"aaData": deputes.aaData,
+				//"dataTables_filter": true,
+				"bPaginate": true,
+				"aoColumns": [
+					{ "sTitle": "Civilité","bVisible":false},
+					{ "sTitle": "Nom de famille","bVisible":false},
+					{ "sTitle": "Prénom","bVisible":false},
+					{ "sTitle": "Nom",},
+					{ "sTitle": "Département",},
+					{ "sTitle": "Circonscription","bVisible":false},
+					{ "sTitle": "Groupe",},
+					{ "sTitle": "Vote",},
+					{ "sTitle": "Taille","bVisible":false},
+				],
+				"aaSorting":[[1,'asc']],
+				"bSort": true,
+				"sScrollY": "350px",
+				"sPaginationType": "full_numbers",
+				"iDisplayLength": 580,
+				"bLengthChange": false,
+				"bPaginate": false,
+				"bInfo": false,
+				"oLanguage": {
+					"sZeroRecords": "Pas de données disponibles avec cette recherche",
+					"sLengthMenu": "_MENU_ entrées affichées",
+					"sInfo": "Entrées _START_ à _END_ (sur _TOTAL_)",
+					"sInfoFiltered": "",
+					"sSearch": "Recherchez un député (nom ou département) :",
+					"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+				}
+			} );	
+
+		} );
+	</script>
+	<style type="text/css" media="screen">
+		* {
+			margin:0;
+			padding:0;
+		}
+		body {
+			width:990px;
+		}
+		.legend {
+			width:12px;
+		}
+		#graph {
+			z-index: 5;
+		}
+		.legend {
+			text-align: left;
+		}
+		.pour {
+			position: absolute;
+			top: 75px;
+			left: 75px;
+			z-index:10;
+		}
+		.contre {
+			position: absolute;
+			top: 75px;
+			left: 675px;
+			z-index:10;
+		}
+		.hesite {
+			position: absolute;
+			top: 500px;
+			left: 500px;
+			z-index:10;
+		}
+		.abstention {
+			position: absolute;
+			top: 375px;
+			left: 450px;
+			z-index:10;
+		}
+		.tooltip {
+		    position: absolute;
+		    top: 100px;
+		    left: 100px;
+		    border: 1px solid #e0e0e0;
+		    background-color: #fefefe;
+		    opacity: .9;
+		    color: black;
+		    padding: 10px;
+		    width: 300px;
+		    font-size: 7pt;
+		    z-index: 10;
+		}
+
+		.tooltip .title a {
+		    font-size: 8pt;
+		    font-weight: bold;
+		    color: #000;
+		}
+	</style>
+</head>
+<body>
+	<div id="chapo" style="margin-left:15px" class="txt13">Survolez les différents cercles avec votre souris pour savoir  comment chaque député s'est positionné concernant la loi ouvrant le mariage aux homosexuels. Cliquez sur les groupes ci-dessous pour filtrer l'affichage en fonction des groupes parlementaires. La liste présente l'ensemble des  choix des députés.</div>
+	<div id="legend" class="txt13" style="margin-left:15px">
+		<a href="#" onclick="toggle('GDR')""><img src="legende-02.png" class="legend" /> groupe communiste et apparentés (GDR)</a>
+		<a href="#" onclick="toggle('ECOLO')""><img src="legende-04.png" class="legend" /> groupe écologiste</a>
+		<a href="#" onclick="toggle('SRC')""><img src="legende-06.png" class="legend" /> groupe socialiste et apparentés (SRC)</a><br />
+		<a href="#" onclick="toggle('RRDP')""><img src="legende-07.png" class="legend" /> groupe radical et apparentés (RRDP)</a>
+		<a href="#" onclick="toggle('UDI')""><img src="legende-05.png" class="legend" /> groupe centriste (UDI)</a>
+		<a href="#" onclick="toggle('UMP')""><img src="legende-03.png" class="legend" /> groupe UMP</a>
+		<a href="#" onclick="toggle('NI')"><img src="legende-01.png" class="legend" /> députés non-inscrits</a>
+	</div>
+ 	<div class="pour tt26_capital">Ils ont voté pour le texte<br /><span id="sum_pour"></span></div>
+	<div class="contre tt26_capital">Ils ont voté contre le texte<br /><span id="sum_contre"></span></div>
+	<div class="abstention tt17_capital">Ils se sont abstenus</div>
+	<div id="graph"></div>
+	<script type="text/javascript" src="script.js" ></script>
+	<div id="container"></div>
+	<div id="credits" class="txt10" style="text-align:right;margin-right:15px">crédits : Alexandre Léchenet - source : <a href="http://www.assemblee-nationale.fr/14/scrutins/jo0511.asp" target="_blank">Assemblée nationale</a></div>
+</body>
+</html>

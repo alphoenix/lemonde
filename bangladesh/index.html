@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://libs.cartodb.com/cartodb.js/v2/themes/css/cartodb.css" />
+<link rel="stylesheet" type="text/css" href="lemonde.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v2/cartodb.js"></script>
+<script>
+(function(window, $, undefined) {
+
+  $(window).load(function main() {
+
+      cartodb.createVis('map', 'http://villechenon.cartodb.com/api/v1/viz/situation_psa/viz.json', {
+          shareable: false,
+          title: false,
+          description: false,
+          searchControl: false,
+          zoomControl: true,
+          loaderControl: true,
+          center_lat: 47.219568,
+          center_lon: 2.373047,
+          zoom: 5,          
+          cartodb_logo: false,
+          infowindow: true
+      }).done(function(vis, layers) {          
+          createSelector(layers[1]);
+          layers[1].infowindow.set('template', $('#infowindow_template').html() );
+      });
+
+      $('.sidebar .close').on('click', function() {
+        $('.sidebar').toggleClass("closed");
+      });
+
+      resize();
+      $(window).on("resize", resize);
+
+  });
+
+  function resize() {
+    $("#map, .sidebar").css("top", $(".navbar").outerHeight() )
+    // Close the sidebar in mobile view
+    if( $(window).width() <  767) $("#map, .sidebar").addClass("closed");
+  }
+
+  // create layer selector
+  function createSelector(layer) {
+
+    var sql = new cartodb.SQL({ user: 'julesbonnard' });
+
+    $('.sidebar .checkbox').on("click", function() {
+      
+      var query = "SELECT * FROM accidents_bangladesh";
+
+      
+      // change the query in the layer to update the map
+      layer.setQuery(query);
+
+    });
+  }
+
+  function buildQuery(theme, col) {
+
+    var theme_min_array = ['100000']
+        , theme_max_array = ['0'];
+
+    // looks up the values in the checkboxes
+    $('input[name=' + theme + ']:checked').each(function() {
+
+        theme_min_array.push($(this).attr('data-' + theme + '-min'));
+        theme_max_array.push($(this).attr('data-' + theme + '-max'));
+    
+    });
+    
+    return  "(" + col + " >= " + Math.min.apply( Math, theme_min_array ) + " and " + col + " < " + Math.max.apply( Math, theme_max_array ) + ")";
+  
+  }
+
+})(window, jQuery);
+</script>
+<style>
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+<script type="infowindow/html" id="infowindow_template">
+	<div class="cartodb-popup txt12_120">
+		<a href="#close" class="cartodb-popup-close-button close">x</a>
+		<div class="cartodb-popup-content-wrapper">
+               <div class="cartodb-popup-content">
+                    <div class="tt17_capital">{{content.data.nom}} ({{content.data.departement}})</div>
+                  <ul class="popup-list">
+                        <li><em>{{content.data.site}}</em></li>
+                        <li>{{content.data.legende}}</li>
+ 					</ul>
+				</div>
+		</div>
+        <div class="cartodb-popup-tip-container"></div>
+	</div>
+</script>
+
+
+</body>
+</html>

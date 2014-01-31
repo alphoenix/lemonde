@@ -1,0 +1,64 @@
+._global{
+	width:1000px;
+	height:800px;
+}
+#graph {
+	float:left;
+	width: 700px;
+}
+#menu {
+	float:right;
+	width:300px;
+	margin:0;
+	padding:0;
+}
+.tile {
+	display:block;
+	float:left;
+	margin:2px;
+	width:15px;
+	height:15px;
+}
+#menu h3 {
+	clear:both;
+}
+#menu .coldouble label {
+	width: 147px;
+	display: block;
+	padding-left:2px;
+	float:left;
+}
+#menu .coldouble .right{
+	float:right;
+}
+body{
+	width: 1000px;
+	height:800px;
+}
+.scroll-pane{
+	height:250px;
+	overflow: auto;
+	width:90%;
+	margin-top:10px;
+}
+.legend-source {
+	float:right;
+}
+#detail_promesse {
+	clear:both;
+	padding-left: 10px;
+}
+h2,#source {
+	width: 85%;
+	line-height: 1.2em;
+}
+#detail_promesse h4 {
+	font-size: 1.2em;
+	margin-top: 5px;
+}
+#detail p {
+	margin: 5px 0;
+}
+#detail  h1,#detail  h2,#detail  h3,#detail  h4 {
+	font-size:1.05em;
+}

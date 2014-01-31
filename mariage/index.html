@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Le "mariage pour tous" et les parlementaires</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="./lemonde.css">
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="./tooltip.js"></script>
+	<script type="text/javascript" src="./class.Gselper.js"></script>
+	<style type="text/css" media="screen">
+		* {
+			margin:0;
+			padding:0;
+		}
+		body {
+			width:534px;
+		}
+		.legend {
+			width:12px;
+		}
+		#graph {
+			z-index: 5;
+		}
+		.legend {
+			text-align: left;
+		}
+		.pour {
+			position: absolute;
+			top: 50px;
+			left: 50px;
+			z-index:10;
+		}
+		.contre {
+			position: absolute;
+			top: 50px;
+			left: 300px;
+			z-index:10;
+		}
+		.hesite {
+			text-align:center;
+			position: absolute;
+			top: 200px;
+			left: 175px;
+			z-index:10;
+		}
+		.abstention {
+			text-align: center;
+			position: absolute;
+			top: 200px;
+			left: 300px;
+			z-index:10;
+		}
+		.tooltip {
+		    position: absolute;
+		    top: 100px;
+		    left: 100px;
+		    border: 1px solid #e0e0e0;
+		    background-color: #fefefe;
+		    opacity: .9;
+		    color: black;
+		    padding: 5px;
+		    width: 200px;
+		    font-size: 7pt;
+		    z-index: 10;
+		}
+
+		.tooltip .title a {
+		    font-size: 8pt;
+		    font-weight: bold;
+		    color: #000;
+		}
+	</style>
+</head>
+<body>
+	<div class="pour tt17_capital">Ils ont voté pour l'article<br /><span id="sum_pour"></span></div>
+	<div class="hesite">Ils se sont abstenus</div>
+	<div class="contre tt17_capital">Ils ont voté contre l'article<br /><span id="sum_contre"></span></div>
+	<div class="abstention">Ils n'ont pas<br />pris part au vote</div>
+	<div id="graph"></div>
+	<div id="legend" class="txt13" style="margin-left:15px">
+		<img src="legende-02.png" class="legend" /> Communistes
+		<img src="legende-04.png" class="legend" /> Ecologistes
+		<img src="legende-07.png" class="legend" /> Socialistes et apparentés<br />
+		<img src="legende-06.png" class="legend" /> Radicaux et républicains
+		<img src="legende-05.png" class="legend" /> UDI
+		<img src="legende-03.png" class="legend" /> UMP
+		<img src="legende-01.png" class="legend" /> Non-inscrits
+	</div>
+    <script type="text/javascript" src="script.js" style="margin-left:15px"></script>
+</body>
+</html>

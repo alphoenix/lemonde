@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Pôle emploi</title>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link href="css/mycss.css" rel="stylesheet" type="text/css">
+		<script src="./js/jquery.dataTables.js"></script>
+		<script src="./js/data.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		//fonction pour séparer les milliers (ne pas toucher)
+			function format(valeur,decimal,separateur) {
+			// formate un chiffre avec 'decimal' chiffres après la virgule et un separateur
+				var deci=Math.round( Math.pow(10,decimal)*(Math.abs(valeur)-Math.floor(Math.abs(valeur)))) ; 
+				var val=Math.floor(Math.abs(valeur));
+				if ((decimal==0)||(deci==Math.pow(10,decimal))) {val=Math.floor(Math.abs(valeur)); deci=0;}
+				var val_format=val+"";
+				var nb=val_format.length;
+				for (var i=1;i<4;i++) {
+					if (val>=Math.pow(10,(3*i))) {
+						val_format=val_format.substring(0,nb-(3*i))+separateur+val_format.substring(nb-(3*i));
+					}
+				}
+				if (decimal>0) {
+					var decim=""; 
+					for (var j=0;j<(decimal-deci.toString().length);j++) {decim+="0";}
+					deci=decim+deci.toString();
+					val_format=val_format+"."+deci;
+				}
+				if (parseFloat(valeur)<0) {val_format="-"+val_format;}
+				return val_format;
+			} 
+		
+		
+		function scroller(id,event) {
+			event.preventDefault();
+			$(window.parent.document).find('body').stop().animate( {scrollTop : $(id).offset().top+100},500);
+			$(window.parent.document).find('html').stop().animate( {scrollTop : $(id).offset().top+100},500)
+		}
+		
+		 $(function () {
+			jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+				"currency-pre": function ( a ) {
+					a = (a==="-") ? 0 : a.replace( /[^\d\-\.]/g, "" );
+					return parseFloat( a );
+				},
+				"currency-asc": function (a,b) {
+					return a - b;
+				},
+				"currency-desc": function (a,b) {
+					return b - a;
+				}
+			});			
+			
+		$('#tableau').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableautable"></table>' );
+		$('#tableautable').dataTable({
+			"aaData": poleemploi.aaData,
+			"aoColumns": [
+				{ "sTitle": "Agence","sType": "string","bSearchable":true},
+				{ "sTitle": "Département","sType": "numeric","bVisible":false},
+				{ "sTitle": "Département","sType": "string"},
+				{ "sTitle": "Chômeurs suivis et hors suivi","sType": "numeric","bSearchable":false,"bVisible":false},
+				{ "sTitle": "Chômeurs par conseiller","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],2,'');
+				}},
+				{ "sTitle": "Chômeurs suivis","sType": "numeric","bSearchable":false,"bVisible":false},
+				{ "sTitle": "Chômeurs suivis par conseiller","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],2,'');
+				}},
+				{ "sTitle": "Nombre de conseillers en suivi renforcé","sType": "numeric","bSearchable":false,"bVisible":false},
+				{ "sTitle": "Nombre de conseillers","sType": "numeric","bSearchable":false},
+				{ "sTitle": "Suivi renforcé / conseiller","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],2,'');
+				},"bVisible":false},
+				{ "sTitle": "Nombre de conseillers en suivi normal","sType": "numeric","bSearchable":false,"bVisible":false},
+				{ "sTitle": "Suivi normal / conseiller","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],2,'');
+				},"bVisible":false},
+				{ "sTitle": "Nombre de conseillers en suivi allégé","sType": "numeric","bSearchable":false,"bVisible":false},
+				{ "sTitle": "Suivi allégé / conseiller","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],2,'');
+				},"bVisible":false}
+			],
+			"bSort": true,
+			"aaSorting": [[4,'desc']],
+			"sScrollY": "450px",
+			"bPaginate":false,
+			"bScrollInfinite": true,
+	        "bScrollCollapse": true,
+			"oLanguage": {
+				"sZeroRecords": "Pas de données disponibles avec cette recherche",
+				"sLengthMenu": "_MENU_ entrées affichées",
+				"sInfo": "",
+				"sSearch": "Cliquez sur l'intitulé d'une colonne pour trier les informations selon les critères. Recherchez une agence :",
+				"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+				"sInfoFiltered": ""
+			}
+		});
+		});	
+		</script>
+
+
+		</head>
+<body>
+			<div class="article grid_12">
+
+			<div id="tableau"></div>
+			<div id="credits" style="font-size:0.8em;clear:both;float:right;margin-right:3px;">Source : <a href="http://www.pole-emploi.org/file/galleryelement/pj/13/02/d2/0b/201309%20com%20ods%20de%208471060597202572966.pdf" target="_blank">Pôle emploi</a> - <a href="./donneesPE.xls" target="_blank">Télécharger les données</a>.</div>
+			
+				<p style="width:80%">Le nombre de chômeurs par conseiller correspond aux demandeurs d'emplois suivis et non suivis. La moyenne nationale est de <strong>229,8 demandeurs d'emplois par conseiller</strong>. Le nombre de chômeurs "en portefeuille" par conseiller correspond aux demandeurs d'emplois suivis par un conseiller. La moyenne nationale est de <strong>116,0 demandeurs d'emplois par conseiller</strong>.</p>
+
+</body>
+</html>

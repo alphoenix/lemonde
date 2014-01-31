@@ -1,0 +1,233 @@
+{
+    "panels": 409, 
+    "scenes": [
+        {
+            "duration": 1, 
+            "start": 5, 
+			"name": "ADEP",
+            "chars": [
+                2,
+				7,
+				9,
+				10,
+				11,
+				21
+            ], 
+            "id": 0
+        }, 
+        {
+            "duration": 1, 
+            "start": 5, 
+			"name": "EEA",
+            "chars": [
+                12, 
+                13, 
+                22, 
+                23,
+				24
+            ], 
+            "id": 1
+        },
+        {
+            "duration": 1, 
+            "start": 5,
+			"name": "OAI",
+            "chars": [
+                14, 
+                25, 
+                26, 
+                27,
+				28,
+				29
+            ], 
+            "id": 2
+        },
+		{
+			"duration": 1,
+			"start": 5,
+			"name":"UEUS",
+			"chars": [
+				4,
+				40
+			],
+			"id": 3
+		},
+		{
+			"duration": 1,
+			"start": 5,
+			"name": "UNIR",
+			"chars": [
+				16,
+				30,
+				31,
+				32,
+				33
+			],
+			"id":4
+		},
+		{
+			"duration": 1,
+			"start": 30,
+			"name":"Maintenant",
+			"chars": [
+				0,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				16,
+				36,
+				37,
+				38
+			],
+			"id":5
+		},
+		{
+			"duration": 1,
+			"start": 30,
+			"id": 6,
+			"name": "Envie",
+			"chars": [
+				2,
+				9,
+				10,
+				12,
+				13,
+				17
+			]
+		},
+		{
+			"duration": 1,
+			"start": 30,
+			"id": 7,
+			"name":"CETT",
+			"chars": [
+				1,
+				4,
+				5,
+				6,
+				8,
+				26,
+				34,
+				35,
+				15,
+				14,
+				39,
+				40,
+				41
+			]
+		},
+		{
+			"duration": 1,
+			"start": 50,
+			"id": 8,
+			"name": "CAP",
+			"chars": [
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38
+			]			
+		},
+		{
+			"duration": 1,
+			"start": 50,
+			"name": "LMP",
+			"id": 9,
+			"chars": [
+				11,
+				15,
+				14,
+				9,
+				10,
+				12,
+				13,
+				16
+			]			
+		},
+		{
+			"duration": 1,
+			"start": 50,
+			"name": "LOVE",
+			"id": 10,
+			"chars": [
+				19,
+				18,
+				17
+			]			
+		},
+		{
+			"duration": 1,
+			"start": 50,
+			"name": "VIA",
+			"id": 11,
+			"chars": [
+				39,
+				40,
+				41
+			]			
+		},
+		{
+			"duration": 1,
+			"start": 15,
+			"id": 12,
+			"name": "Parti socialiste",
+			"chars": [
+				8,
+				15,
+				20
+			]
+		},
+		{
+			"duration": 1,
+			"start": 18,
+			"id": 13,
+			"name": "Parti de Gauche",
+			"chars": [
+				7
+			]
+		},
+		{
+			"duration": 1,
+			"start": 35,
+			"id":14,
+			"name": "Parti socialiste",
+			"chars": [
+				8
+			]
+		},
+		{
+			"duration": 1,
+			"start": 18,
+			"id": 15,
+			"name": "Parti communiste",	
+			"chars": [
+				39
+			]
+		}
+	]
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Réserve parlementaire</title>
+		<link href="lemonde.css" rel="stylesheet" type="text/css">
+		<link href="mycss.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<<<<<<< HEAD
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="jquery.dataTables.js"></script>
+		<script src="data.js"></script>
+=======
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link href="css/mycss.css" rel="stylesheet" type="text/css">
+		<script src="./js/jquery.dataTables.js"></script>
+		<script src="./js/data.js"></script>
+>>>>>>> sauvegarde
+		<script type="text/javascript" charset="utf-8">
+		//fonction pour séparer les milliers (ne pas toucher)
+			function format(valeur,decimal,separateur) {
+			// formate un chiffre avec 'decimal' chiffres après la virgule et un separateur
+				var deci=Math.round( Math.pow(10,decimal)*(Math.abs(valeur)-Math.floor(Math.abs(valeur)))) ; 
+				var val=Math.floor(Math.abs(valeur));
+				if ((decimal==0)||(deci==Math.pow(10,decimal))) {val=Math.floor(Math.abs(valeur)); deci=0;}
+				var val_format=val+"";
+				var nb=val_format.length;
+				for (var i=1;i<4;i++) {
+					if (val>=Math.pow(10,(3*i))) {
+						val_format=val_format.substring(0,nb-(3*i))+separateur+val_format.substring(nb-(3*i));
+					}
+				}
+				if (decimal>0) {
+					var decim=""; 
+					for (var j=0;j<(decimal-deci.toString().length);j++) {decim+="0";}
+					deci=decim+deci.toString();
+					val_format=val_format+"."+deci;
+				}
+				if (parseFloat(valeur)<0) {val_format="-"+val_format;}
+				return val_format;
+			} 
+		
+		
+		function scroller(id,event) {
+			event.preventDefault();
+			$(window.parent.document).find('body').stop().animate( {scrollTop : $(id).offset().top+100},500);
+			$(window.parent.document).find('html').stop().animate( {scrollTop : $(id).offset().top+100},500)
+		}
+		
+		 $(function () {
+			jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+				"currency-pre": function ( a ) {
+					a = (a==="-") ? 0 : a.replace( /[^\d\-\.]/g, "" );
+					return parseFloat( a );
+				},
+				"currency-asc": function (a,b) {
+					return a - b;
+				},
+				"currency-desc": function (a,b) {
+					return b - a;
+				}
+			});			
+			
+			$('#tableau').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableautable"></table>' );
+		$('#tableautable').dataTable({
+			"aaData": deputes.aaData,
+			"aoColumns": [
+				{ "sTitle": "Collectivité territoriale","sType": "string"},
+<<<<<<< HEAD
+				{ "sTitle": "Département","sType": "string","bSearchable":false},
+				{ "sTitle": "Département","sType": "string","bVisible":false},
+=======
+>>>>>>> sauvegarde
+				{ "sTitle": "Nature du projet","sType": "string"},
+				{ "sTitle": "Montant du projet","sType": "string","bSearchable":false, 	"sType": "currency",
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ],0,' ')+' €';
+				}},
+				{ "sTitle": "Subvention allouée", "bSearchable":false, 	"sType": "currency",
+					"fnRender": function(obj) { 
+						return format(obj.aData[ obj.iDataColumn ],0,' ')+' €';
+				}},
+<<<<<<< HEAD
+				{ "sTitle": "Parlementaire","sType": "string"},
+				{ "sTitle": "Département d'élection","sType": "string"},
+				{ "sTitle": "Département d'élection","sType": "string","bVisible":false,"bSearchable":false},
+				{ "sTitle": "Groupe","sType": "string","bSearchable":false},
+=======
+				{ "sTitle": "Parlementaire","sType": "string","bSearchable":false},
+				{ "sTitle": "Parlementaire","sType": "string","bVisible":false},
+				{ "sTitle": "Département","sType": "string","bVisible":true,"bSearchable":true},
+>>>>>>> sauvegarde
+				{ "sTitle": "Nature","sType": "string","bSearchable":false}
+			],
+			"bSort": true,
+			"aaSorting": [[0,'asc']],
+			"sScrollY": "400px",
+			"bScrollInfinite": true,
+	        "bScrollCollapse": true,
+			"oLanguage": {
+				"sZeroRecords": "Pas de données disponibles avec cette recherche",
+				"sLengthMenu": "_MENU_ entrées affichées",
+<<<<<<< HEAD
+				"sInfo": "Entrées _START_ à _END_ (sur _TOTAL_)",
+				"sSearch": "Cliquez sur l'intitulé d'une colonne pour trier les informations selon les critères.<br />Recherchez une subvention (commune, projet, département, parlementaire) :",
+				"sInfoEmpty": "Pas de données disponibles avec cette recherche"
+=======
+				"sInfo": "",
+				"sSearch": "Cliquez sur l'intitulé d'une colonne pour trier les informations selon les critères.<br />Recherchez une subvention (commune, projet, département, parlementaire) :",
+				"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+				"sInfoFiltered": ""
+>>>>>>> sauvegarde
+			}
+		});
+		});	
+		</script>
+<<<<<<< HEAD
+	</head>
+<body>
+<div class="_global">
+    <div class="container_18 clearfix">
+		<div class="article txt15_140 grid_10 alpha prefix_1 suffix_1">
+			<p class="lire ancre"><a href="#recherche" onclick="scroller('#recherche',event);">Aller directement au moteur de recherche</a></p>
+			<p>Plus de mille pages de documents, des dizaines de tableaux, des centaines de communes, des milliers de projets… Pour la première fois, la valise de la réserve parlementaire est ouverte. <a href="http://www.lemonde.fr/politique/article/2013/06/28/la-reserve-parlementaire-2011-enfin-transparente_3438569_823448.html" target="_blank">Grâce à la ténacité d’un professeur de mathématiques</a>, Hervé Lebreton, qui voulait <em>"montrer que les citoyens peuvent agir en démocratie",</em> le ministère de l’intérieur a fini <a href="http://www.pour-une-democratie-directe.fr/" target="_blank">par dévoiler l’utilisation</a>, pour l’année 2011, de cette enveloppe de 150 millions d’euros distribuée chaque année entre les parlementaires pour financer des projets <em>"d’intérêt général"</em>.</p>
+		<p>Une ligne budgétaire en hausse constante depuis 2008 (+ 29 % en cinq ans), orientée à 90 % sur les collectivités et à 10 % vers les associations et les fondations – seules subventions sur lesquelles l’intérieur n’a pas transmis d’informations. Inscrit dans aucun texte, le système repose sur une coutume qui remonte, pour certains, aux années 1970, pour d’autres à la loi de séparation de l’Eglise et de l’Etat en 1905. La réserve parlementaire se maintient et l’exploration des informations recueillies sur l’année 2011 donne des enseignements précieux sur cet archaïsme de la République.<strong>
+			<p class="lire">Lire : "<a href="http://www.lemonde.fr/politique/article/2013/04/18/a-quelles-associations-profite-la-reserve-parlementaire_3161735_823448.html" target="blank">A quelles associations profite la réserve parlementaire ?</a>"</p>
+			</p><p>
+			Un système arbitraire</strong> Avant les premières réformes impulsées par la nouvelle majorité, l’arbitraire régnait en maître. Au début, même, <em>"seuls les membres de la commission des finances étaient au courant de son existence. Ils se partageaient la cagnotte entre eux",</em> selon le député René Dosière (PS, Aisne). En 2011, encore, les mieux lotis étaient dans la majorité : quand un député UMP pouvait octroyer, en moyenne, 191 000 euros de subventions, un élu PS devait se contenter de 39 000 euros.</p>
+			<p>Au sein même de l’UMP, les écarts étaient flagrants entre le premier d’entre eux, le président de l’Assemblée de l’époque, Bernard Accoyer (11,9 millions) et le tout dernier, le député du Nord Sébastien Huyghe (1 319 euros). Dans le carré de tête, trois autres hommes, tous haut placés : Gilles Carrez, alors rapporteur du budget à l’Assemblée (3,85 millions), Gérard Larcher, à l’époque président du Sénat (3,13 millions) et Philippe Marini, ex-rapporteur du budget au Sénat (2,7 millions).</p>
+			<p><strong>Une aide au financement pour les communes</strong> Parmi les 222 parlementaires également maires en 2011, plus de la moitié (112) ont utilisé une partie de leur réserve parlementaire pour financer un projet dans leur commune, et 78 d’entre eux y ont consacré plus de la moitié de leur enveloppe. Ainsi, M. Carrez a versé l’intégralité de sa réserve à sa ville du Perreux-sur-Marne (Val-de-Marne) pour aider à financer 51 projets, allant de l’aménagement urbain à l’acquisition de matériel informatique. Jean-François Copé, député de Seine-et-Marne et maire de Meaux, a quant à lui utilisé ses 200 000 euros pour subventionner une nouvelle salle des fêtes, dans sa ville de Meaux.</p>
+			<p>Noël Mamère, député écologiste de la Gironde et maire de Bègles, a utilisé sa réserve dans sa commune pour un montant total de 26 000 euros, auxquels s’ajoutent 3 000 euros perçus au titre de la réserve d’Yves Cochet, ancien député écologiste de Paris.</p>
+			<img src="http://s1.lemde.fr/image/2013/07/10/1024x658/3445485_6_32ca_ill-3445485-17d9-reserve-x1d1_f5af6de7b5520bc0067ec18ebca03bfa.jpg" style="width:100%" />
+			<p><strong>Des subventions externalisées</strong> Ils sont un petit pourcentage (4,8 %) à utiliser leur réserve en dehors de leur circonscription – ce qui représente tout de même 14 % du montant global de la réserve parlementaire. Ainsi, M. Accoyer a certes pu octroyer les subventions les plus généreuses, mais il en a fait bénéficier 44 départements, en portant des projets au nom d’autres députés.</p>
+					<p>Idem pour Gérard Larcher, qui a financé des projets dans 39 départements ou encore pour le sénateur socialiste David Assouline, vice-président de la commission de la culture, dont l’importante réserve de 636 000 euros correspond à l'ensemble des doléances de ses collègues qu'il était chargé de rassembler. Laurent Fabius, à l’époque député de la Seine-Maritime, ou Xavier Bertrand (UMP, Aisne) ont externalisé leurs subventions vers leur lieu de vacances : Carla-Bayle en Ariège pour le premier et le village d’Aregno (Haute-Corse) pour M. Bertrand, d’où est originaire sa femme, et où il a participé à la rénovation des portes de l’église.</p>
+		<p><strong>Des fonds à visée électoraliste</strong> L’utilisation de la réserve parlementaire soulève un véritable conflit d’intérêts en ce qui concerne les sénateurs, dont l’élection dépend des élus locaux. <a href="http://www.mediapart.fr/journal/france/010713/en-2011-le-president-du-senat-utilise-sa-reserve-des-fins-electorales" target="_blank">Selon un calcul de Mediapart</a>, M. Larcher, l’ancien président du Sénat, a orienté 83 % de ses 3,13 millions de réserve vers des communes concernées par le renouvellement sénatorial de septembre 2011. Le président du groupe radical du Sénat, Yvon Collin, <a href="http://www.lepoint.fr/politique/senatoriales-la-campagne-bat-son-plein-16-09-2011-1374102_20.php" target="_blank">admettait à cette époque</a> avoir fait bénéficier des collègues renouvelables d’une partie de sa réserve.</p>
+	<p>Côté Assemblée, M. Carrez, député du Val-de-Marne, a financé le renforcement d’une route dans la Vienne… où son attaché parlementaire entre 2004 et 2010, Enguerrand Delannoy, allait être candidat aux législatives de 2012. En Eure-et-Loir, le maire de Maillebois, Vincent Gajas, a bénéficié d’une part de la réserve de François Trucy, sénateur (UMP) du Var, dont il est l’attaché parlementaire.</p>
+			<p><strong>Réformer sans supprimer</strong> Les réformes mises en place par la gauche, fin 2011 au Sénat puis en 2012 à l’Assemblée, ont changé la donne. Chaque parlementaire se voit désormais attribuer le même montant (environ 130 000 euros), avec double ration pour les responsables de groupe et bonus pour les élus à des postes à responsabilités. Claude Bartolone, président de l’Assemblée, a décidé de rendre publique, chaque année, l’utilisation de la réserve parlementaire.</p>
+		<p>Rares sont ceux qui plaident pour sa suppression, à l’instar de René Dosière. Les partisans de son maintien la jugent nécessaire pour compenser les inégalités entre Paris et les régions, d’autant plus en période de restriction des dotations publiques. Personne ne veut être le premier à baisser la garde, car les élus locaux connaissent le système et attendent à la caisse.
+			<p class="auteur txt12">Hélène Bekmezian et Alexandre Léchenet</p>
+		</div>
+		<div class="grid_6 omega col_droite">
+			<div id="bloc" class="bloc_base" style="position:relative;top:150px">
+				<h2 class="entete">Une réserve toujours plus importante</h3>
+				<div class="contenu_bloc_droit txt12">Sommes attribuées aux collectivités territoriales au titre de la réserve parlementaire.</div>
+				<script src="chart1.js"></script>
+				<div id="chart1" class="contenu_bloc_droit" style="height:200px;"></div>
+			</div>
+
+			<div id="bloc" class="bloc_base" style="position:relative;top:250px">
+				<h2 class="entete">A l'Assemblée, la majorité privilégiée</h3>
+				<div class="contenu_bloc_droit txt12">Part moyenne de la réserve parlementaire par député en fonction du groupe parlementaire en 2011. Les députés reçoivent en moyenne, tous groupes confondus, 127 500 euros.</div>
+				<script src="chart2.js"></script>
+				<div id="chart2" class="contenu_bloc_droit" style="height:200px;"></div>
+			</div>
+
+
+			<div id="bloc" class="bloc_base" style="position:relative;top:750px">
+				<h2 class="entete">Lire sur la réserve parlementaire</h3>
+				<div class="contenu_bloc_droit">
+				   <p><a href="http://www.lemonde.fr/politique/article/2013/04/14/vers-la-suppression-de-la-reserve-parlementaire_3159547_823448.html" target="_blank"><span class="titre_blog">Le Monde</span>Vers la suppression de la réserve parlementaire&nbsp;?</a><br />
+				   <p><a href="http://www.lemonde.fr/politique/article/2013/04/18/a-quelles-associations-profite-la-reserve-parlementaire_3161735_823448.html" target="_blank"><span class="titre_blog">Le Monde</span>A quelles associations profite la réserve parlementaire ?</a><br />
+				   <p><a href="http://www.lemonde.fr/politique/article/2013/06/28/la-reserve-parlementaire-2011-enfin-transparente_3438569_823448.html" target="_blank"><span class="titre_blog">Le Monde</span>La réserve parlementaire 2011 enfin transparente</a><br />
+				</div>				
+			</div>
+
+		</div>
+
+		<h2 class="tt26_capital" id="recherche" style="clear:both;">L'ensemble de la réserve en 2011 : le moteur de recherche</h2>
+		<div id="tableau" name="tableau"></div>
+		<p class="credits txt10">Données du ministère de l'intérieur récupérée par l'<a href="http://www.pour-une-democratie-directe.fr/" target"_blank">Association pour une démocratie directe</a> et Regards Citoyens (<a href="http://www.nosdeputes.fr/" target="_blank">nosdeputes.fr</a> et <a href="http://www.nossenateurs.fr/" target="_blank">nossenateurs.fr</a>) - <a href="./donnees.csv" target="_blank">télécharger les données</a>.</p>
+		<p class="credits txt10" style="margin-bottom:10px">Si un parlementaire n'apparaît pas, c'est qu'il n'a pas sollicité la réserve parlementaire ou qu'il ne le pouvait pas. Certains parlementaires ont sollicité la réserve au nom d'autres.</p>
+		<h2 class="tt26_capital">Signalez-nous les curiosités repérées</h2>
+		<div id="form">
+			<form action="https://docs.google.com/forms/d/1vFRS7HHJRtdRTx-4Tj0USjiBPsQpAr8U-CqRXsfqEoM/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">
+				<div id="left" style="float:left;width:35%">
+					<label for="entry_571541384"><h3 class="tt17_capital ss-q-title">Commune concernée</h3>
+					<div class="ss-q-help ss-secondary-text" dir="ltr"></div></label>
+					<input type="text" name="entry.571541384" value="" class="ss-q-short" id="entry_571541384" dir="auto" aria-required="true" style="width:75%;margin:5px;">
+					<label for="entry_1050173061"><h3 class="tt17_capital ss-q-title">Parlementaire ayant transmis le dossier</h3></label>
+					<input type="text" name="entry.1050173061" value="" class="ss-q-short" id="entry_1050173061" dir="auto" aria-required="true" style="width:75%;margin:5px;">
+					<input type="hidden" name="draftResponse" value="[]"><input type="hidden" name="pageHistory" value="0">
+				</div>
+				<div id="right" style="float:left">
+					<label for=""><h3 class="tt17_capital ss-q-title">Remarques</h3></label>
+					<textarea name="entry.564841821" rows="4" cols="30" class="ss-q-long" id="entry_564841821" dir="auto" style="width:75%;margin:5px"></textarea>
+					<input type="submit" name="submit" value="Transmettre" id="ss-submit">
+			</div>
+
+		</div>
+	</div>
+=======
+
+
+		</head>
+<body>
+			<div class="article grid_12"><p><em>Le Monde</em> a analysé comment les parlementaires ont réparti les 134 millions d’euros de la réserve parlementaire en 2012. Avec notre moteur de recherche, explorez le détail de la réserve parlementaire, et la manière dont votre député ou votre sénateur l’a dépensée.</p>
+
+			<p class="lire">Lire : "<a href="http://www.lemonde.fr/politique/article/2013/08/06/comment-les-parlementaires-ont-utilise-leur-reserve-en-2012_3458300_823448.html" target="_blank">Comment les parlementaires ont utilisé leur réserve en 2012</a>"</p></div>
+			<div id="tableau"></div>
+			<div id="credits" style="font-size:0.8em;clear:both;float:right;margin-right:3px;">source : <a href="http://www.etalab.gouv.fr/article-le-ministere-de-l-interieur-met-en-ligne-les-subventions-allouees-au-titre-de-la-reserve-parlementai-119364262.html" target="_blank">ministère de l'intérieur</a> et <a href="https://twitter.com/RegardsCitoyens/status/364769080869269504" target="_blank">Regards Citoyens</a></div>
+>>>>>>> sauvegarde
+</body>
+</html>

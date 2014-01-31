@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Centrales nucléaires</title>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v2/cartodb.js"></script>
+<script>
+(function(window, $, undefined) {
+
+  $(window).load(function main() {
+
+      cartodb.createVis('map', 'http://alphoenix.cartodb.com/api/v1/viz/centrales/viz.json', {
+          shareable: false,
+          title: false,
+          description: false,
+          searchControl: false,
+          zoomControl: true,
+          loaderControl: true,
+          center_lat: 47.219568,
+          center_lon: 2.373047,
+          zoom: 6,          
+          cartodb_logo: false,
+          infowindow: true
+      }).done(function(vis, layers) {          
+          createSelector(layers[1]);
+          layers[1].infowindow.set('template', $('#infowindow_template').html() );
+      });
+
+      $('.sidebar .close').on('click', function() {
+        $('.sidebar').toggleClass("closed");
+      });
+
+      resize();
+      $(window).on("resize", resize);
+
+  });
+
+  function resize() {
+    $("#map, .sidebar").css("top", $(".navbar").outerHeight() )
+    // Close the sidebar in mobile view
+    if( $(window).width() <  767) $("#map, .sidebar").addClass("closed");
+  }
+
+  // create layer selector
+  function createSelector(layer) {
+
+    var sql = new cartodb.SQL({ user: 'alphoenix' });
+
+    $('.sidebar .checkbox').on("click", function() {
+      
+      var query = "SELECT * FROM centrales";
+
+      
+      // change the query in the layer to update the map
+      layer.setQuery(query);
+
+    });
+  }
+
+  function buildQuery(theme, col) {
+
+    var theme_min_array = ['100000']
+        , theme_max_array = ['0'];
+
+    // looks up the values in the checkboxes
+    $('input[name=' + theme + ']:checked').each(function() {
+
+        theme_min_array.push($(this).attr('data-' + theme + '-min'));
+        theme_max_array.push($(this).attr('data-' + theme + '-max'));
+    
+    });
+    
+    return  "(" + col + " >= " + Math.min.apply( Math, theme_min_array ) + " and " + col + " < " + Math.max.apply( Math, theme_max_array ) + ")";
+  
+  }
+
+})(window, jQuery);
+</script>
+
+		</head>
+<body>
+<div class="_global">
+    <div class="container_18 clearfix">
+		<iframe src="./map.html" style="width:100%;border:0;height:560px"></iframe>
+	
+	
+		<!--COLGAUCHE-->
+		<div class="article txt15_140 grid_10 alpha prefix_1 suffix_1">
+<p>L'information est passée plutôt inaperçue. <a href="http://www.iaea.org/About/Policy/GC/GC57/GC57InfDocuments/English/gc57inf-3_en.pdf" target="_blank">Dans son bilan annuel "Nuclear safety review 2013"</a>, publié vendredi 19 juillet, l'Agence internationale de l'énergie atomique (AIEA) estime que nombre de réacteurs vieillissants posent le problème de la sûreté des centrales nucléaires dans le monde, même si de nettes améliorations ont été apportées dans ce domaine l'an passé.</p>
+<p>L'agence décompte ainsi, sur les 437 réacteurs nucléaires en exploitation dans 31 pays, 184 réacteurs qui ont plus de 30 ans, dont 22 qui dépassent les 40 ans d'activité, soit 42 % du parc mondial. L'âge moyen, lui, se situe à 28 ans. Quant aux cinq réacteurs les plus vieux, toujours en fonctionnement, ils ont été mis en service en 1969, soit il y a 44 ans : Beznau-1 (Suisse), Nine Mile Point-1 et Oyster Creek (Etats-Unis), ainsi que les réacteurs Tarapur-1 et 2 (Inde), selon la base de données de la <a href="http://world-nuclear.org/NuclearDatabase/rdResults.aspx?id=27569" target="_blank">World Nuclear Association</a>.</p>
+<p>En France, les centrales les plus âgées sont celles de Fessenheim, dans le Haut-Rhin (1978), de Bugey, dans l'Ain (1979), du Tricastin (1980), où <a href="http://www.lemonde.fr/planete/article/2013/07/15/des-militants-de-greenpeace-s-introduisent-dans-la-centrale-nucleaire-de-tricastin_3447500_3244.html">une trentaine de militants de Greenpeace se sont introduits</a> lundi 15 juillet,<strong> </strong>de Dampierre, dans le Loiret (1980) et de Gravelines, dans le Nord (1980).</p>
+<p><strong> DÉGRADATION DES COMPOSANTS ET DU BÉTON</strong></p>
+<p><em>"L<em>'exploitation des centrales à long terme</em> et leur vieillissement constituent un défi continu pour les autorités de régulation, les exploitants et les services publics"</em>, juge l'AIEA, et ce, même si <em>"la communauté nucléaire mondiale a accompli des progrès notables dans le renforcement de la sûreté nucléaire en 2012"</em> à la suite de l'accident nucléaire de Fukushima en 2011. </p>
+<p>En jeu : la dégradation des composants électroniques, du béton, de l'acier, des câbles électriques, des générateurs de vapeur, mais surtout de la cuve du réacteur, des piscines et des enceintes de confinement sous l'effet du temps, de la corrosion, de la pression ou des rayonnements radioactifs.</p>
+<p><em>"Notre rôle est de dire quels sont les risques, quels composants changer et quand le faire, grâce à des programmes de surveillance et de recherche"</em>, affirme Denis Flory, directeur général adjoint de l'AIEA, en charge du département sûreté et sécurité nucléaires. En 2010, l'agence a mis en place le programme <a href="http://www-ns.iaea.org/projects/igall/" target="_blank">International Generic Ageing Lessons Learned</a> (Igall) pour fournir aux opérateurs de centrales des retours d'expérience sur le vieillissement. Un guide devrait sortir dans ce but à la fin de l'année.</p>
+<p><em>"Ce vieillissement, au-delà de rendre les centrales de plus en plus dangereuses, pose la question du coût des travaux nécessaires pour augmenter la durée de vie des réacteurs</em>, assure Sébastien Blavier, chargé de mission énergie pour Greenpeace France. <em>Ce coût, qui ne cesse d'augmenter, ne sera pas toujours supportable. </em><em>Pour maintenir un niveau de sûreté acceptable, il faudra alors fermer davantage de réacteurs."</em></p>
+
+			<p class="auteur txt12">Audrey Garric et Alexandre Léchenet</p>
+		</div>
+		<!--COLDROITE-->
+		<div class="grid_6 omega col_droite">
+			<div id="bloc" class="bloc_base">
+				
+				<div class="contenu_bloc_droit txt12">Dans la carte ci-dessus, les réacteurs ayant plus de 30 ans sont en rouges. Les autres réacteurs sont en grisé. Certains réacteurs, comme les réacteurs japonais, bien qu'arrêtés, <a href="http://world-nuclear.org/NuclearDatabase/rdResults.aspx?id=27569" target="_blank">sont considérés par la WNA</a> et l'AIEA comme opérationnels.</div>
+			</div>
+
+			<div id="bloc" class="bloc_base">
+				<h2 class="entete">Un parc mondial vieillissant</h2>
+				<div class="contenu_bloc_droit txt12">Durée depuis la mise en service des réacteurs dans le monde.</div>
+				<script src="./js/chart1.js"></script>
+				<div id="chart1" class="contenu_bloc_droit" style="height:200px;"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

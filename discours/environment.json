@@ -1,0 +1,440 @@
+{
+   "input_encoding" : "windows-1252",
+   "columns" : [
+      {
+         "main" : {
+            "modules" : [
+               {
+                  "params" : {
+                     "module" : "Gauge",
+                     "closed" : [
+                        "taille"
+                     ],
+                     "fields" : [
+                        "candidat",
+                        "themes"
+                     ],
+                     "url" : "url",
+                     "contents" : [
+                        "incipit"
+                     ],
+                     "title" : "titre"
+                  },
+                  "label" : "Discours de Nicolas Sarkozy",
+                  "module" : "PostsNavigator",
+                  "description" : "<p>Ce module vous permet de naviguer Ã  travers les discours de Nicolas Sarkozy et de comparer le nombre de mots employÃ©s dans l'ensemble des discours sÃ©lectionnÃ©s.</p><br /><p>La jauge en haut permet de comparer la taille des discours :</p>
+<ul><li>Une valeur <i>faible</i> correspond Ã  des discours de moins de 2500 mots</li><li>Une valeur <i>moyenne</i> correspond Ã  des discours de 2500 Ã  7000 mots</li><li>Une valeur <i>forte</i> correspond Ã  des discours de plus de 7000 mots</li></ul>
+<p>Cliquez sur une catÃ©gorie pour filtrer les discours qui y correspondent. Maintenez la touche <b>Control</b> enfoncÃ©e en cliquant pour exclure une catÃ©gorie.</p><br /><p>La liste en bas vous permet de naviguer Ã  travers les discours. Cliquez sur un titre pour afficher un extrait, ainsi quâ€™un lien vers lâ€™intÃ©gralitÃ© du texte. La barre de choix situÃ©e entre la jauge et la liste des discours vous permet de choisir de classer les discours par date et par taille.</p>"
+               }
+            ]
+         }
+      },
+      {
+         "header" : {
+            "modules" : [
+               {
+                  "params" : {
+                     "field" : "je"
+                  },
+                  "label" : "Emploi du pronom \"Je\" dans les discours",
+                  "module" : "Gauge",
+                  "description" : "<p>Cette jauge vous permet de comparer la frÃ©quence de l'emploi du pronom <i>je</i> dans l'ensemble des discours sÃ©lectionnÃ©s.</p>
+<ul><li>Une valeur <i>faible</i> correspond Ã  la prÃ©sence de 5 <i>je</i> ou moins pour 1000 mots dans le discours</li><li>Une valeur <i>moyenne</i> correspond Ã  la prÃ©sence de 6 Ã  10 <i>je</i> pour 1000 mots dans le discours</li><li>Une valeur <i>forte</i> correspond Ã  la prÃ©sence de plus de 10 <i>je</i> pour 1000 mots dans le discours</li></ul>
+<p>Cliquez sur une catÃ©gorie pour filtrer les discours qui y correspondent. Maintenez la touche <b>Control</b> enfoncÃ©e en cliquant pour exclure une catÃ©gorie.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "nous"
+                  },
+                  "label" : "Emploi du pronom \"Nous\" dans les discours",
+                  "module" : "Gauge",
+                  "description" : "<p>Cette jauge vous permet de comparer la frÃ©quence de l'emploi du pronom <i>nous</i> dans l'ensemble des discours sÃ©lectionnÃ©s.</p>
+<ul><li>Une valeur <i>faible</i> correspond Ã  la prÃ©sence de 5 <i>nous</i> ou moins pour 1000 mots dans le discours</li><li>Une valeur <i>moyenne</i> correspond Ã  la prÃ©sence de 6 Ã  10 <i>nous</i> pour 1000 mots dans le discours</li><li>Une valeur <i>forte</i> correspond Ã  la prÃ©sence de plus de 10 <i>nous</i> pour 1000 mots dans le discours</li></ul>
+<p>Cliquez sur une catÃ©gorie pour filtrer les discours qui y correspondent. Maintenez la touche <b>Control</b> enfoncÃ©e en cliquant pour exclure une catÃ©gorie.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "vous"
+                  },
+                  "label" : "Emploi du pronom \"Vous\" dans les discours",
+                  "module" : "Gauge",
+                  "description" : "<p>Cette jauge vous permet de comparer la frÃ©quence de l'emploi du pronom <i>vous</i> dans l'ensemble des discours sÃ©lectionnÃ©s.</p>
+<ul><li>Une valeur <i>faible</i> correspond Ã  la prÃ©sence de 5 <i>vous</i> ou moins pour 1000 mots dans le discours</li><li>Une valeur <i>moyenne</i> correspond Ã  la prÃ©sence de 6 Ã  10 <i>vous</i> pour 1000 mots dans le discours</li><li>Une valeur <i>forte</i> correspond Ã  la prÃ©sence de plus de 10 <i>vous</i> pour 1000 mots dans le discours</li></ul>
+<p>Cliquez sur une catÃ©gorie pour filtrer les discours qui y correspondent. Maintenez la touche <b>Control</b> enfoncÃ©e en cliquant pour exclure une catÃ©gorie.</p>"
+               }
+            ],
+            "height" : 150
+         },
+         "main" : {
+            "modules" : [
+               {
+                  "params" : {
+                     "field" : "themes",
+							"limit":100,
+                     "full" : true
+                  },
+                  "label" : "ThÃ©matiques abordÃ©es",
+                  "module" : "SpiderChart",
+                  "description":"<p>Ce diagramme vous permet de comparer les principales thÃ©matiques abordÃ©es dans les discours sÃ©lectionnÃ©s.</p><br /><p>Chaque flÃ¨che correspond Ã  une thÃ©matique, et l'intersection entre la courbe rouge et chaque flÃ¨che est proportionnelle au nombre de discours qui correspondent aux thÃ©matiques.</p><br /><p>Les thÃ©matiques sont dÃ©finies Ã  partir de listes de mots clÃ©s, et nous ne retenons pour chaque discours que les 5 thÃ©matiques qui sont les plus prÃ©sentes. Un discours peut se voir attribuer moins de 5 thÃ©matiques si aucune n'est suffisamment prÃ©sente.</p><br /><p>Cliquez sur une thÃ©matique pour filtrer les discours qui y correspondent. Vous pouvez sÃ©lectionner plusieurs thÃ©matiques Ã  la fois en maintenant la touche <b>Control</b> enfoncÃ©e en mÃªme temps que le clic.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "person"
+                  },
+                  "label" : "Personnes citÃ©es",
+                  "module" : "TagCloud",
+                  "description":"<p>Ce nuage de mots vous permet de comparer les personnes citÃ©es dans les discours sÃ©lectionnÃ©s.</p><p>Seules les personnes qui apparaissent dans au moins 10 discours ont Ã©tÃ© retenues.</p><br /><p>Les noms des personnes sont classÃ©s par ordre alphabÃ©tique, la couleur de chaque nom est proportionnelle au nombre de disours dans lesquels ils apparaissent (les plus foncÃ©s sont les plus frÃ©quents).</p><br /><p>Cliquez sur un nom pour filtrer les discours qui le citent. Vous pouvez sÃ©lectionner plusieurs noms en maintenant la touche <b>Control</b> enfoncÃ©e en plus du clic. Vous pouvez retirer les discours qui contiennent un nom en maintenant la touche <b>Majuscule</b> enfoncÃ©e en plus du clic (et <b>Control, Maj et clic</b> pour retirer plusieurs mots).</p><br /><p>Vous pouvez cliquer sur le bouton \"Voir toutes les valeurs\" (en bas Ã  gauche) pour afficher la liste complÃ¨te des noms. Vous pouvez trier cette liste par ordre alphabÃ©tique ou bien en fonction du nombre de discours dans lesquels ils apparaissent, en cliquant sur les titres des colonnes.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "entity"
+                  },
+                  "label" : "EntitÃ©s citÃ©es",
+                  "module" : "TagCloud",
+                  "description":"<p>Ce nuage de mots vous permet de comparer les entitÃ©s (noms de pays, d'institutions, de compagnies ou de fonctions) citÃ©es dans les discours sÃ©lectionnÃ©s.</p><p>Seules les entitÃ©s qui apparaissent dans au moins 10 discours ont Ã©tÃ© retenues.</p><br /><p>Les entitÃ©s sont classÃ©es par ordre alphabÃ©tique, la couleur de chaque entitÃ© est proportionnelle au nombre de disours dans lesquels elles apparaissent (les plus foncÃ©es sont les plus frÃ©quentes).</p><br /><p>Cliquez sur une entitÃ© pour filtrer les discours qui la citent. Vous pouvez sÃ©lectionner plusieurs entitÃ©s en maintenant la touche <b>Control</b> enfoncÃ©e en plus du clic. Vous pouvez retirer les discours qui contiennent une entitÃ© en maintenant la touche <b>Majuscule</b> enfoncÃ©e en plus du clic (et <b>Control, Maj et clic</b> pour retirer plusieurs entitÃ©s).</p><br /><p>Vous pouvez cliquer sur le bouton \"Voir toutes les valeurs\" (en bas Ã  gauche) pour afficher la liste complÃ¨te des entitÃ©s. Vous pouvez trier cette liste par ordre alphabÃ©tique ou bien en fonction du nombre de discours dans lesquels elles apparaissent, en cliquant sur les titres des colonnes.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "term"
+                  },
+                  "label" : "Termes employÃ©s",
+                  "module" : "TagCloud",
+                  "description":"<p>Ce nuage de mots vous permet de comparer les termes et expressions les plus frÃ©quents qui apparaissent dans les discours sÃ©lectionnÃ©s.</p><p>Seules les termes qui apparaissent dans au moins 10 discours ont Ã©tÃ© retenus.</p><br /><p>Les termes sont classÃ©s par ordre alphabÃ©tique, la couleur de chaque terme est proportionnelle au nombre de disours dans lesquels ils apparaissent (les plus foncÃ©s sont les plus frÃ©quents).</p><br /><p>Cliquez sur un terme pour filtrer les discours qui le citent. Vous pouvez sÃ©lectionner plusieurs termes en maintenant la touche <b>Control</b> enfoncÃ©e en plus du clic. Vous pouvez retirer les discours qui contiennent un terme en maintenant la touche <b>Majuscule</b> enfoncÃ©e en plus du clic (et <b>Control, Maj et clic</b> pour retirer plusieurs termes).</p><br /><p>Vous pouvez cliquer sur le bouton \"Voir toutes les valeurs\" (en bas Ã  gauche) pour afficher la liste complÃ¨te des termes. Vous pouvez trier cette liste par ordre alphabÃ©tique ou bien en fonction du nombre de discours dans lesquels ils apparaissent, en cliquant sur les titres des colonnes.</p>"
+               }
+            ]
+         }
+      },
+      {
+        "header" : {
+            "modules" : [
+               {
+                  "params" : {
+                     "field" : "nous"
+                  },
+                  "label" : "Emploi du pronom \"Nous\" dans les discours",
+                  "module" : "Gauge",
+                  "description" : "<p>Cette jauge vous permet de comparer la frÃ©quence de l'emploi du pronom <i>nous</i> dans l'ensemble des discours sÃ©lectionnÃ©s.</p>
+<ul><li>Une valeur <i>faible</i> correspond Ã  la prÃ©sence de 5 <i>nous</i> ou moins pour 1000 mots dans le discours</li><li>Une valeur <i>moyenne</i> correspond Ã  la prÃ©sence de 6 Ã  10 <i>nous</i> pour 1000 mots dans le discours</li><li>Une valeur <i>forte</i> correspond Ã  la prÃ©sence de plus de 10 <i>nous</i> pour 1000 mots dans le discours</li></ul>
+<p>Cliquez sur une catÃ©gorie pour filtrer les discours qui y correspondent. Maintenez la touche <b>Control</b> enfoncÃ©e en cliquant pour exclure une catÃ©gorie.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "vous"
+                  },
+                  "label" : "Emploi du pronom \"Vous\" dans les discours",
+                  "module" : "Gauge",
+                  "description" : "<p>Cette jauge vous permet de comparer la frÃ©quence de l'emploi du pronom <i>vous</i> dans l'ensemble des discours sÃ©lectionnÃ©s.</p>
+<ul><li>Une valeur <i>faible</i> correspond Ã  la prÃ©sence de 5 <i>vous</i> ou moins pour 1000 mots dans le discours</li><li>Une valeur <i>moyenne</i> correspond Ã  la prÃ©sence de 6 Ã  10 <i>vous</i> pour 1000 mots dans le discours</li><li>Une valeur <i>forte</i> correspond Ã  la prÃ©sence de plus de 10 <i>vous</i> pour 1000 mots dans le discours</li></ul>
+<p>Cliquez sur une catÃ©gorie pour filtrer les discours qui y correspondent. Maintenez la touche <b>Control</b> enfoncÃ©e en cliquant pour exclure une catÃ©gorie.</p>"
+               }
+            ],
+            "height" : 150
+         },
+         "main" : {
+            "modules" : [
+               {
+                  "params" : {
+                     "field" : "person"
+                  },
+                  "label" : "Personnes citÃ©es",
+                  "module" : "TagCloud",
+                  "description":"<p>Ce nuage de mots vous permet de comparer les personnes citÃ©es dans les discours sÃ©lectionnÃ©s.</p><p>Seules les personnes qui apparaissent dans au moins 10 discours ont Ã©tÃ© retenues.</p><br /><p>Les noms des personnes sont classÃ©s par ordre alphabÃ©tique, la couleur de chaque nom est proportionnelle au nombre de disours dans lesquels ils apparaissent (les plus foncÃ©s sont les plus frÃ©quents).</p><br /><p>Cliquez sur un nom pour filtrer les discours qui le citent. Vous pouvez sÃ©lectionner plusieurs noms en maintenant la touche <b>Control</b> enfoncÃ©e en plus du clic. Vous pouvez retirer les discours qui contiennent un nom en maintenant la touche <b>Majuscule</b> enfoncÃ©e en plus du clic (et <b>Control, Maj et clic</b> pour retirer plusieurs mots).</p><br /><p>Vous pouvez cliquer sur le bouton \"Voir toutes les valeurs\" (en bas Ã  gauche) pour afficher la liste complÃ¨te des noms. Vous pouvez trier cette liste par ordre alphabÃ©tique ou bien en fonction du nombre de discours dans lesquels ils apparaissent, en cliquant sur les titres des colonnes.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "entity"
+                  },
+                  "label" : "EntitÃ©s citÃ©es",
+                  "module" : "TagCloud",
+                  "description":"<p>Ce nuage de mots vous permet de comparer les entitÃ©s (noms de pays, d'institutions, de compagnies ou de fonctions) citÃ©es dans les discours sÃ©lectionnÃ©s.</p><p>Seules les entitÃ©s qui apparaissent dans au moins 10 discours ont Ã©tÃ© retenues.</p><br /><p>Les entitÃ©s sont classÃ©es par ordre alphabÃ©tique, la couleur de chaque entitÃ© est proportionnelle au nombre de disours dans lesquels elles apparaissent (les plus foncÃ©es sont les plus frÃ©quentes).</p><br /><p>Cliquez sur une entitÃ© pour filtrer les discours qui la citent. Vous pouvez sÃ©lectionner plusieurs entitÃ©s en maintenant la touche <b>Control</b> enfoncÃ©e en plus du clic. Vous pouvez retirer les discours qui contiennent une entitÃ© en maintenant la touche <b>Majuscule</b> enfoncÃ©e en plus du clic (et <b>Control, Maj et clic</b> pour retirer plusieurs entitÃ©s).</p><br /><p>Vous pouvez cliquer sur le bouton \"Voir toutes les valeurs\" (en bas Ã  gauche) pour afficher la liste complÃ¨te des entitÃ©s. Vous pouvez trier cette liste par ordre alphabÃ©tique ou bien en fonction du nombre de discours dans lesquels elles apparaissent, en cliquant sur les titres des colonnes.</p>"
+               },
+               {
+                  "params" : {
+                     "field" : "term"
+                  },
+                  "label" : "Termes employÃ©s",
+                  "module" : "TagCloud",
+                  "description":"<p>Ce nuage de mots vous permet de comparer les termes et expressions les plus frÃ©quents qui apparaissent dans les discours sÃ©lectionnÃ©s.</p><p>Seules les termes qui apparaissent dans au moins 10 discours ont Ã©tÃ© retenus.</p><br /><p>Les termes sont classÃ©s par ordre alphabÃ©tique, la couleur de chaque terme est proportionnelle au nombre de disours dans lesquels ils apparaissent (les plus foncÃ©s sont les plus frÃ©quents).</p><br /><p>Cliquez sur un terme pour filtrer les discours qui le citent. Vous pouvez sÃ©lectionner plusieurs termes en maintenant la touche <b>Control</b> enfoncÃ©e en plus du clic. Vous pouvez retirer les discours qui contiennent un terme en maintenant la touche <b>Majuscule</b> enfoncÃ©e en plus du clic (et <b>Control, Maj et clic</b> pour retirer plusieurs termes).</p><br /><p>Vous pouvez cliquer sur le bouton \"Voir toutes les valeurs\" (en bas Ã  gauche) pour afficher la liste complÃ¨te des termes. Vous pouvez trier cette liste par ordre alphabÃ©tique ou bien en fonction du nombre de discours dans lesquels ils apparaissent, en cliquant sur les titres des colonnes.</p>"
+               }
+            ]
+         }
+      }
+   ],
+   "attributes" : {
+      "id" : {
+         "label" : "ID",
+         "type" : "text"
+      },
+      "titre" : {
+         "label" : "Titre",
+         "type" : "text"
+      },
+      "date" : {
+         "unit" : "day",
+         "label" : "Date",
+         "type" : "date",
+         "mask" : "%y-%m-%d"
+      },
+      "candidat" : {
+         "values" : [
+                      {
+               "color" : "0D4E9E",
+               "id" : "Nicolas Sarkozy",
+               "label" : "Nicolas Sarkozy"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Candidat"
+      },
+      "parti" : {
+         "values" : [
+            {
+               "color" : "0D4E9E",
+               "id" : "UMP",
+               "label" : "UMP"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Parti"
+      },
+      "size" : {
+         "type" : "num",
+         "label" : "Taille"
+      },
+      "taille" : {
+         "values" : [
+            {
+               "color" : "fcae91",
+               "id" : "1",
+               "label" : "Court"
+            },
+            {
+               "color" : "f86a4a",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "cb181d",
+               "id" : "3",
+               "label" : "Long"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Taille"
+      },
+      "incipit" : {
+         "label" : "Incipit",
+         "type" : "text"
+      },
+      "url" : {
+         "label" : "URL",
+         "type" : "url"
+      },
+      "term" : {
+         "type" : "list",
+         "label" : "Termes utilisÃ©s"
+      },
+      "entity" : {
+         "type" : "list",
+         "label" : "EntitÃ©s citÃ©es"
+      },
+      "person" : {
+         "type" : "list",
+         "label" : "Personnes citÃ©es"
+      },
+      "themes" : {
+         "type" : "list",
+         "label" : "ThÃ©matiques"
+      },
+      "nb_themes" : {
+         "type" : "num",
+         "label" : "Nombre de thÃ©matiques"
+      },
+      "je" : {
+         "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Je"
+      },
+      "nous" : {
+         "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Nous"
+      },
+      "tu" : {
+         "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Tu"
+      },
+      "vous" : {
+         "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Vous"
+      },
+      "il" : {
+         "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Il"
+      },
+      "ils" : {
+          "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Ils"
+      },
+      "elle" : {
+         "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Elle"
+      },
+      "elles" : {
+         "values" : [
+            {
+               "color" : "9EBCDA",
+               "id" : "1",
+               "label" : "Faible"
+            },
+            {
+               "color" : "8C96C6",
+               "id" : "2",
+               "label" : "Moyen"
+            },
+            {
+               "color" : "8856A7",
+               "id" : "3",
+               "label" : "Fort"
+            }
+         ],
+         "type" : "closed",
+         "label" : "Elles"
+      }
+   },
+   "control" : {
+      "Search" : {
+         "fields" : [
+            "titre",
+            "term",
+            "entity",
+            "person"
+         ]
+      },
+      "TimeNavigator" : {
+         "field" : "date"
+      },
+      "Sorting" : {
+         "fields" : [
+            "size"
+         ]
+      }
+   }
+}

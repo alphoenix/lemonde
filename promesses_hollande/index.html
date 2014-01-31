@@ -1,0 +1,237 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Les promesses de François Hollande</title>
+	<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+	<link href="css/mycss.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css"/>
+	<link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/data.js"></script>
+	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript" ></script>
+</head>
+<script>
+	 $(document).ready(function(){
+		$('.scroll-pane')
+		.jScrollPane(
+			{
+				showArrows: true,
+				horizontalGutter: 30,
+				verticalGutter: 30,
+				animateScroll: true
+			}
+		)
+	 });
+</script>
+<body>
+	<div id="chapo" style="padding:10px;">Un an après l'élection de François Hollande, <em>Le Monde.fr</em>, avec <a href="http://luipresident.fr/" target="_blank">Lui Président</a>, fait le bilan des prommesses. Chaque promesse est représentée par un carré, la couleur détermine si la promesse est tenue ou non.<br /><strong>Cliquez sur un carré pour avoir le verdict dans son détail, utilisez les filtres pour préciser l'affichage.</strong></div>
+	<div id='graph'></div>
+	<div class="txt15_20" id="menu">
+		<div class="col coldouble">
+			<h3 class="tt26_capital">Promesses</h3>
+			<label for="t"><input type="checkbox" name="1" value="0" id="t" checked onclick="calc(value, id, name);"> tenues 
+				<span class="tile" style="background:#80a309">&nbsp;</span>
+			</label>
+			<label for="ept" class="right" ><input type="checkbox" name="1" value="1" id="ept" checked onclick="calc(value, id, name);"> en partie tenues
+				<span class="tile" style="background:#fb7102">&nbsp;</span>
+			</label>
+			<label for="b"><input type="checkbox" name="1" value="2" id="b" checked onclick="calc(value, id, name);"> brisées
+				<span class="tile" style="background:#ad1629">&nbsp;</span>
+			</label>
+			<label for="ed" class="right" ><input type="checkbox" name="1" value="3" id="ed" checked onclick="calc(value, id, name);"> en doute
+				<span class="tile" style="background:#666666">&nbsp;</span>
+			</label>
+			<label for="ec"><input type="checkbox" name="1" value="4" id="ec" checked onclick="calc(value, id, name);"> en cours
+				<span class="tile" style="background:#BAD950">&nbsp;</span>
+			</label>
+			<label for="pet"class="right"><input type="checkbox" name="1" value="5" id="pet" checked onclick="calc(value, id, name);"> pas encore tenues
+				<span class="tile" style="background:#cccccc">&nbsp;</span>
+			</label>
+			<label for="ti"><input type="checkbox" name="1" value="6" id="ti" checked onclick="calc(value, id, name);"> trop imprécises
+				<span class="tile" style="background:#C6B098">&nbsp;</span>
+			</label>	
+		</div>
+		<div class="col coldouble">
+			<h3 class="tt26_capital">Prises en tant que...</h3>
+			<label for="c"><input type="checkbox" name="0" value="0" id="c" checked onclick="calc(value, id, name);"> candidat</label>
+			<label for="p"><input type="checkbox" name="0" value="1" id="p" checked onclick="calc(value, id, name);"> président</label>
+		</div>
+		<div class="col">
+			<h3 class="tt26_capital">Thématiques</h3>
+			<input type="checkbox" name="2" value="0" id="eco" checked onclick="calc(value, id, name);"><label for="eco"> Economie, industrie, fiscalité et finances publiques</label><br />
+			<input type="checkbox" name="2" value="1" id="edu" checked onclick="calc(value, id, name);"><label for="edu"> Education, recherche, jeunesse et sports</label><br />
+			<input type="checkbox" name="2" value="2" id="san" checked onclick="calc(value, id, name);"><label for="san"> Santé et bioéthique</label><br />
+			<input type="checkbox" name="2" value="3" id="agr" checked onclick="calc(value, id, name);"><label for="agr"> Agriculture, mer et ruralité</label><br />
+			<input type="checkbox" name="2" value="4" id="pol" checked onclick="calc(value, id, name);"><label for="pol"> Police, justice et armée</label><br />
+			<input type="checkbox" name="2" value="5" id="soc" checked onclick="calc(value, id, name);"><label for="soc"> Social, travail, pouvoir d'achat et emploi</label><br />
+			<input type="checkbox" name="2" value="6" id="ins" checked onclick="calc(value, id, name);"><label for="ins"> Institutions, vie politique et moralisation</label><br />
+			<input type="checkbox" name="2" value="7" id="cul" checked onclick="calc(value, id, name);"><label for="cul"> Culture, médias, science et numérique</label><br />
+			<input type="checkbox" name="2" value="8" id="env" checked onclick="calc(value, id, name);"><label for="env"> Environnement et énergie</label><br />
+			<input type="checkbox" name="2" value="9" id="log" checked onclick="calc(value, id, name);"><label for="log"> Logement, transports, ville et aménagement du territoire</label><br />
+			<input type="checkbox" name="2" value="10" id="int" checked onclick="calc(value, id, name);"><label for="int"> Europe et international</label><br />
+			<input type="checkbox" name="2" value="11" id="fam" checked onclick="calc(value, id, name);"><label for="fam"> Société, famille, laïcité et immigration</label><br />
+		</div>
+	</div>
+	<div id="detail_promesse">
+		<img src="img/t.png" id="picto" style="float:right;display:none;" />
+		<div id='texte' class='scroll-pane'>
+		</div>
+	</div>
+	<div class='legend-source' id="credits">Source: <a href="http://www.luipresident.fr/" target="_blank">Lui Président</a></div>
+	<script>
+	//COULEUR
+	attributes = {
+            t: '#80a309',
+			ept: '#fb7102',
+			b: '#ad1629',
+			ed: '#666666',
+			ec: '#BAD950',
+			pet: '#cccccc',
+			ti: '#C6B098',
+        },
+	tableau_filtre=[["c","p"],["t","ept","b","ed","ec","pet","ti"],["eco","edu","san","agr","pol","soc","ins","cul","env","log","int","fam"]]
+	
+	// ["Id","Candidat/président","Verdict","Thème","Engagement","Détail","Détail verdict","Visible"]
+	
+	margin = 5
+	//INITIALISER RAPHAEL
+	var paper = new Raphael(document.getElementById('graph'), 700, 500);
+	row = -1
+	col = 0
+	//CREER LES PROMESSES
+	for (var i = 0;i<tableau_promesses.length; i++){
+		if (i%24==0){
+			col = 0
+			row +=1
+		}
+		var c = paper.rect(29*col, 29*row, 25, 25, 3)
+		col+=1
+		
+		c.id = tableau_promesses[i][0];
+		
+		//ATTRIBUTS COULEUR
+		c.attr({"stroke-opacity":0, "stroke-linecap":"round", "stroke":"#FF0000", "stroke-linejoin":"bevel", "title":tableau_promesses[i][4]})
+		if (tableau_promesses[i][2]=="t"){
+			c.attr({"fill":attributes.t})
+		}
+		else if (tableau_promesses[i][2]=="ept"){
+			c.attr({"fill":attributes.ept})
+		}
+		else if (tableau_promesses[i][2]=="b"){
+			c.attr({"fill":attributes.b})
+		}
+		else if (tableau_promesses[i][2]=="ed"){
+			c.attr({"fill":attributes.ed})
+		}
+		else if (tableau_promesses[i][2]=="ec"){
+			c.attr({"fill":attributes.ec})
+		}
+		else if (tableau_promesses[i][2]=="pet"){
+			c.attr({"fill":attributes.pet})
+		}
+		else if (tableau_promesses[i][2]=="ti"){
+			c.attr({"fill":attributes.ti})
+		}
+
+		//AFFICHER LE TEXTE DE LA PROMESSE AU CLIC (HTML compatible - liens et tout....)
+		c.click(function(){
+			for (var i = 0; i<tableau_promesses.length; i++){
+				paper.getById(tableau_promesses[i][0]).attr({"stroke-opacity":0})
+				if (this.id == tableau_promesses[i][0]){
+					var assoc = {"t":"Promesse tenue","ept":"Promesse en partie tenue","ed":"Promesse en doute","b":"Promesse brisée","ec":"Promesse en cours","pet":"Promesse pas encore tenue","ti":"Promesse trop imprécise"}
+
+					var titre = "<h2 id=\"titre\">"+tableau_promesses[i][4]+"</h2>"
+					if(tableau_promesses[i][7] != "") var promesse = "<h4 id=\"promesse\">"+assoc[tableau_promesses[i][2]]+" - "+tableau_promesses[i][7]+"</h4><hr />"
+					else var promesse = "<h4 id=\"promesse\">"+assoc[tableau_promesses[i][2]]+"</h4><hr />"
+
+					$("#picto").attr("src","img/"+tableau_promesses[i][2]+".png")
+					$("#picto").show();
+					
+					var texte = tableau_promesses[i][5]
+					if(tableau_promesses[i][6] != null) texte += tableau_promesses[i][6]
+					if(tableau_promesses[i][7] != "" && tableau_promesses[i][8] != null) texte += "<p><strong>"+tableau_promesses[i][7]+"</strong>. "+tableau_promesses[i][8]+"</p>"
+					else if(tableau_promesses[i][7] != "") texte += "<p><strong>"+tableau_promesses[i][7]+"</strong>.</p>"
+
+					var api = $("#texte").data("jsp")
+					api.getContentPane().html(titre+promesse+"<div id=\"detail\">"+texte+"</div>");
+					api.reinitialise()
+				}
+			}
+			this.attr({"stroke-opacity":1})
+		})
+	}
+
+	//POUR SAVOIR QUELLES PROMESSES AFFICHER
+	function calc(value, id, name){
+		if(document.getElementById(id).checked){
+			tableau_filtre[name][value] = id
+		}
+		else {
+			tableau_filtre[name][value] = ""
+		}
+		filtrer(id, name)
+	}
+
+	//ON DONNE LA PROPRIETE D'AFFICHAGE A CHAQUE PROMESSE
+	function filtrer(id, name){
+		for (var i = 0;i<tableau_promesses.length; i++){
+			//TABLEAU FILTRE
+			if (
+				(tableau_promesses[i][1]==tableau_filtre[0][0]||tableau_promesses[i][1]==tableau_filtre[0][1]) && 
+				(tableau_promesses[i][2]==tableau_filtre[1][0]||tableau_promesses[i][2]==tableau_filtre[1][1]||tableau_promesses[i][2]==tableau_filtre[1][2]||tableau_promesses[i][2]==tableau_filtre[1][3]||tableau_promesses[i][2]==tableau_filtre[1][4]||tableau_promesses[i][2]==tableau_filtre[1][5]||tableau_promesses[i][2]==tableau_filtre[1][6]) && 
+				(tableau_promesses[i][3]==tableau_filtre[2][0]||tableau_promesses[i][3]==tableau_filtre[2][1]||tableau_promesses[i][3]==tableau_filtre[2][2]||tableau_promesses[i][3]==tableau_filtre[2][3]||tableau_promesses[i][3]==tableau_filtre[2][4]||tableau_promesses[i][3]==tableau_filtre[2][5]||tableau_promesses[i][3]==tableau_filtre[2][6]||tableau_promesses[i][3]==tableau_filtre[2][7]||tableau_promesses[i][3]==tableau_filtre[2][8]||tableau_promesses[i][3]==tableau_filtre[2][9]||tableau_promesses[i][3]==tableau_filtre[2][10]||tableau_promesses[i][3]==tableau_filtre[2][11])
+			){
+				tableau_promesses[i][9] = 1
+			}
+			else {
+				tableau_promesses[i][9] = 0
+			}
+		}
+		classer()
+	}
+
+	//ON RECLASSE DANS L'ORDRE 1)les sélectionnées [7], 2) les promesses [2], 3) les thèmes [3]
+	function classer(){
+		tableau_promesses.sort(function(a,b){
+			if (b[9] == a[9]){
+				if (b[2]==a[2]){
+					var x2 = a[3], y2 = b[3]
+					return x2 > y2 ? -1 : x2 < y2 ? 1 : 0
+				}
+				var assoc = {"t":1,"ept":2,"ed":3,"b":4,"ec":5,"pet":6,"ti":7}
+				var x = assoc[a[2]], y = assoc[b[2]]
+				return x > y ? 1 : x < y ? -1 : 0
+			}
+			return b[9]-a[9]
+		})
+		afficher()
+	}
+
+	//ON AFFICHE DANS L'ORDRE DEFINI PAR LE CLASSEMENT 
+	function afficher(){
+		row1 = -1
+		col1 = 0
+		//var c = paper.rect(40*col, 40*row, 35, 35, 4)
+		for (var i = 0; i<tableau_promesses.length; i++){
+			if (i%24==0){
+				col1 = 0
+				row1 +=1
+			}
+			myPromesse = paper.getById(tableau_promesses[i][0]);
+			myPromesse.animate({"x":29*col1, "y":29*row1},300)
+			col1+=1
+			if (tableau_promesses[i][9]==0){
+				myPromesse.animate({"opacity":0.1},300) 
+			}
+			else {
+				myPromesse.animate({"opacity":1},200)
+			}
+		}			
+	}
+	</script>
+</body>
+</html>

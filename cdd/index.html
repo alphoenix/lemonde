@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CDD</title>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<link href="css/lemonde.css" rel="stylesheet" type="text/css">
+		<link href="css/mycss.css" rel="stylesheet" type="text/css">
+		<script src="./js/jquery.dataTables.js"></script>
+		<script src="./js/data.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		//fonction pour séparer les milliers (ne pas toucher)
+			function format(valeur,decimal,separateur) {
+			// formate un chiffre avec 'decimal' chiffres après la virgule et un separateur
+				var deci=Math.round( Math.pow(10,decimal)*(Math.abs(valeur)-Math.floor(Math.abs(valeur)))) ; 
+				var val=Math.floor(Math.abs(valeur));
+				if ((decimal==0)||(deci==Math.pow(10,decimal))) {val=Math.floor(Math.abs(valeur)); deci=0;}
+				var val_format=val+"";
+				var nb=val_format.length;
+				for (var i=1;i<4;i++) {
+					if (val>=Math.pow(10,(3*i))) {
+						val_format=val_format.substring(0,nb-(3*i))+separateur+val_format.substring(nb-(3*i));
+					}
+				}
+				if (decimal>0) {
+					var decim=""; 
+					for (var j=0;j<(decimal-deci.toString().length);j++) {decim+="0";}
+					deci=decim+deci.toString();
+					val_format=val_format+"."+deci;
+				}
+				if (parseFloat(valeur)<0) {val_format="-"+val_format;}
+				return val_format;
+			} 
+		
+		
+		function scroller(id,event) {
+			event.preventDefault();
+			$(window.parent.document).find('body').stop().animate( {scrollTop : $(id).offset().top+100},500);
+			$(window.parent.document).find('html').stop().animate( {scrollTop : $(id).offset().top+100},500)
+		}
+		
+		 $(function () {
+			jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+				"currency-pre": function ( a ) {
+					a = (a==="-") ? 0 : a.replace( /[^\d\-\.]/g, "" );
+					return parseFloat( a );
+				},
+				"currency-asc": function (a,b) {
+					return a - b;
+				},
+				"currency-desc": function (a,b) {
+					return b - a;
+				}
+			});			
+			
+		$('#tableau').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="tableautable"></table>' );
+		$('#tableautable').dataTable({
+			"aaData": poleemploi.aaData,
+			"aoColumns": [
+				{ "sTitle": "Nace21","sType": "string","bVisible":false},
+				{ "sTitle": "Catégorie","sType": "string"},
+				{ "sTitle": "CDD","sType": "numeric","bVisible":false},
+				{ "sTitle": "CDD moins d'un mois","sType": "numeric","bVisible":false},
+				{ "sTitle": "DUE","sType": "numeric","bVisible":false},
+				{ "sTitle": "% de CDD signés","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ]*100,2,'')+'&nbsp;%';
+				}},
+				{ "sTitle": "% de CDD de moins d'un mois signés","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ]*100,2,'')+'&nbsp;%';
+				}},
+				{ "sTitle": "CDD 2000","sType": "numeric","bVisible":false},
+				{ "sTitle": "CDD - 1 mois 2000","sType": "numeric","bVisible":false},
+				{ "sTitle": "DUE 2000","sType": "numeric","bVisible":false},
+				{ "sTitle": "CDD / DUE 2000","sType": "numeric","bVisible":false},
+				{ "sTitle": "Evolution par rapport à 2000","sType": "numeric","bSearchable":false,
+					"fnRender": function(obj) {
+						return format(obj.aData[ obj.iDataColumn ]*100,2,'')+'&nbsp;%';
+				}}
+			],
+			"bSort": true,
+			"bFilter": false,
+			"aaSorting": [[5,'desc']],
+			"sScrollY": "600px",
+			"bPaginate":false,
+			"bScrollInfinite": true,
+	        "bScrollCollapse": true,
+			"oLanguage": {
+				"sZeroRecords": "Pas de données disponibles avec cette recherche",
+				"sLengthMenu": "_MENU_ entrées affichées",
+				"sInfo": "",
+				"sSearch": "Cliquez sur l'intitulé d'une colonne pour trier les informations selon les critères. Recherchez une agence :",
+				"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+				"sInfoFiltered": ""
+			}
+		});
+		});	
+		</script>
+
+
+		</head>
+<body>
+			<div class="article grid_12">
+
+			<div id="tableau"></div>
+			<div id="credits" style="font-size:0.8em;clear:both;float:right;margin-right:3px;">Source : <a href="http://www.acoss.fr/dmdocuments/acoss/Acoss_Stat_180.zip" target="_blank">Acoss</a></div>
+			
+				<p style="width:80%"></p>
+
+</body>
+</html>

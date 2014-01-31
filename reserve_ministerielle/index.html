@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="http://libs.cartodb.com/cartodb.js/v2/themes/css/cartodb.css" />
+<link rel="stylesheet" type="text/css" href="./lemonde.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+<script>
+(function(window, $, undefined) {
+  $(window).load(function main() {
+      cartodb.createVis('map', 'http://lemonde.cartodb.com/api/v2/viz/6365328e-0041-11e3-9167-3085a9a9563c/viz.json', {
+          shareable: false,
+          title: false,
+          description: false,
+          searchControl: false,
+          zoomControl: true,
+          loaderControl: true,
+          center_lat: 47.219568,
+          center_lon: 2.373047,
+          zoom: 6,          
+          cartodb_logo: false,
+          infowindow: true
+      }).done(function(vis,layers) {
+			console.log();
+			layers[1].layers[1].sub.infowindow.set('template', $('#infowindow_template').html() );
+      });
+
+      $('.sidebar .close').on('click', function() {
+        $('.sidebar').toggleClass("closed");
+      });
+
+      resize();
+      $(window).on("resize", resize);
+
+  });
+
+  function resize() {
+    $("#map, .sidebar").css("top", $(".navbar").outerHeight() )
+    // Close the sidebar in mobile view
+    if( $(window).width() <  767) $("#map, .sidebar").addClass("closed");
+  }
+
+       
+
+
+})(window, jQuery);
+</script>
+<style>
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+<script type="cartodb customizehtml" id="infowindow_template">
+	<div class="cartodb-popup txt12_120">
+		<a href="#close" class="cartodb-popup-close-button close">x</a>
+		<div class="cartodb-popup-content-wrapper">
+               <div class="cartodb-popup-content">
+                    <h2 class="tt17_capital">{{content.data.beneficiaire}}</h2>
+					<p style="border-bottom:solid 1px #454545">{{content.data.nature_du_projet}}</p>
+					<p><strong>{{content.data.subvention_allouee}} euros</strong> de subvention allouée sur un coût total de <strong>{{content.data.cout_du_projet}} euros</strong> en {{content.data.annee}}.</p>
+				</div>
+		</div>
+        <div class="cartodb-popup-tip-container"></div>
+	</div>
+</script>
+
+<p class="leaflet-control-attribution" style="font-size:0.75em;width:275px;color:#454545;background:#fff;position:absolute;bottom:0;left:0">source : <a href="http://www.interieur.gouv.fr/Publications/Subventions" target="_blank">ministère de l'intérieur</a> et <a href="http://www.nosdonnees.fr/fr/dataset/r-serve-parlementaire-2012-attribu-e-aux-collectivit-s-territoriales" target="_blank">Regards Citoyens</a>.</p>
+</body>
+</html>

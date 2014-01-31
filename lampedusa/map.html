@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="http://libs.cartodb.com/cartodb.js/v2/themes/css/cartodb.css" />
+<link rel="stylesheet" type="text/css" href="./lemonde.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v2/cartodb.js"></script>
+<script>
+(function(window, $, undefined) {
+
+  $(window).load(function main() {
+
+      cartodb.createVis('map', 'http://lemonde.cartodb.com/api/v1/viz/lampedusa/viz.json', {
+          shareable: false,
+          title: false,
+          description: false,
+          searchControl: false,
+          zoomControl: true,
+          loaderControl: true,
+          center_lat: 38,
+          center_lon: 14,
+          zoom: 5,          
+          cartodb_logo: false,
+          infowindow: true
+      }).done(function(vis, layers) {          
+          layers[1].infowindow.set('template', $('#infowindow_template').html() );
+      });
+
+      $('.sidebar .close').on('click', function() {
+        $('.sidebar').toggleClass("closed");
+      });
+
+      resize();
+      $(window).on("resize", resize);
+
+  });
+
+  function resize() {
+    $("#map, .sidebar").css("top", $(".navbar").outerHeight() )
+    // Close the sidebar in mobile view
+    if( $(window).width() <  767) $("#map, .sidebar").addClass("closed");
+  }
+
+  // create layer selector
+
+
+})(window, jQuery);
+
+
+</script>
+<style>
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+<script type="cartodb customizehtml" id="infowindow_template">
+	<div class="cartodb-popup txt12_120">
+		<a href="#close" class="cartodb-popup-close-button close">x</a>
+		<div class="cartodb-popup-content-wrapper">
+               <div class="cartodb-popup-content">
+                    <div class="tt17_capital">{{content.data.deaths_and_dispersed}} morts ou disparus.</div>
+					<p style="margin-top:5px;"><strong>{{content.data.city}}, {{content.data.country}}</strong><br />
+                    <a href="{{content.data.url}}" target="_blank">Source</a></p>
+				</div>
+		</div>
+        <div class="cartodb-popup-tip-container"></div>
+	</div>
+</script>
+
+
+</body>
+</html>

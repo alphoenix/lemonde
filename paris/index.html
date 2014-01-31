@@ -1,0 +1,218 @@
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" charset="utf-8" src="class.Gselper.js"></script>
+	<script type="text/javascript" charset="utf-8" src="circos.js"></script>
+	<script type="text/javascript">
+	var latlng = new google.maps.LatLng(48.86,2.34);
+
+	function addMarker(title,bio,lng,lat,color,map) {
+		var infoWindow,marker = new google.maps.Marker({
+			position: new google.maps.LatLng(lat,lng),
+			map: map
+		});
+		if(color == 'vert') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(0,0)));
+		}
+		else if(color == 'rose') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(25,0)));
+		}
+		else if(color == 'bleu') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(50,0)));
+		}
+		else if(color == 'orange') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(75,0)));
+		}
+		else if(color == 'marine') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(100,0)));
+		}
+		else if(color == 'rouge') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(125,0)));
+		}
+		else if(color == 'blanc') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(150,0)));
+		}
+		else if(color == 'gris') {
+			marker.setIcon(new google.maps.MarkerImage('markers.png',new google.maps.Size(25,25),new google.maps.Point(175,0)));
+		}
+		google.maps.event.addListener(marker,'mouseover',function() {
+			if(infoWindow != null)infoWindow.close();
+			infoWindow = new google.maps.InfoWindow({
+ 				maxWidth: 250,
+				content: '<h1 style="font-size:small;font-weight:bold">'+title+'</h1>'+'<p style="font-size:small">'+bio+'</p>'
+			});
+			infoWindow.open(map,marker);
+/**			google.maps.event.addListener(infoWindow,'closeclick',function() {
+				map.panTo(latlng)
+			});**/
+		});
+		google.maps.event.addListener(marker,'mouseout',function() {
+			map.panTo(latlng)
+			infoWindow.close();
+		});
+		return marker;
+	}
+	
+	function addPolygon(latlng,map,number,table) {
+		var html;
+		var polygon = new google.maps.Polygon({
+			paths: latlng,
+			strokeColor: "#333333",
+			strokeOpacity: 0.8,
+			strokeWeight: 2,
+			fillColor: "#666666",
+			fillOpacity: 0.33,
+			map: map
+		});
+		google.maps.event.addListener(polygon,'mouseover',function() {
+			polygon.setOptions({paths:latlng,fillColor:'#993333'})
+		});
+		google.maps.event.addListener(polygon,'click',function() {
+			element = table.get(number-1);
+			html = "<h1>" + element.circo + " circonscription</h1>";
+			html = html + "<h2>" + element.title + "</h2>";
+			html = html + "<p style='font-size:12px;margin-top:1px;'><strong>Arrondissement(s) : </strong>" + element.arrondissements + "</p>";
+			html = html + "<p style='font-size:12px;border-bottom:solid 1px;margin-top:1px;margin-bottom:2px'><strong>Sortant(s) avant redécoupage : </strong>" + element.sortants + "</p>";
+			html = html + "<p>" + element.desc + "</p>";
+			$("#notices").html(html);	
+		});
+		google.maps.event.addListener(polygon,'mouseout',function() {
+			polygon.setOptions({fillColor:'#666666'})
+		});
+		return polygon;
+	}
+	
+	function createPolygon(map,table) {
+		circoun = addPolygon(circounlatlng,map,1,table);
+		circodeux = addPolygon(circodeuxlatlng,map,2,table);
+		circotrois = addPolygon(circotroislatlng,map,3,table);
+		circoquatre = addPolygon(circoquatrelatlng,map,4,table);
+		circocinq = addPolygon(circocinqlatlng,map,5,table);
+		circosix = addPolygon(circosixlatlng,map,6,table);
+		circosept = addPolygon(circoseptlatlng,map,7,table);
+		circohuit = addPolygon(circohuitlatlng,map,8,table);
+		circoneuf = addPolygon(circoneuflatlng,map,9,table);
+		circodix = addPolygon(circodixlatlng,map,10,table);
+		circoonze = addPolygon(circoonzelatlng,map,11,table);
+		circodouze = addPolygon(circodouzelatlng,map,12,table);
+		circotreize = addPolygon(circotreizelatlng,map,13,table);
+		circoquatorze = addPolygon(circoquatorzelatlng,map,14,table);
+		circoquinze = addPolygon(circoquinzelatlng,map,15,table);
+		circoseize = addPolygon(circoseizelatlng,map,16,table);
+		circodixsept = addPolygon(circodixseptlatlng,map,17,table);
+		circodixhuit = addPolygon(circodixhuitlatlng,map,18,table);
+	}
+	
+	function createMarker(map,table) {
+		$.each(table.get(), function(i, line) {
+			addMarker(line.nom,line.biographie,line.lat,line.lng,line.color,map);
+		});
+	}
+
+	$(document).ready(function () {
+		var mapOptions = {
+			zoom: 12,
+			minZoom: 12,
+			center: latlng,
+			mapTypeControlOptions: false,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			draggable: false,
+			panControl: false,
+			scrollwheel: false,
+			zoomControl: false,
+			streetViewControl: false,
+			disableDoubleClickZoom: true,
+			styles: [
+			  {
+			    featureType: "road",
+			    stylers: [
+			      { visibility: "simplified" },
+			      { saturation: -90 }
+			    ]
+			  },{
+			    featureType: "transit",
+			    stylers: [
+			      { visibility: "off" }
+			    ]
+			  },{
+			    featureType: "administrative",
+			    stylers: [
+			      { visibility: "on" },
+			      { lightness: 2 },
+			      { hue: "#0000ff" },
+			      { gamma: 0.04 }
+			    ]
+			  },	{
+				    featureType: "administrative.locality",
+				    stylers: [
+				      { visibility: "on" },
+				      { lightness: 20 },
+				      { hue: "#0000ff" },
+				      { gamma: 0.04 }
+				    ]
+				  },{
+			    featureType: "poi",
+			    stylers: [
+			      { visibility: "off" }
+			    ]
+			  },{
+			    featureType: "landscape",
+			    stylers: [
+			      { saturation: -8 },
+			      { lightness: 24 }
+			    ]
+			  }
+			]
+		};
+		var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+
+		var table = null
+
+		table = new Gselper({
+		    key: "0AiWUhxLpQgUXdHRrWXJ4WFNQcUIxeHBFRHlPZW9zRnc",
+		    worksheet: "od6",
+		    onComplete: function() {
+				createPolygon(map,table);
+			}
+		});
+
+/**		bios = new Gselper({
+		    key: "0AiWUhxLpQgUXdExRLTZZSkRlcVAxczdvNUYxanJ1dHc",
+		    worksheet: "od6",
+		    onComplete: function() {
+				createMarker(map,bios);
+			}
+		});**/
+	});
+	</script>
+	<style type="text/css" media="screen">
+		* {margin: 0;padding:0;}
+		body {width:900px;font-family:Arial, sans-serif;color:#222}
+		a {color: #0045A3;text-decoration: none;}
+		a:hover {color: #900;text-decoration: underline;}
+		#map {width:600px;height:500px;float:right;}
+		#notices {width:290px;height:500px;float:left;padding:5px;overflow: hidden;padding-top:0;}
+		#notices h1 {font-size:16px;text-align:center}
+		#notices h2 {font-size:16px;margin-top:5px;font-style:italic;text-align:center;}
+		#notices p {margin-top: 5px;font-size:14px;line-height:18px;}
+		#auteur {font-weight:bold;clear:both;;text-align:right;font-size:12px;width:900px}
+		#chapo {margin-bottom: 5px;font-size:15px;line-height:18px}
+		.space {height:5px}
+		.pastille {width:25px;height:25px;float:left;padding:3px}
+	</style>
+	<title>Paris, terre de bisbilles</title>
+</head>
+<body>
+	<div id="notices" style="">
+		<p>Handicapée par une démographie en perte de vitesse par rapport au reste du territoire national, Paris va perdre trois députés au terme du prochain scrutin législatif, le 17 juin, passant de 21 sièges à 18.</p>
+		<p>Ces élections législatives permettent de saisir les prémices de la bataille municipale qui se tiendra en 2014. Le maire Bertrand Delanoë ne souhaitant pas se représenter, une primaire devrait se tenir au sein du Parti socialiste. Idem au sein de l'UMP où l'arrivée de François Fillon dans la capitale est censé ramener un peu d'ordre au sein de l'opposition municipale.</p>
+		<p>Europe Ecologie-Les Verts (EELV), qui a obtenu de bons résultats en 2009 et 2010 lors des élections européennes et régionales à Paris, compte retrouver une position charnière au sein du Conseil de Paris. La probable élection de deux parlementaires EELV dans la capitale augure d'une montée en puissance des écologistes sur l'échiquier</p>
+		<p style="margin-top:20px"><em>Cliquez sur les arrondissements pour avoir plus d'informations sur les candidats et les enjeux.</em></p>
+	</div>
+	<div id="map"></div>
+	<div id="auteur">Alexandre Léchenet et Eric Nunès</div>
+</body>
+</html>

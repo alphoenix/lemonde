@@ -1,0 +1,237 @@
+﻿<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/lemonde.css" rel="stylesheet" type="text/css" />
+	<link href="css/banques.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css"/>
+	<title>Classement des lycées</title>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript" ></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js" type="text/javascript" ></script>
+	<script src="js/jquery.dataTables.min.js" type="text/javascript" ></script>
+	<script src="js/dataArr.js" type="text/javascript" ></script>
+	<script>
+		//INIT
+		var stock = [0]
+		$(function(){
+			$("#container_p").hide();
+			$("#profil1").click(function() {pois(0)});
+			$("#profil1").addClass('actif');
+			$("#profil2").click(function() {pois(1)});
+			function pois(val) {
+				if(val == 1) {
+					$("#container_gt").hide();
+					$("#container_p").show();
+					$('#lycees_p').css('width','100%').dataTable().fnAdjustColumnSizing();
+				}
+				else if(val == 0) {
+					$("#container_p").hide();
+					$("#container_gt").show();
+				}
+				stock.push(val)
+			}
+			//ON HIGHLIGHT LES BOUTONS CSUR LEQUEL ON CLIQUE
+			$('nav a').click(function() {
+			  $(this).addClass('actif').siblings().removeClass('actif');
+			});
+		})
+		
+		$(document).ready(function() {
+			$('#container_gt').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="lycees_gt"></table>' );
+			$('#lycees_gt').dataTable( {
+				"aaData": banq0.aaData,
+				"aaSorting": [[39,"desc"]],
+				"aoColumns": [
+					{ "sTitle":"Lycée", "bSearchable":true, "bVisible":true, "sWidth": "200px"},
+					{ "sTitle":"ville", "bSearchable":true, "bVisible":false},
+					{ "sTitle":"code_etablissement", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"code_commune", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"Commune", "bSearchable":true, "bVisible":true},
+					{ "sTitle":"Dept", "bSearchable":false, "bVisible":true},
+					{ "sTitle":"Académie", "bSearchable":false, "bVisible":true, "sWidth": "100px" },
+					{ "sTitle":"departement", "bSearchable":true, "bVisible":false},
+					{ "sTitle":"Privé", "bSearchable":false, "mRender": function(data,type,row) { if(data == "privé") return "<span style='font-size:2em;'>&bull;</span>"; else return "";}},
+					{ "sTitle":"presents_l", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_es", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_stg", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_sti", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_stl", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_st2s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_md", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"presents_h", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"Effectif de terminales", "bSearchable":false, "bVisible":true},
+					{ "sTitle":"reussite_l", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_es", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_stg", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_sti", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_stl", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_st2s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_md", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"reussite_h", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"Taux de réussite (en %)", "bSearchable":false, "bVisible":true, "sType": "numeric"},
+					{ "sTitle":"attendu_acad_l", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_es", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_stg", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_sti", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_stl", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_st2s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_md", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_h", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_acad_total", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"Valeur ajoutée", "sType": "numeric", "bSearchable":false, "mRender": function(data,type,row) { 
+						if(type == "display") {
+							if(data < 0) return "<span style='color:#f00;font-weight:bold'>"+data+"</span>"; 
+							else return "<span style='font-weight:bold'>+"+data+"</span>";
+						} 
+						else return data;
+					}},
+					{ "sTitle":"attendu_france_l", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_es", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_stg", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_sti", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_stl", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_st2s", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_md", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_h", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"attendu_france_total", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"va_france_reussite", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"Secondes allant au bac (%)", "bSearchable":false, "bVisible":true, "sType": "numeric"},
+					{ "sTitle":"bacheliers_terminale", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"bacheliers_seconde_acad", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"Valeur ajoutée", "bSearchable":false, "sType": "numeric", "mRender": function(data,type,row) { 
+						if(type == "display") {
+							if(data < 0) return "<span style='color:#f00;font-weight:bold'>"+data+"</span>"; 
+							else return "<span style='font-weight:bold'>+"+data+"</span>"; 
+						} 
+						else return data;
+					}},
+					{ "sTitle":"bacheliers_terminale_acad", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"bacheliers_seconde_france", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"bacheliers_seconde_va_france", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"bacheliers_terminale_france", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"effectif_seconde", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"effectif_premiere", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"acces_brut_seconde_bac", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"acces_attendu_seconde_acad", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"va_acces_acad", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"acces_attendu_seconde_france", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"acces_brut_premiere", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"acces_attendu_premiere_acad", "bSearchable":false, "bVisible":false},
+					{ "sTitle":"acces_attendu_premiere_france", "bSearchable":false, "bVisible":false},
+				],
+				"bSort": true,
+				"bPaginate": false,
+				"bInfo": false,
+				"sScrollY": "350px",
+				"sPaginationType": "full_numbers",
+				"iDisplayLength": -1,
+				"oLanguage": {
+					"sZeroRecords": "Pas de données disponibles avec cette recherche",
+					"sLengthMenu": "_MENU_ établissements affichés",
+					"sInfo": "Entrées _START_ à _END_ (sur _TOTAL_)",
+					"sInfoFiltered": "",
+					"sSearch": "Recherchez votre lycée (par nom, commune, département ou académie) :",
+					"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+					"oPaginate": {
+						"sFirst": "Première page",
+						"sLast": "Dernière page",
+						"sNext": "Suivante",
+						"sPrevious": "Précédente",
+					}
+				}
+			} );	
+			$('#container_p').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="lycees_p"></table>' );
+			$('#lycees_p').dataTable({
+				"aaData": banq1.aaData,
+				"bAutoWidth": false,
+				"aaSorting": [[8,"desc"]],
+				"aoColumns": [
+					{ "sTitle":"Lycée", "bSearchable":true, "bVisible":true, "sWidth": "200px"},
+					{ "sTitle":"Commune", "bSearchable":true, "bVisible":true},
+					{ "sTitle":"Dept", "bSearchable":false, "bVisible":true},
+					{ "sTitle":"Académie", "bSearchable":false, "bVisible":true, "sWidth": "100px" },
+					{ "sTitle":"Dept", "bSearchable":true, "bVisible":false},
+					{ "sTitle":"Privé", "bSearchable":false, "mRender": function(data,type,row) { if(data == "privé") return "<span style='font-size:2em;'>&bull;</span>"; else return "";}},
+					{ "sTitle":"Effectif de terminales", "bSearchable":false, "bVisible":true},
+					{ "sTitle":"Réussite - production (en %)", "bSearchable":false, "bVisible":true, "sType": "numeric"},
+					{ "sTitle":"Valeur ajoutée", "sType": "numeric", "bSearchable":false, "mRender": function(data,type,row) { 
+						if(type == "display") {
+							if(data == null) return "<span style='text-decoration:italic'>.</span>"
+							if(data < 0) return "<span style='color:#f00;font-weight:bold'>"+data+"</span>"; 
+							else return "<span style='font-weight:bold'>+"+data+"</span>";
+						} 
+						else return data;
+					}},
+					{ "sTitle":"Réussite - services (en %)", "bSearchable":false, "bVisible":true, "sType": "numeric"},
+					{ "sTitle":"Valeur ajoutée", "sType": "numeric", "bSearchable":false, "mRender": function(data,type,row) { 
+						if(type == "display") {
+							if(data == null) return "<span style='text-decoration:italic'>.</span>"
+							if(data < 0) return "<span style='color:#f00;font-weight:bold'>"+data+"</span>"; 
+							else return "<span style='font-weight:bold'>+"+data+"</span>";
+						} 
+						else return data;
+					}},
+					{ "sTitle":"Secondes allant au bac (%)", "bSearchable":false, "bVisible":true, "sType": "numeric"},
+					{ "sTitle":"Valeur ajoutée", "bSearchable":false, "sType": "numeric", "mRender": function(data,type,row) { 
+						if(type == "display") {
+							if(data < 0) return "<span style='color:#f00;font-weight:bold'>"+data+"</span>"; 
+							else return "<span style='font-weight:bold'>+"+data+"</span>"; 
+						} 
+						else return data;
+					}},
+				],
+				"bSort": true,
+				"bPaginate": false,
+				"bInfo": false,
+				"sScrollY": "350px",
+				"sPaginationType": "full_numbers",
+				"iDisplayLength": -1,
+				"oLanguage": {
+					"sZeroRecords": "Pas de données disponibles avec cette recherche",
+					"sLengthMenu": "_MENU_ établissements affichés",
+					"sInfo": "Entrées _START_ à _END_ (sur _TOTAL_)",
+					"sInfoFiltered": "",
+					"sSearch": "Recherchez votre lycée (par nom, commune, département ou académie) :",
+					"sInfoEmpty": "Pas de données disponibles avec cette recherche",
+					"oPaginate": {
+						"sFirst": "Première page",
+						"sLast": "Dernière page",
+						"sNext": "Suivante",
+						"sPrevious": "Précédente",
+					}
+				}
+			});
+		});
+		
+		
+		
+	</script>
+</head>
+<body style="width:992px;margin:auto;">
+	<div class="top">
+		<nav class="clearfix">
+			<a id="profil1" href="#" class="tt17_capital"  style="width:463px;border-right: 1px solid #e9edf0;">Enseignement général et technologique</a>
+			<a id="profil2" href="#" class="tt17_capital"  style="width:463px;">Enseignement professionnel</a>
+		</nav>
+	</div>
+	
+	<div class="txt12_120 ssmenu">
+		<div id="effect" >
+			<div class="colG">
+					<strong>Taux de réussite (en %)</strong>: nombre d'élève ayant eu leur bac en fonction des présentés à l'examen pour toutes les séries.<br />
+					<strong>Secondes allant jusqu'au bac (en %)</strong> : probabilité qu'un élève obtienne son bac après une scolarité entièrement effectuée dans le lycée.<br />
+					<strong>Valeur ajoutée</strong> : différence entre l'indicateur et la valeur attendue, par rapport aux lycées similaires dans l'académie. Ce sont ces indicateurs qui permettent de comparer un lycée à un autre.<br />
+			</div>
+		</div>
+	</div>
+
+	<div style="float:left;" id="container_gt"></div>
+	<div style="float:left" id="container_p"></div>
+
+	<div id="footer" style="text-align:right">source : <a href="http://www.education.gouv.fr/cid3014/les-indicateurs-de-resultats-des-lycees.html" target="_blank">Ministère de l'éducation nationale</a></div>
+</body>
+</html>

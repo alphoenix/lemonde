@@ -1,0 +1,115 @@
+@font-face{font-family:'TheSerifOffice';src:url('http://lemonde.fr/medias/web/font/svg/TheSerifOffice-OT7_West.svgz#TheSerifOffice')format('svg');src:url('http://lemonde.fr/medias/web/font/eot/TheSerifOffice-TT7_.eot');src:url('http://lemonde.fr/medias/web/font/eot/TheSerifOffice-TT7_.eot?#iefix') format('embedded-opentype'),url('http://lemonde.fr/medias/web/font/woff/TheSerifOffice-TT7_.woff') format('woff');font-weight:normal;font-style:normal}@font-face{font-family:'FetteEngschrift';src:url('http://lemonde.fr/medias/web/font/eot/fetteengschrift.eot');src:url('http://lemonde.fr/medias/web/font/eot/fetteengschrift.eot?#iefix') format('embedded-opentype'),url('http://lemonde.fr/medias/web/font/woff/fetteengschrift.woff') format('woff');font-weight:normal;font-style:normal}
+* {
+	margin:0;
+	padding:0;
+}
+body {
+	font-family:"Arial","Helvetica",sans-serif;
+	font-size:15px;
+	line-height:20px;
+	width:990px;
+	height:660px;
+	background:#fff;
+}
+#diapos {
+	width:931px;
+	max-height:660px;
+	margin:auto;
+	overflow:scroll;
+	overflow-x:hidden;
+}
+p a {
+	color:#036;
+	border-bottom: 1px dotted #747B83;
+	text-decoration:none;
+}
+#diapo_0 img {
+	border: none !important;
+	margin-left:75px;
+	width:100px;
+	text-decoration:none;
+}
+.diapo {
+	display:block;
+	clear:both;
+	margin:auto;
+	padding: 15px 0;
+	width:900px;
+	height:660px;
+	background:#e9edf0;
+	line-height:20px;
+}
+#diapo_1 img,#diapo_2 img,#diapo_3 img,#diapo_4 img {
+	width:75px;
+	padding:5px;
+	float:left;
+}
+.diapo h1 {
+	font-family:'TheSerifOffice',Georgia,serif;
+	text-align:center;
+	line-height:25px;
+	padding: 15px 0px 15px 0px;
+}
+.diapo .date {
+	font-size:1.2em;
+	text-align:center;
+	padding: 15px 0px;
+}
+.diapo blockquote {
+	width:85%;
+	font-style: italic;
+	margin:15px auto;
+	line-height:18px;
+}
+.diapo blockquote::before {
+	content:"“";
+	vertical-align:text-top;
+	font-size:1.5em;
+}
+.diapo blockquote::after {
+	content:"”";
+	vertical-align:text-top;
+	font-size:1.5em;
+}
+.diapo .sous-menu {
+	width: 280px;
+	padding: 10px;
+	float:left;
+	font-size:0.8em;
+}
+.diapo .sous-menu a {
+	font-weight:bold;
+}
+.diapo p {
+	margin: 10px auto;
+}
+.diapo ul {
+	margin-left: 25px;
+}
+.diapo .gauche {
+	width:440px;
+	padding:5px;
+	float:left;
+}
+.diapo .droite {
+	width:440px;
+	padding:5px;
+	float:right;
+}
+.menu {
+	clear:both;
+	font-family:'TheSerifOffice',Georgia,serif;
+	font-size:1.2em;
+}
+.menu .droite {
+	text-align:right;
+	padding-left:5px;
+}
+.menu .gauche {
+	text-align:left;
+	padding-right:5px;
+}
+.menu a {
+	border:0;
+	
+}

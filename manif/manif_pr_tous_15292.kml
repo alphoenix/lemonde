@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+  <name>Manif pour tous</name>
+  <description><![CDATA[Images fournies par la préfecture de police de Paris pendant la "Manif pour tous" du 24 mars.]]></description>
+  <Style id="style14">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style5">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style22">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style2">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style13">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style10">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style7">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style19">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style16">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style15">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style18">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style20">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style17">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style4">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style1">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style21">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style3">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style12">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style8">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style9">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style6">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style11">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/pink.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Placemark>
+    <name>15:24:15</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x694/3148929_6_a905_manif-pour-tous-15-24-15_a22f75ea61ad991334ff7168cebcfc5e.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.84' E 002°16.37']]></description>
+    <styleUrl>#style14</styleUrl>
+    <Point>
+      <coordinates>2.280350,48.878418,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:12</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x691/3148932_6_1a0e_manif-pour-tous-15-30-12_500bb2cdbf381a984a95ff7ea47ed1f8.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°53.28' E 002°15.19']]></description>
+    <styleUrl>#style5</styleUrl>
+    <Point>
+      <coordinates>2.264621,48.883320,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:16</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x690/3148963_6_5e63_manif-pour-tous-15-30-16_f7741d3b20c3aa69d8f292b6d323866a.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°53.26' E 002°15.29']]></description>
+    <styleUrl>#style22</styleUrl>
+    <Point>
+      <coordinates>2.266263,48.882816,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:19</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x688/3148970_6_ec94_ill-3148970-8497-153019_e772d7a5691be978309fe4330341af76.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°53.24' E 002°15.34']]></description>
+    <styleUrl>#style2</styleUrl>
+    <Point>
+      <coordinates>2.267593,48.882420,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:23</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x688/3148974_6_2518_ill-3148974-aee5-153023_d1d56681b8667169a83e7a3f210f5753.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°53.20' E 002°15.42']]></description>
+    <styleUrl>#style13</styleUrl>
+    <Point>
+      <coordinates>2.269084,48.881981,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:25</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x690/3148975_6_be2f_ill-3148975-4a1a-153025_e23574ce82b14352dbf5f8d82a700458.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°53.19' E 002°15.43']]></description>
+    <styleUrl>#style10</styleUrl>
+    <Point>
+      <coordinates>2.270286,48.881565,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:28</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x696/3148952_6_b794_manif-pour-tous-15-30-28_0dd3520a78ecc230eb3ce6c55310153a.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°53.16' E 002°15.48']]></description>
+    <styleUrl>#style7</styleUrl>
+    <Point>
+      <coordinates>2.272673,48.880802,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:31</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x696/3148976_6_1fba_ill-3148976-df28-153031_e6fca745eda8fcd4929a905daba99f9e.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°53.12' E 002°15.54']]></description>
+    <styleUrl>#style19</styleUrl>
+    <Point>
+      <coordinates>2.275878,48.879807,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:30:33</name>
+    <description><![CDATA[<img src="http://s1.lemde.fr/image/2013/03/27/990x692/3148977_6_2bbf_ill-3148977-5399-153033_71e590ff2ef88c99642dad8fb1a73770.jpg" style="width:450px"><b>Coordonnées de l'hélicoptère</b> : N 48°53.10' E 002°15.57']]></description>
+    <styleUrl>#style16</styleUrl>
+    <Point>
+      <coordinates>2.278360,48.879021,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:31:45</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x694/3148993_6_b641_ill-3148993-08f7-153145_5dd59ccf05708b0645cd1b64b2d46f80.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.64' E 002°16.95']]></description>
+    <styleUrl>#style15</styleUrl>
+    <Point>
+      <coordinates>2.284105,48.877384,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:34:16</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x693/3148983_6_4a8d_ill-3148983-d702-153416_82e13c100a09c55dc1c020bee69bd4fd.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°51.97' E 002°17.76']]></description>
+    <styleUrl>#style18</styleUrl>
+    <Point>
+      <coordinates>2.294898,48.873283,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:34:49</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x695/3149178_6_30df_ill-3149178-7888-153449_7f97e0e360264c471e097315adce2603.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.31' E 002°17.07']]></description>
+    <styleUrl>#style20</styleUrl>
+    <Point>
+      <coordinates>2.292323,48.873528,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:34:52</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x694/3149168_6_b47e_ill-3149168-13c0-153452_56339fc4b0859b84a2a2868ab607d4f0.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.34' E 002°17.01']]></description>
+    <styleUrl>#style17</styleUrl>
+    <Point>
+      <coordinates>2.290950,48.873367,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:34:56</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x697/3149165_6_562d_ill-3149165-75d1-153456_0f0086ef720bd3e009d3de36c38bcb45.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.37 E 002°16.82']]></description>
+    <styleUrl>#style4</styleUrl>
+    <Point>
+      <coordinates>2.287801,48.873039,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:35:02</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x697/3149216_6_3073_ill-3149216-edf4-153502_5dddb0baedbd628c9d1b8aef35369b5d.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.42' E 002°16.83']]></description>
+    <styleUrl>#style1</styleUrl>
+    <Point>
+      <coordinates>2.284142,48.872536,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:45:57</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x696/3149153_6_a50b_ill-3149153-b671-154557_bd788b45d5ae5af6f7b9f7145fc4c49a.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.31' E 002°17.66']]></description>
+    <styleUrl>#style21</styleUrl>
+    <Point>
+      <coordinates>2.292041,48.874672,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:46:02</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x698/3149143_6_9333_ill-3149143-cbcc-154602_56ac2cee7e3ff5cb2b146eaf600b2f3c.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.37' E 002°17.55']]></description>
+    <styleUrl>#style3</styleUrl>
+    <Point>
+      <coordinates>2.290153,48.875381,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:46:07</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x692/3149139_6_3f09_manif-pour-tous-15-46-07_a17f6b2a3a6d655e8eb479b1db1731fd.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.42' E 002°17.45']]></description>
+    <styleUrl>#style12</styleUrl>
+    <Point>
+      <coordinates>2.288793,48.875828,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:46:12</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x699/3149135_6_a2e8_manif-pour-tous-15-46-12_008bba88e90b005ada7e4a144c07f077.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère </b>: N 48°52.45' E 002°17.38']]></description>
+    <styleUrl>#style8</styleUrl>
+    <Point>
+      <coordinates>2.286503,48.876488,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:46:16</name>
+    <description><![CDATA[<div dir="ltr"><img src="http://s1.lemde.fr/image/2013/03/28/990x695/3149134_6_fafd_ill-3149134-965a-154616_ea240da0e96a1bdf6987117b08b15f97.jpg" style="width:450px"></div><div dir="ltr"><b>Coordonnées de l'hélicoptère</b> : N 48°52.48' E 002°17.28'</div>]]></description>
+    <styleUrl>#style9</styleUrl>
+    <Point>
+      <coordinates>2.284716,48.877007,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:46:25</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/27/990x702/3148996_6_f07f_ill-3148996-c11d-154625_72b195beda29ff552125c84b05ae9a36.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.53' E 002°17.11']]></description>
+    <styleUrl>#style6</styleUrl>
+    <Point>
+      <coordinates>2.281487,48.878292,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>15:49:04</name>
+    <description><![CDATA[<div><img src="http://s1.lemde.fr/image/2013/03/28/990x701/3149229_6_30e5_ill-3149229-fb8d-154904_ca84d3e8b7237cfdf876c7806ed36850.jpg" style="width:450px"></div><b>Coordonnées de l'hélicoptère</b> : N 48°52.79' E 002°16.39']]></description>
+    <styleUrl>#style11</styleUrl>
+    <Point>
+      <coordinates>2.282388,48.877811,0.000000</coordinates>
+    </Point>
+  </Placemark>
+</Document>
+</kml>

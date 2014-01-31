@@ -1,0 +1,206 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="lemonde.css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style>footer {font-size:0.7em}</style>
+ <link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+<script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+</head>
+<body class="article txt12_120" style="width:999px;height:860px;">
+<article style="width:48%;float:left;padding-left:13px;">
+    <p>En se penchant les traitements effectivement versés à près de 230 000 enseignants dans cinq académies, soit 23,6 % du corps enseignant, un bon échantillon représentatif, la Cour des comptes <a href="http://www.ccomptes.fr/Actualites/A-la-une/Gerer-les-enseignants-autrement" target="_blank">a pu analyser</a> l'étendue des salaires. Tous les éléments constituant le traitement ont été pris en compte, notamment la rétribution des heures supplémentaires et des colles, ou les primes liées à la fonction de professeur principal.</p>
+    <p class="lire" ">Lire aussi : "<a href="http://www.lemonde.fr/education/article/2013/05/22/les-ecarts-de-salaires-des-enseignants-sont-surtout-dus-aux-heures-sup_3415094_1473685.html" target="_blank">Les écarts de salaires des enseignants surtout dus aux 'heures sup'</a>"</p>
+</article>
+<article style="width:48%;float:right;padding-right:13px;">
+    <p>La Cour des comptes a dressé 14 portraits-robots parmi ces 227 000 enseignants, allant du professeur des écoles débutant au professeur de chaire supérieure en passant par l'agrégé travaillant en classe préparatoire aux grandes écoles (CPGE). </p>
+    <p>Pour chacun de ces "enseignants type" – sachant que les professeurs des écoles sont les plus nombreux -, retrouvez ci-dessous le salaire net annuel extrême - le plus bas et le plus haut -, ainsi que, à titre de comparaison, le salaire moyen par catégorie - la pastille blanche - et les salaires moyens par catégorie des 5 % les mieux et les moins bien payés  - les rectangles violets.</p>
+</article>
+<div id="container" style="width: 999px; height: 660px; margin: 0 auto;clear:both"></div>
+<footer>Remis à jour le 24 mai à cause d'erreurs dans les légendes</footer>
+<script>
+$(function () {
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: " "
+        }
+    });
+    $('#container').highcharts({
+
+        chart: {
+            type: 'columnrange',
+            inverted: true
+        },
+
+        title: {
+            text: ''
+        },
+        credits: {
+            enabled: false
+        },
+        subtitle: {
+            text: '',
+            style: {
+                fontFamily: "Arial, sans-serif",
+                color: "#333",
+                fontStyle: 'italic',
+            }
+        },
+
+        xAxis: {
+            labels: {
+                style: {
+                    fontFamily: "Arial, sans-serif",
+                    color: "#333",
+					fontWeight: "bold"
+                }
+            },
+        categories: ["Professeurs des écoles<br />1 an d'ancienneté","Enseignants certifiés et équivalents<br />1 an d'ancienneté","Professeurs des écoles dans le privé sous contrat<br />15 ans d'ancienneté","Professeurs des écoles<br />15 ans d'ancienneté","Enseignants agrégés hors CPGE<br />1 an d'ancienneté","Enseignants certifiés et équivalents dans le privé sous contrat<br />15 ans d'ancienneté","Professeurs des écoles<br />30 ans d'ancienneté","Enseignants certifiés et équivalents<br />15 ans d'ancienneté","Enseignants certifiés et équivalents<br />30 ans d'ancienneté","Enseignants agrégés hors CPGE<br />15 ans d'ancienneté","Enseignants agrégés hors CPGE<br />30 ans d'ancienneté","Enseignants agrégés en CPGE<br />10 à 20 ans d'ancienneté","Enseignants agrégés en CPGE<br />25 à 35 ans d'ancienneté","Professeurs de chaire supérieure<br />10 à 20 ans d'ancienneté","Professeurs de chaire supérieure<br />25 à 35 ans d'ancienneté"]
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            labels: {
+                style: {
+                    fontFamily: "Arial, sans-serif",
+                    color: "#333",
+                }
+            },
+       },
+        tooltip: {
+            valueSuffix: ' euros',
+            style: {
+                fontFamily: "Arial, sans-serif",
+                color: "#333",
+            },
+			formatter: function () {
+				var html = "<strong>"+this.x+"</strong><br />"
+				if(this.series.name == "Traitement net le moins et le plus élevé") html += "Traitement net entre <strong>"+this.point.low+"</strong> € et <strong>"+this.point.high+"</strong> €";
+				else html += "<strong>"+this.series.name+"</strong> : "+this.point.y + ' €';
+				return html;
+            },
+        },
+        plotOptions: {
+            columnrange: {
+                dataLabels: {
+                    enabled: true,
+                    formatter: function () {
+                        return this.y + ' €';
+                    },
+                    style: {
+                        fontFamily: "Arial, sans-serif",
+                        color: "#333",
+                    }
+                }
+            },
+            line: {
+                lineWidth: 0
+            },
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        series: [{
+            name: 'Traitement net le moins et le plus élevé',
+            color: "#F1A340",
+            data: [
+  [18087,26543],
+  [18986,31872],
+  [19613,32917],
+  [20144,38374],
+  [22636,36647],
+  [19023,56776],
+  [21303,42761],
+  [23065,49815],
+  [26336,55798],
+  [29397,61271],
+  [34997,76235],
+  [32143,76677],
+  [40908,107339],
+  [34476,97979],
+  [36879,102609]
+]
+        }, {
+            name: 'Moyenne des 5 % des traitements les plus bas',
+            type: 'line',
+            color: "#542788",
+            marker: {
+                symbol: "square",
+            },
+            data: [
+  [19594],
+  [20098],
+  [20733],
+  [23233],
+  [25126],
+  [21275],
+  [25392],
+  [25240],
+  [29256],
+  [31468],
+  [37263],
+  [34802],
+  [43000],
+  [38613],
+  [43553]
+]
+        }, {
+            name: 'Traitement net moyen',
+            color: "#fff",
+            type: 'line',
+            marker: {
+                symbol: "circle",
+            },
+            data: [
+  [21606],
+  [22121],
+  [23457],
+  [25616],
+  [27221],
+  [27627],
+  [29250],
+  [29670],
+  [37531],
+  [38589],
+  [47505],
+  [49296],
+  [57745],
+  [63470],
+  [68942]
+]
+        }, {
+            name: 'Moyenne des 5 % traitements les plus hauts',
+            color: "#542788",
+            type: 'line',
+            marker: {
+                symbol: "square",
+            },
+            data: [
+  [24824],
+  [27267],
+  [28716],
+  [30128],
+  [31838],
+  [36640],
+  [36371],
+  [38324],
+  [47223],
+  [51933],
+  [65304],
+  [69781],
+  [79239],
+  [92190],
+  [94953]
+]
+        }]
+
+    });
+
+});
+</script>
+</body>
+</html>

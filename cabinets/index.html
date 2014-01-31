@@ -1,0 +1,474 @@
+<html>
+<head>
+	<title>Cabinets</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="chosen.css" />
+	<style type="text/css" media="screen">
+	body {
+		width: 990px;
+		height:850px;
+		padding: 0;
+		margin: 0;
+		color: #000;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 15px;
+		line-height: 20px;
+	}
+	a {
+		color: #036;
+		text-decoration: none;
+	}
+	a.lien {
+		color: #036;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	#liste, #ministeres {
+		width:100%;
+		margin:0;
+		padding:0;
+		margin-bottom:5px;
+	}
+	#liste select,#ministeres select {
+		width:100%;
+		font-size:13px;
+		line-height:20px;
+	}
+	input {
+		width:100% !important;
+	}
+	.button {
+		width:240px;
+		background-color: #ffffff;
+		-moz-background-clip   : padding;
+		-webkit-background-clip: padding-box;
+		background-clip        : padding-box;
+		border: 1px ridge #333;
+		-webkit-box-shadow: 0 0 3px #aaa, 0 1px 1px rgba(0,0,0,0.1);
+		-moz-box-shadow   : 0 0 3px #aaa, 0 1px 1px rgba(0,0,0,0.1);
+		box-shadow        : 0 0 3px #aaa, 0 1px 1px rgba(0,0,0,0.1);
+		font-size:13px;
+		text-align:left;
+		padding:0 0 0 8px;
+		line-height:24px;
+		white-space: nowrap;
+		color:#333;
+		cursor:pointer;
+		margin:2px 0;
+	}
+	#description {
+		width:990px;
+		font-size:15px;
+		line-height:20px;
+		font-size:0.9em;
+	}
+	#description p {
+		margin-top:0;
+		padding:5px;
+	}
+	#right {
+		float:left;
+		width:240px;
+	}
+	#telecommande {
+		font-size:13px;
+		line-height: 15px;
+		width:240px;
+		height:450px;
+		background:#fff;
+		padding:2px;
+		padding-top:10px;
+		border-top:2px double #000;
+		z-index:10;
+	}
+	h2 {
+		font-size:1em;
+		text-align:center;
+		margin:2px 0;
+		text-transform:uppercase;
+	}
+	#infobulle {
+		width: 240px;
+		border-top:2px double #000;
+		padding:5px;
+		background:#f8f9fB;
+		height:400px;
+		z-index:20;
+	}
+	#infobulle p {
+		width: 240px;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	h1 {
+		text-transform: uppercase;
+		font-size:15px;
+		margin-top:0;
+		text-align:center;
+	}
+	#graphique {
+		width: 730px;
+		height: 730px;
+		background: #fff;
+		float:right;
+	}
+	.node {
+		z-index: 30;
+		line-height: 1em;
+		width:175px;
+	}
+	#parite-chart {
+		width:240px;
+		height:200px;
+		background:#eee;
+	}
+	</style>
+	<!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+	<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="jit.js"></script>
+	<script type="text/javascript" charset="utf-8" src="highcharts.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class.Gselper.js"></script>
+	<script type="text/javascript" charset="utf-8" src="chosen.min.js"></script>
+	<script type="text/javascript" charset="iso-8859-1">
+	var labelType, useGradients, nativeTextSupport, animate, ht,chart;
+
+	var nbFemmes = nbHommes = 0;
+
+	var paris = voltaire = senat = parite = ena = false; 
+
+	var lieu = {};
+	lieu["elysee"]="cabinet de la présidence de la République";
+	lieu["matignon"]="cabinet du premier ministre";
+	lieu["orsay"]="ministère des affaires étrangères";
+	lieu["education"]="ministère de l’éducation nationale";
+	lieu["justice"]="ministère de la justice";
+	lieu["economie"]="ministère de l’économie et des finances";
+	lieu["social"]="ministère des affaires sociales et de la santé";
+	lieu["logement"]="ministère de l’égalité des territoires et du logement";
+	lieu["commerce"]="ministère du commerce extérieur";
+	lieu["interieur"]="ministère de l'intérieur";
+	lieu["ecologie"]="ministère de l’écologie, du développement durable et de l’énergie";
+	lieu["industrie"]="ministère du redressement productif";
+	lieu["travail"]="ministère du travail, de l’emploi, de la formation professionnelle et du dialogue social";
+	lieu["defense"]="ministère de la défense";
+	lieu["culture"]="ministère de la culture et de la communication";
+	lieu["recherche"]="ministère de l’enseignement supérieur et de la recherche";
+	lieu["femmes"]="ministère des droits des femmes";
+	lieu["agriculture"]="ministère de l’agriculture, de l’agroalimentaire et de la forêt";
+	lieu["reforme"]="ministère de la réforme de l’État, de la décentralisation et de la fonction publique";
+	lieu["outremer"]="ministère des outre-mer";
+	lieu["sports"]="ministère des sports, de la jeunesse, de l’éducation populaire et de la vie associative";
+	lieu["budget"]="ministère délégué chargé du budget";
+	lieu["reussite"]="ministère délégué chargé de la réussite éducative";
+	lieu["parlement"]="ministère délégué chargé des relations avec le Parlement";
+	lieu["ville"]="ministère délégué chargé de la ville";
+	lieu["europe"]="ministère délégué chargé des affaires européennes";
+	lieu["autonomie"]="ministère délégué chargé des personnes âgées et de l’autonomie";
+	lieu["artisanat"]="ministère de l’artisanat, du commerce et du tourisme";
+	lieu["ess"]="ministère délégué chargé de l'économie sociale et solidaire et de la consommation";
+	lieu["famille"]="ministère délégué chargé de la famille";
+	lieu["handicap"]="ministère délégué chargé des personnes handicapées et de la lutte contre l’exclusion";
+	lieu["formation"]="ministère délégué chargé de la formation professionnelle et de l’apprentissage";
+	lieu["developpement"]="ministère délégué chargé du développement";
+	lieu["francophonie"]="ministère délégué chargé de la francophonie";
+	lieu["transports"]="ministère délégué chargé des transports, de la mer et de la pêche";
+	lieu["innovation"]="ministère délégué chargé des PME, de l'innovation et de l'économie numérique";
+	lieu["combattants"]="ministère délégué chargé des anciens combattants";
+	lieu["decentralisation"]="ministère délégué chargé de la décentralisation";
+	lieu["agroalimentaire"]="ministère délégué chargé de l’agroalimentaire";
+	lieu["etranger"]="ministère délégué chargé des français de l’étranger";
+
+	var doc = new Gselper({
+		key: "0AiWUhxLpQgUXdDBtMEtUUEhhUW5wd3NMajE2RHZ5Snc",
+		worksheet: "od6",
+
+		onComplete: function() {
+			var source;
+			var items = [];
+			$.each(doc.get(), function(i, line) {
+				var item = line;
+				var name = line.nom;
+				var parentid = line.sup;
+				var id = line.id;
+
+				if(items[parentid]) {
+					var item = {id:id,name:name,data:item};
+					if (!items[parentid].children) {
+						items[parentid].children = [];
+					}
+					items[parentid].children[items[parentid].children.length] = item;
+					items[id] = item;
+				}
+				else {
+					items[id] = {id:id,name:name,data:item};
+					source = items[id];
+				}
+			});
+
+			ht = new $jit.Hypertree({
+				injectInto: 'graphique',  
+				//canvas width and height  
+				width: 730,  
+				height: 730,
+				//Change node and edge styles such as  
+				//color, width and dimensions.  
+				Node: {  
+					overridable: true,
+					dim: 15, 
+					color: "#EF8A62"
+				},  
+				Edge: {  
+					lineWidth: 0.5,  
+					color: "#ddd"  
+				},
+				Events: {
+					enable: true,
+					onClick: function(node) {
+						if(node) ht.onClick(node.id);
+					}
+				},
+				onBeforeCompute: function(node){
+					$("#parite-chart").hide();
+					$("#infobulle").html("");
+					//console.log("centering "+node.id);
+					var html = "<h1>"+node.name+"</h1><p><strong>"+node.data.fonction+"</strong></p><p>"+lieu[node.data.lieu] +"</p>";
+					html += "<p style=\"font-size:13px;margin-top:20px\">"+node.data.description+"</p>";
+					$('#infobulle').html(html);  
+				},  
+				onCreateLabel: function(domElement, node){
+					domElement.innerHTML = node.name;  
+					$jit.util.addEvent(domElement, 'click', function () {  
+						ht.onClick(node.id, {  
+							onComplete: function() {  
+								ht.controller.onComplete();  
+							}  
+						});  
+					});  
+				},
+				onPlaceLabel: function(domElement, node){ 
+					var $domElement = $(domElement);
+					var style = domElement.style;  
+					$(domElement).css({"display":'','cursor':'pointer'});
+					if (node._depth < 1) {
+						$(domElement).css({"fontSize":'1.2em','color':'#000'});
+					} else if(node._depth == 1){  
+						$(domElement).css({"fontSize":'0.7em','color':'#333'});
+					} else if(node._depth == 2) {			  
+						$(domElement).css({"fontSize":'0.6em','color':'#666'});
+					} else {  
+						$(domElement).css({"display":'none'});
+					}  
+					var left = parseInt(style.left);  
+					style.left = (left-50) + 'px';
+					var top = parseInt(style.top);  
+					var h = domElement.offsetHeight;  
+					style.top = (top - h / 2) + 'px';
+
+					// Coloriage
+					node.data.$color = "#EF8A62";
+
+					if(node.data.genre == "F" && parite) {
+						node.data.$color = "#7FBF7B";
+					} else if(node.data.genre == "H" && parite) {
+						node.data.$color = "#AF8DC3";
+					}
+					if(paris && node.data.paris == "oui") {
+						node.data.$color = "#67A9CF";
+					}
+					else if(ena && node.data.ena == "igf") {
+						node.data.$color = "#67A9CF";
+					}
+					else if(voltaire && node.data.voltaire == "oui") {
+						node.data.$color = "#67A9CF";
+					}
+					else if(senat && node.data.senat == "oui") {
+						node.data.$color = "#67A9CF";
+					}
+				},
+				onComplete: function(){ 
+					var node = ht.graph.getClosestNodeToOrigin("current");
+					//console.log("done");
+				}
+			});  
+			//load JSON data.  
+			ht.loadJSON(source);  
+			//compute positions and plot.  
+			ht.refresh();
+			
+			nbFemmes = nbHommes = 0;
+			var html = '<option value=""></option>';
+			
+			$.each(doc.get(), function(i, line) {
+				if(line.genre == "F" && line.double != "oui") nbFemmes++;
+				if(line.genre == "H" && line.double != "oui") nbHommes++;
+				
+				if(line.double != "oui") html += '<option value="'+line.id+'">'+line.nom+'</option>';
+			});
+			
+			$("#liste").html(html)
+			$(".chzn-select").chosen({no_results_text: "Aucun résultat"})
+			$(".chzn-select").chosen().change(function(result){
+				ht.onClick($(this).val());
+			});
+			
+			/**	site.el.$countries.find(".outset-shadow .chosen").change(function() { that.updateCountrieTimeline.call(this); });**/
+			
+			
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'parite-chart',
+					backgroundColor: "#eee",
+					borderColor: "#eee",
+					plotShadow: false,
+				},
+				title: {
+					text: ''
+				},
+				credits: {
+					enabled: false
+				},
+				tooltip: {
+					enabled:true,
+					formatter: function() {
+						return '<b>'+ this.point.name +'</b><br />'+ Math.floor(this.percentage*100)/100 +' %';
+					}
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: false,
+						dataLabels: {
+							enabled: false,
+							color: '#000000',
+							connectorColor: '#000000',
+							formatter: function() {
+								return '<b>'+ this.point.name +'</b><br />'+ Math.floor(this.percentage*100)/100 +' %';
+							}
+						}
+					}
+				},
+				series: [{
+					type: 'pie',
+					name: '',
+					data: [{name:"Hommes",y:nbHommes,color:"#AF8DC3"},{name:"Femmes",y:nbFemmes,color:"#7FBF7B"}]
+					}]
+				});				
+			}
+		});
+
+		function reset() {
+			toggle();
+			ht.onClick("p1");
+			$("#parite-chart").hide();
+			$("#infobulle").html("");
+		}
+
+		function colorParis() {
+			toggle();
+			paris = true;
+			node = ht.graph.getClosestNodeToOrigin("current");
+			ht.onClick(node.id);
+			html = "<h1>Mairie de Paris</h1>Élus ou conseiller du maire de Paris font partie de la nouvelle organisation du gouvernement, ce qui ne manque pas d'agacer <strong>Bertrand Delanoë</strong>, qui voit partir des proches alors qu'il n'accède à aucun poste ministériel.";
+			$("#infobulle").html(html);
+		}
+		function colorENA() {
+			toggle();
+			ena = true;
+			node = ht.graph.getClosestNodeToOrigin("current");
+			ht.onClick(node.id);
+		}
+		function colorVoltaire() {
+			toggle();
+			voltaire = true;
+			node = ht.graph.getClosestNodeToOrigin("current");
+			ht.onClick(node.id);
+			html = "<h1>La \"promotion Voltaire\"</h1>Sortie de l'ENA un an avant l'alternance de 1981, la \"promotion Voltaire\" s'est mobilisée pour la victoire de l'un des siens lors de la campagne présidentielle : <a href=\"#\" class=\"lien\" onclick=\"ht.onClick('p1')\">François Hollande</a>. Ils sont cinq à avoir un rôle dans le nouveau pouvoir en place.";
+			$("#infobulle").html(html);
+		}
+		function colorSenat() {
+			toggle();
+			senat = true;
+			ht.onClick("p2");
+			html = "<h1>Présidence du Sénat</h1><a href=\"http://www.lemonde.fr/election-presidentielle-2012/article/2012/05/18/a-l-elysee-m-hollande-aspire-le-cabinet-de-jean-pierre-bel_1703649_1471069.html\" target=\"_blank\">Le cabinet du président du Sénat, antichambre de celui de l'Elysée</a> : en témoigne l'arrivée de nombreux anciens membres de ce cabinet dans l'entourage de M. Hollande. À la suite de <a href=\"#\" class=\"lien\" onclick=\"ht.onClick('p1')\">Pierre-René Lemas</a>, secrétaire général de l'Élysée, et de <a href=\"#\" class=\"lien\" onclick=\"ht.onClick('p9')\">Pierre Besnard</a>, chef de cabinet du président, trois conseillers ont rejoint l'Élysée.";
+			$("#infobulle").html(html);
+		}
+		function colorIGF() {
+			toggle();
+			ena = true;
+			ht.onClick("p1");
+			html = "<h1>Inspection générale des finances</h1>";
+			$("#infobulle").html(html);
+		}
+		function toggle() {
+			$("#infobulle").height('450');
+			if(paris) {paris = !paris;}
+			if(voltaire) {voltaire = !voltaire;}
+			if(senat) {senat = !senat;}
+			if(parite) {parite = !parite;}
+			if(ena) {ena = !ena;}
+		}
+		function showParite() {
+			toggle();
+			parite = true;
+			node = ht.graph.getClosestNodeToOrigin("current");
+			ht.onClick(node.id);
+			//			ht.refresh();
+			html = "<p style=\"margin:0;font-size:1em;text-align:center;margin-bottom:10px\"><span style=\"color:#AF8DC3\">&#9632;</span> hommes <span style=\"color:#7FBF7B\">&#9632;</span> femmes</p><h1>Parité dans les cabinets</h1>Au-delà de l'affichage d'un gouvernement paritaire et de la volonté politique, difficile, dans les cabinets, de tenir l'égalité hommes-femmes. À ce jour, "+nbFemmes+" femmes ont été nommées membres de cabinets et du gouvernement sur un total de "+(nbFemmes+nbHommes)+", soit "+(Math.floor(nbFemmes/(nbFemmes+nbHommes)*100))+"%.";
+			chart.series[0].setData([{name:"Hommes",y:nbHommes,color:"#AF8DC3"},{name:"Femmes",y:nbFemmes,color:"#7FBF7B"}]);
+			$("#infobulle").height('250');
+			$("#parite-chart").show();
+			$("#infobulle").html(html);
+		}
+		</script>
+	</head>
+	<body>
+		<div id="description">
+			<p>Le Monde.fr vous propose de naviguer dans les 500 postes de conseillers nommés à l'Elysée et au gouvernement.<br />
+			<em><strong>Cliquez sur le nom d'une personne</strong> pour afficher dans la colonne de droite des détails sur son parcours et le réseau de ses collaborateurs.<br /> <strong>Cliquez sur un ministre</strong>, le premier ministre ou le président pour faire apparaître son cabinet. <br />
+				<u>Nota bene</u> : Cliquez de point en point pour accéder aux noms non-visibles. Un outil de navigation se trouve en bas à droite</em></p>
+		</div>
+		<div id="right">
+			<div id="parite-chart" style="display:none"></div>
+			<div id="infobulle"><h1>Profils de postes</h1>
+				<p>Ministres, directeurs et chefs de cabinets, conseillers... Près de 500 postes ont été pourvus après la victoire de François Hollande et la formation du gouvernement de Jean-Marc Ayrault. Des noms que l'on découvre au gré des nominations au Journal officiel.</p><p>Retrouvez l'ensemble de ces personnes, ainsi que des détails sur leurs parcours. Des mises à jour ont lieu régulièrement, pour nous envoyer des précisions : <a href="mailto:lesdecodeurs@gmail.com">lesdecodeurs@gmail.com</a></p></div>
+			<div id="telecommande">
+				<h2 style="display:block;text-decoration:none">Navigation</h2>
+				<select data-placeholder="Chercher un nom..." class="chzn-select" id="liste"></select>
+				<input onclick="reset()" type="button" class="button" value="Revenir à une vue d'ensemble" /><br />
+				<input onclick="ht.onClick('p2')" type="button" class="button" value="Voir le cabinet de M.Hollande" /><br />
+				<input onclick="ht.onClick('p44')" type="button" class="button" value="Voir le cabinet de M.Ayrault" /><br />
+					<select data-placeholder="Choisir un ministère..." id="ministeres" class="chzn-select">
+						<option value=""></option>
+						<option value="m2">affaires étrangères</option>
+						<option value="m3">éducation nationale</option>
+						<option value="m4">justice</option>
+						<option value="m5">économie et finances</option>
+						<option value="m6">affaires sociales et santé</option>
+						<option value="m7">égalité des territoires et logement</option>
+						<option value="m8">intérieur</option>
+						<option value="m9">commerce extérieur</option>
+						<option value="m10">redressement productif</option>
+						<option value="m11">écologie et développement durable</option>
+						<option value="m12">travail et emploi</option>
+						<option value="m13">défense</option>
+						<option value="m14">culture et communication</option>
+						<option value="m15">enseignement supérieur et recherche</option>
+						<option value="m16">droits des femmes</option>
+						<option value="m17">agriculture, agroalimentaire et forêt</option>
+						<option value="m18">réforme de l’Etat, de la décentralisation et de la fonction publique</option>
+						<option value="m19">outre-mer</option>
+						<option value="m20">artisanat, commerce et tourisme</option>
+						<option value="m21">sports et jeunesse</option>
+					</select>
+				<h2>Parité</h2>
+				<input onclick="showParite()" class="button" type="button" value="Distinguer hommes et femmes" /><br />
+				<h2>Vivier d'origine</h2>
+				<input onclick="colorIGF()" type="button" title="Cliquez pour mettre en couleur les inspecteurs des finances" class="button" value="Inspection générale des finances" /><br />
+				<input onclick="colorVoltaire()" type="button" title="Cliquez pour mettre en couleur les membres de la promotion Voltaire" class="button" value="Promotion Voltaire de l'ENA" /><br />
+				<input onclick="colorParis()" type="button" title="Cliquez pour mettre en couleur les personnes arrivant de la mairie de Paris" class="button" value="Mairie de Paris" /><br />
+				<input onclick="colorSenat()" type="button" title="Cliquez pour mettre en couleur les personnes arrivant de la présidence du Sénat" class="button" value="Présidence du Sénat" /><br />
+				<em style="font-size:12px;line-height:12px;margin:0;padding:2px">Mises à jour : vous pouvez nous envoyer des précisions à <a href="mailto:lesdecodeurs@gmail.com">lesdecodeurs@gmail.com</a></em>
+			</div>
+		</div>
+		<div id="graphique"></div>
+	</body>	
+	</html>

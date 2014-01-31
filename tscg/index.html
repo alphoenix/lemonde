@@ -1,0 +1,96 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Positions des personnalités politiques vis-à-vis de l'Europe</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<!-- CSS concatenated and minified via ant build script-->
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/aristo.css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<!-- end CSS-->
+
+	<script src="js/libs/modernizr-2.0.6.min.js"></script>
+	<script src="js/libs/jquery.min.js"></script>
+	<script src="js/libs/jquery-ui.min.js"></script>
+	<script defer src="js/plugins.js"></script>
+	<script src="js/CustomTooltip.js"></script>
+	<script src="js/libs/coffee-script.js"></script>
+	<script src="js/libs/d3.min.js"></script>
+	<script src="js/libs/d3.csv.min.js"></script>
+	<script src="js/libs/d3.layout.min.js"></script>
+	<script src="js/libs/d3.geom.min.js"></script>
+	<script type="text/coffeescript" src="coffee/vis.coffee"></script>
+	<script type="text/javascript" charset="utf-8">
+	var view_type = "maastricht"
+	$(document).ready(function() {
+		$(function() {
+			$("#slider").slider({
+				value: 4,
+				min: 1,
+				max: 4,
+				step: 1,
+				slide: function( event, ui ) {
+					if(ui.value == 1) {
+						toggle_view("maastricht");
+						$("#amount").html("Le <strong>traité de Maastricht</strong> (1992) est le premier traité européen à être soumis à référendum. Le oui l'emporte avec 51,05% des suffrages. Certaines personnalités ont dit ne pas avoir pris part à la campagne, telle M<sup>me</sup> Duflot, mineure à l'époque.");
+					}
+					if(ui.value == 2) {
+						toggle_view("tce");
+						$("#amount").html("Le <strong>traité établissant une constitution pour l'Europe</strong> (TCE), malgré une campagne importante des partis majoritaires et des médias pour le oui, est rejeté par les électeurs, avec 54,58% des voix.")
+					}
+					if(ui.value == 3) {
+						toggle_view("lisbonne");
+						$("#amount").html("Le <strong>traité de Lisbonne</strong> (2008) reprend les principaux traités. Il fut adopté en France par le Parlement. Nous avons retenu les positions lors du vote du 7 février 2008 sur le texte lui-même, intervenu quelques jours après le vote en Congrès adoptant une révision constitutionnelle.")
+					}
+					if(ui.value == 4) {
+						toggle_view("traite");
+						$("#amount").html("Négocié par le président Nicolas Sarkozy, le <strong>traité sur la stabilité, la coordination et la gouvernance</strong> (TCSG), auquel a notamment été ajouté un volet croissance sous François Hollande, doit être adopté par le Parlement durant l'automne 2012. Certaines personnalités ne se sont pas prononcées, parmi lesquels les représentants de l'aile gauche du PS, MM.Hamon et Emmanuelli, sollicités.")
+					}
+				}
+			});
+		});
+	});
+	</script>
+	<!--[if lt IE 7 ]>
+	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+	<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div id="container" class="container">
+		<div id="main" role="main">
+			<p id="desc"><em>Le Monde</em> a rassemblé les positions de 39 responsables sur quatre scrutins européens : deux sont des référendums (du 20 septembre 1992, sur le traité de Maastricht et du 29 mai 2005, sur le traité constitutionnel européen) ; deux sont des votes au Parlement. En cas de changement de position, nous avons privilégié la dernière adoptée, par exemple pour M. Valls, qui a défendu le non en 2005 avant de faire campagne pour le oui. Les positions sur le traité sont susceptibles de changer et seront mises à jour. Pour toute question : <a href="mailto:lesdecodeurs@gmail.com">lesdecodeurs@gmail.com</a></p>
+			<ol style="font-weight:bold;font-decoration:italic"><li>Faites bouger le curseur pour changer de scrutin et voir qui a voté quoi à cette époque.</li><li>Cliquez sur une bulle pour voir les positions d'une personnalité politique pour chaque scrutin.</li></ol>
+			<div id="curseur" style="margin-top:15px;width:100%">
+				<div class="ui-slider-legend" style="margin-left:55px;">
+					<p class="etiquette" style="width:132px;text-align:left;"><strong>1992</strong><br /><span>Traité de Maastricht</span></p>
+					<p class="etiquette" style="width:265px;"><strong>2005</strong><br /><span>Traité constitutionnel</span></p>
+					<p class="etiquette" style="width:265px;"><strong>2008</strong><br /><span>Traité de Lisbonne</span></p>
+					<p class="etiquette" style="width:132px;text-align:right"><strong>2012</strong><br /><span>Traité budgétaire</span></p>
+				</div>
+				<div id="slider" style="clear:both;width:800px;margin-bottom:10px;margin-left:55px;margin-top:5px;"></div>
+			</div>
+			<div id="vis"></div>
+			<div id="amount">Négocié par le président Nicolas Sarkozy, le <strong>traité sur la stabilité, la coordination et la gouvernance</strong> (TCSG), auquel a notamment été ajouté un volet croissance sous François Hollande, doit être adopté par le Parlement durant l'automne 2012. Certaines personnalités ne se sont pas prononcées, parmi lesquels les représentants de l'aile gauche du PS, MM.Hamon et Emmanuelli, sollicités.</div>
+		</div>
+		<div id="footer">
+			source : <a href="http://lemonde.fr" target="_blank">Le Monde</a> - crédits : Alexandre Léchenet - code par <a href="http://vallandingham.me/bubble_charts_in_d3.html" target="_blank">Jim Vallandingham</a>
+		</div>
+	</div> <!--! end of #container -->
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+
+</body>
+</html>

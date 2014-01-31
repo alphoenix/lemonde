@@ -1,0 +1,320 @@
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="./lemonde.css">
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+	<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="class.Gselper.js"></script>
+	<script type="text/javascript">
+	
+	$(function () {
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: '',
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>',
+            style: {
+                        fontFamily: 'Arial',
+                        color: 'black',
+            }
+        },
+        credits:{
+            enabled: false,
+        },
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: false,
+                },
+                startAngle: -90,
+                endAngle: 90,
+                center: ['50%', '50%']
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Nombre de conseillers',
+            innerSize: '50%',
+            data: [
+                {name:'Communistes et PG',y: 10, color:'rgba(183, 4, 0, .75)'},
+                {name:'Europe-Ecologie-Les Verts',y:10, color:'rgba(95, 139, 43, .75)'},
+                {name:'Socialistes et apparentés',y:77, color:'rgba(214, 0, 101, .75)'},
+                {name:'UDI',y:11, color:'rgba(6, 120, 185, .75)'},
+                {name:'UMP',y:52, color:'rgba(41, 86, 170, .75)'},
+                {name:'non inscrits',y:2, color:'rgba(69, 69, 69, .75)'}
+            ]
+        }]
+    });
+});
+    
+
+	
+	var latlng = new google.maps.LatLng(48.86,2.34);
+	
+	function addMarker(lng,lat,text,map) {
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(lat,lng),
+			map: map
+		});
+				
+		marker.setIcon(new google.maps.MarkerImage('marker.png',new google.maps.Size(25,25),new google.maps.Point(0,0)));
+
+		google.maps.event.addListener(marker,'click',function() {
+			$("#notices").html(text);
+		});
+		
+		return marker;
+	}
+
+	function addPolygon(map,number,table) {
+		var html = "",path = [];
+		var element = table.get(number);
+		
+		var pathTable = $.parseJSON(element.json);
+
+		$.each(pathTable, function(key, val) {
+			path.push(new google.maps.LatLng(pathTable[key][1],pathTable[key][0]));
+		});
+
+		color = element.couleurhexa
+		
+		var polygon = new google.maps.Polygon({
+			paths: path,
+			strokeColor: "#333",
+			strokeOpacity: 0.5,
+			strokeWeight: 0.5,
+			fillColor: color,
+			fillOpacity: 0.5,
+			map: map
+		});
+		
+		google.maps.event.addListener(polygon,'mouseover',function() {
+			polygon.setOptions({paths:path,fillOpacity:0.2})
+		});
+				
+		if(element.ardt == 1) html = "<p><span class=\"tt26_capital\">" + element.ardt + "<sup>er</sup> arrondissement</span><br />";
+		else html = "<p ><span class=\"tt26_capital\">" + element.ardt + "<sup>e</sup> arrondissement</span><br />";
+
+		html += element.nbconseillers + " conseiller"
+		if(element.nbconseillers > 1) html += "s"
+		html += " de Paris à élire dans cet arrondissement."
+
+
+		//- NOTULE -//
+		
+		html += "<br /><p>"+element.notule+"</p>";
+
+	
+		//- CURSEUR 2008 -//
+	
+		html += "<p style='margin-top:10px'>Lors des élections municipales en <strong>2008</strong>, <strong>la "+element.vainqueur2008+"</strong> l'emporte"
+		if(element.tour2008 == 1) html += " au premier tour "
+		else html += " au second tour "
+		html += "dans l'arrondissement, avec <strong>" + Math.floor(element.score2008*10000)/100+"&nbsp;%</strong>"
+	
+		html += "<span style='width:100%;float:left;min-height:15px;margin-top:5px;background:"
+		if(element.vainqueur2008 == "gauche") html += "#2956aa'>"
+		else html += "#d60065'>" 
+		//- Ve ARRONDISSEMENT -//
+		html += "<span style='margin:0;background:"
+		if(element.vainqueur2008 == "gauche") html += "#d60065"
+		else html += "#2956aa" 
+		html += ";float:left;width:"+Math.floor(element.score2008*10000)/100+"%'>&nbsp;</span>"
+		
+		if(element.ardt == 5) {
+			html += "<span style='margin:0;padding:0;min-height:15px;float:left;background:#f76a00;width:10.9%'>&nbsp;</span>"		
+		}
+
+		
+		html+= "</span></p><br />"
+	
+		html += "<p>Au second tour de l'élection présidentielle en <strong>2012</strong>, <strong>la "+element.vainqueur2012+"</strong> arrive en tête dans l'arrondissement avec <strong>" + Math.floor(element.score2012*10000)/100+"&nbsp;%</strong> des voix."
+
+
+		//- CURSEUR 2012 -//
+		
+		html += "<span style='width:100%;float:left;min-height:15px;margin-top:5px;background:"
+		if(element.vainqueur2012 == "gauche") html += "#2956aa"
+		else html += "#d60065" 
+		html += "'><span style='margin:0;float:left;background:"
+		if(element.vainqueur2012 == "gauche") html += "#d60065"
+		else html += "#2956aa" 
+		html += ";width:"+Math.floor(element.score2012*10000)/100+"%'>&nbsp;</span></span></p>"
+		
+		//- TETE DE LISTE -//
+
+		html += "<br /><strong class=\"tt17_capital\">TÊTES DE LISTES ANNONCEÉS</strong>"
+		
+		
+		//-- TETE DE LISTE DU PARTI DE GAUCHE --//
+		html += "Tête de liste PG : "
+		if(element.tetepg == "") html += "<em>pas encore annoncée</em>"
+		else html +=  "<strong class=\"tt17_capital\" style=\"display:inline\">"+element.tetepg+"</strong>"
+
+		if(element.candidatpg == "oui") html += " (candidate à la mairie de Paris)"
+
+		html += "<br />"
+
+		//-- TETE DE LISTE DES VERTS --//
+		html += "Tête de liste EELV : "
+		html +=  "<strong class=\"tt17_capital\" style=\"display:inline\">"+element.teteeelv+"</strong>"
+		
+		if(element.sortanteelv == "oui" && element.sexeeelv == "femme") html += " (maire sortante)"
+		if(element.sortanteelv == "oui" && element.sexeeelv == "homme") html += " (maire sortant)"
+		if(element.candidateelv == "oui") html += " (candidat à la mairie de Paris)"
+		
+		html += "<br />"
+
+		//-- TETE DE LISTE DE GAUCHE --//
+		html += "Tête de liste PS et alliés : "
+		html +=  "<strong class=\"tt17_capital\" style=\"display:inline\">"+element.teteps+"</strong>"
+		
+		if(element.sortantps == "oui" && element.sexeps == "femme") html += " (maire sortante)"
+		if(element.sortantps == "oui" && element.sexeps == "homme") html += " (maire sortant)"
+		if(element.candidatps == "oui") html += " (candidate à la mairie de Paris)"
+		
+		html += "<br />"
+		
+		//-- TETE DE LISTE DE DROITE --//
+		html += "Tête de liste UMP : "
+		if(element.tetedroite == "") html += "<em>pas encore annoncée</em>"
+		else html +=  "<strong class=\"tt17_capital\" style=\"display:inline\">"+element.tetedroite+"</strong>"
+
+		if(element.sortantdroite == "oui" && element.sexedroite == "homme") html += " (maire sortant)"
+		if(element.sortantdroite == "oui" && element.sexedroite == "femme") html += " (maire sortante)"
+		if(element.candidatdroite == "oui") html += " (candidate à la mairie de Paris)"
+
+		html += "<br />"
+		
+		if(element.dissidence != "")  {
+
+		html += "Dissidence possible à droite : "
+		html +=  "<strong class=\"tt17_capital\" style=\"display:inline\">"+element.dissidence+"</strong><br />"
+
+		}
+		
+		//-- TETE DE LISTE D'EXTREME-DROITE --//
+		html += "Tête de liste FN : "
+		if(element.tetefn == "") html += "<em>pas encore annoncée</em>"
+		else html +=  "<strong class=\"tt17_capital\" style=\"display:inline\">"+element.tetefn+"</strong>"
+
+		if(element.candidatfn == "oui") html += " (candidat à la mairie de Paris)"
+		
+		
+		
+		//-- CONSTRUCTION DE LA CARTE --//
+		google.maps.event.addListener(polygon,'click',function() {
+			$("#notices").html(html);	
+		});
+		
+		google.maps.event.addListener(polygon,'mouseout',function() {
+			polygon.setOptions({fillOpacity:0.5})
+		});
+		
+		return polygon;
+
+	}
+	
+	function createPolygon(map,table) {
+		for(var i=0;i<20;i++) {
+			addPolygon(map,i,table);
+		}
+	}
+	
+	$(document).ready(function () {
+		var mapOptions = {
+			zoom: 12,
+			minZoom: 12,
+			center: latlng,
+			mapTypeControlOptions: false,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeControl: false,
+			draggable: false,
+			panControl: false,
+			scrollwheel: false,
+			zoomControl: false,
+			streetViewControl: false,
+			disableDoubleClickZoom: true,
+			styles: [
+			  {
+				"elementType": "geometry",
+				"stylers": [
+				  { "saturation": -100 }
+				]
+			  },{
+				"elementType": "labels",
+				"stylers": [
+				  { "visibility": "off" }
+				]
+			  },{
+				"featureType": "water",
+				"stylers": [
+				  { "saturation": 75 },
+				  { "hue": "#004cff" }
+				]
+			  },{
+				"featureType": "road",
+				"elementType": "geometry",
+				"stylers": [
+				  { "lightness": 50 }
+				]
+			  },{
+			  }
+			]
+		};
+		var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+
+		var table = new Gselper({
+		    key: "0AiWUhxLpQgUXdHZvRWFRVUpsdzdHUlc4OWJMZHh4QUE",
+		    worksheet: "od6",
+		    onComplete: function() {
+				createPolygon(map,table);
+			}
+		});
+	});
+	</script>
+	<style type="text/css" media="screen">
+		* {margin: 0;padding:0;}
+		body {width:1000px;height:520px;font:normal 130% arial,sans-serif}
+		#map {width:550px;height:550px;float:right;}
+		#column {width:430px;float:left;padding-left:5px;padding-top:0;}
+		#legend {width:430px;position:absolute;bottom:0;background:white;padding:0;margin:0}
+		#notices p {width:430px;margin-top:5px;}
+		#chapo {margin-bottom:5px;}
+		.space {height:5px}
+	</style>
+	<title>Municipales à Paris</title>
+</head>
+<body class="contenu_article article">
+	<div id="column">
+	<div id="notices">
+<<<<<<< HEAD
+		<p class="tt26_capital">Municipales : la guerre est déclarée</p>
+		<p>Après deux mandats, Bertrand Delanoë ne se représente pas aux élections </p>
+		<div id="container" style="width: 430px; height: 400px; margin: 0 auto"></div>
+=======
+		<p>Après deux mandats successifs, <strong>Bertrand Delanoë</strong>, cédera sa place en mars 2014. Si la gauche pourrait pâtir d'un contexte politique national défavorable, la droite doit faire face de son côté à plusieurs dissidences et un système électoral indirect favorable aux socialistes.</p>
+		<p class="tt26_capital">2008 : Un conseil de Paris à gauche</p>
+		<div id="container" style="width: 100%; height: 400px; margin: 0 auto"></div>
+		<p style="position:relative;top:-175px;">Entre arrondissements de reconquête et bascule possible, tour d'horizon des différentes batailles par arrondissement.</p>
+>>>>>>> a257e7a0db9caa5c42d6d80d172f7d514903bd20
+	</div>
+	<div id="legend">
+		<p><hr /><em>Cliquez sur les différents arrondissements dans la carte ci-contre pour en savoir plus.</em></p>
+		<p><span style='width:50px;min-height:15px;margin-top:5px;background:rgba(214, 0, 101, .75);display:inline;'>&nbsp;</span> Mairie d'arrondissement à gauche<br /><span style='width:30px;min-height:15px;margin-top:5px;background:rgba(41, 86, 170, .75)'>&nbsp;</span> Mairie d'arrondissement à gauche</p>
+		<p class="lire"><strong>Retrouvez <a target="_blank" href="http://lemonde.fr/paris">tous nos contenus sur les élections municipales à Paris</a>.</strong></p>
+	</div>
+	</div>
+	<div id="map"></div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css" />
+	<link rel="stylesheet" type="text/css" href="./lemonde.css" />
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<style type='text/css'>
+	body {
+		background: #fff;
+	}
+	  .wax-legend .legend-title {
+	    text-align: left;
+	    margin-bottom: 8px;
+	    font-weight: bold;
+	    font-size: 90%;
+	    }
+	  .wax-legend .legend-scale ul {
+	    margin: 0;
+	    padding: 0;
+	    float: left;
+	    list-style: none;
+	    }
+	  .wax-legend .legend-scale ul li {
+	    display: block;
+	    float: left;
+	    width: 50px;
+	    margin-bottom: 6px;
+	    text-align: left;
+	    font-size: 80%;
+	    list-style: none;
+	    }
+	  .wax-legend ul.legend-labels li span {
+	    display: block;
+	    float: left;
+	    height: 15px;
+	    width: 50px;
+	    }
+	  .wax-legend .legend-source {
+	    font-size: 70%;
+	    color: #999;
+	    clear: both;
+	    }
+	.wax-legend a {
+		color: #777;
+	}
+	p {
+		padding-top: 5px;
+	}
+</style>
+</head>
+<body style="width:999px">	
+	<iframe width='999' height='630' frameborder='0' src='map.html'></iframe>
+	<div class='wax-legend'>
+		<div class='legend-scale'>
+			<ul class='legend-labels'>
+				<li><span style='background:#FEF0D9;'></span></li>
+				<li><span style='background:#FDD49E;'></span>1</li>
+				<li><span style='background:#FDBB84;'></span>1,2</li>
+				<li><span style='background:#FC8D59;'></span>1,4</li>
+				<li><span style='background:#EF6548;'></span>1,6</li>
+				<li><span style='background:#D7301F;'></span>1,8</li>
+				<li><span style='background:#990000;'></span>2</li>
+			</ul>
+		</div>
+		<div class='legend-title' style="padding-left:360px">Nombre de détenus par rapport à la capacité</div>
+	</div>
+	<div class="container_18">
+	<div class="col_droite grid_6 omega" style="width:25%;float:right;clear:both">
+		<div class="col_droite bloc_base">
+			<h4 class="entete">La moitié des établissements en surpopulation</h4>
+			<p class="contenu_bloc_droit"><div id="chart" style="width:241px;height:241px;"></div></p>
+			<script type="text/javascript">$(function () {
+    $('#chart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+		credits: {
+			enabled:false,
+		},
+        title: {
+            text:''
+        },
+        tooltip: {
+            formatter: function() {
+                s = 'Densité '+this.point.name+'<br />Nombre d\'établissements : '+this.point.y;
+                return s;
+            },
+            style:{
+                fontFamily: 'Arial',
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: false,
+                dataLabels: {
+                    enabled: false,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>Densité {point.name}</b><br />{point.percentage:.1f} %',
+                    style:{
+                        fontFamily: 'Arial'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Densité carcérale',
+            data: [
+                {name:'supérieure ou égale à 200 %',y:7,color:'#990000'},
+                {name:'entre 150 % et 200 %',y:30,color:'#D7301F'},
+                {name:'entre 120 % et 150 %',y:58,color:'#FC8D59'},
+                {name:'entre 100 % et 120 %',y:29,color:'#FDD49E'},
+                {name:'inférieure à 100 %',y:127,color:'#FEF0D9'}
+            ]
+        }]
+    });
+});
+    
+</script>
+		</div>
+	</div>
+	<div class="article grid_12 alpha txt15_140" style="clear:left">
+		<p>67 088 personnes étaient incarcérées en France au 1<sup>er</sup> septembre 2013, soit une baisse de 0,9 % par rapport au mois d'août. Le mois de juillet avait établi un  record avec 68 569 détenus. La capacité opérationnelle de l'ensemble des établissements pénitentiaires est de 57 473 places. La densité carcérale est donc de 116,7 % en septembre.</p>
+				
+		<p >Sur la carte ci-dessus, chaque lieu de privation de liberté est représenté par un cercle. La taille du cercle dépend de la capacité opérationnelle de celui-ci. Plus un cercle est rouge, plus la densité dans le lieu de privation de liberté est élevée. Les données proviennent <a href="./mensuelle_avril_2013.pdf" target="_blank">des statistiques mensuelles de la population détenue et écrouée</a> compilées par le ministère de la justice mais non publiques.</p>
+
+		<p>Naviguez dans la carte et cliquez sur les cercles pour en savoir plus sur chaque lieu de privation de liberté. Cliquez sur chaque point pour plus de détails. Des établissements pénitentiaires sont visibles en outre-mer : l'établissement le plus surpeuplé est le centre pénitentiaire de Faa'a Nuutania, en Polynésie française, qui compte 409 personnes écrouées pour une capacité opérationnelle de 165 places. Sept établissements en France ont une densité supérieure à 200 % en septembre 2013.</p>
+		<p style="font-size:x-small;" class="normal">Source : <a href="http://www.justice.gouv.fr/art_pix/mensuelle_septembre_2013.pdf" target="_blank">ministère de la justice</a></div>
+	</div>
+	</div>
+</body>
+</html>

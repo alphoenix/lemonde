@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>À Marseille, la vague des règlements de compte</title>
+	<style>
+	* {margin:0;padding:0;font-family:Arial, sans-serif}
+	body{width:990px;height:600px;font-size:15px;line-height:130%}
+	#map-canvas {width:660px;height:600px;float:left}
+	#column {width:310px;float:right;padding:10px}
+	#tools {width:90%}
+	#slider {margin-left:10px;}
+	#legend {margin: 10px 3px;font-size:.9em}
+	#tuto {position:absolute;bottom:25px;}
+	#credits {position:absolute;bottom:0;font-size:12px;right:1px;text-align:right;line-height:100%}
+	sup {position:relative;font-size:75%;line-height:0;top:.5em;vertical-align:text-top;}
+	</style>
+	<script src="js/jquery.min.js"></script>
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.ui.datepicker-fr.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	var map;
+	var layer,polygon;
+	function initialize() {
+		map = new google.maps.Map(document.getElementById('map-canvas'), {
+			center: new google.maps.LatLng(43.31988417364429, 5.38055419921875),
+			zoom: 11,
+			mapTypeId: google.maps.MapTypeId.TERRAIN,
+			mapTypeControl:false,
+			streetViewControl:false,
+			//			zoomControl:false,
+			//			panControl:false,
+			//			scrollwheel: false,
+			//			draggable:false,
+			disableDoubleClickZoom:true
+		});
+		var style = [
+		{
+			"featureType": "road",
+			"elementType": "labels",
+			"stylers": [
+			{ "visibility": "off" }
+			]
+		},{
+			"featureType": "transit",
+			"stylers": [
+			{ "visibility": "off" }
+			]
+		},{
+			"featureType": "road",
+			"elementType": "geometry",
+			"stylers": [
+			{ "color": "#8c8f96" }
+			]
+		},{
+			"featureType": "landscape",
+			"stylers": [
+			{ "color": "#efe7e0" },
+			{ "lightness": 18 }
+			]
+		},{
+			"featureType": "poi",
+			"stylers": [
+			{ "visibility": "off" }
+			]
+		},{
+		}
+		];
+		var styledMapType = new google.maps.StyledMapType(style, {
+			map: map,
+			name: 'Styled Map'
+		});
+		map.mapTypes.set('map-style', styledMapType);
+		map.setMapTypeId('map-style');
+
+		pathMarseille = [new google.maps.LatLng(43.293591286527466,5.371008366340329),
+		new google.maps.LatLng(43.294991984262509,5.373616424523345),
+		new google.maps.LatLng(43.298098197906938,5.360818835962618),
+		new google.maps.LatLng(43.308532319516218,5.363131708048592),
+		new google.maps.LatLng(43.318874589211674,5.360178391933806),
+		new google.maps.LatLng(43.336266357096569,5.345515525225727),
+		new google.maps.LatLng(43.339477152288602,5.337717765640301),
+		new google.maps.LatLng(43.341636524053335,5.333995143969294),
+		new google.maps.LatLng(43.347250277540198,5.335764086607702),
+		new google.maps.LatLng(43.35955476480553,5.313493306530384),
+		new google.maps.LatLng(43.360450986090484,5.303969859650236),
+		new google.maps.LatLng(43.353657472043352,5.282250636130829),
+		new google.maps.LatLng(43.366086023904586,5.278845022710742),
+		new google.maps.LatLng(43.374982897424744,5.283305582360426),
+		new google.maps.LatLng(43.380468891254139,5.278797321327975),
+		new google.maps.LatLng(43.387064532044839,5.300135756269961),
+		new google.maps.LatLng(43.3720238306108,5.31918823936611),
+		new google.maps.LatLng(43.371445464110352,5.332279390349889),
+		new google.maps.LatLng(43.376528130426252,5.337395913017613),
+		new google.maps.LatLng(43.376703033570742,5.353825447060562),
+		new google.maps.LatLng(43.382502197279649,5.350372962010059),
+		new google.maps.LatLng(43.388603020357948,5.371478393074058),
+		new google.maps.LatLng(43.383781168704694,5.377116634588627),
+		new google.maps.LatLng(43.370558860678585,5.377977284279147),
+		new google.maps.LatLng(43.372075887262007,5.391635976136481),
+		new google.maps.LatLng(43.378663508753235,5.415168826725397),
+		new google.maps.LatLng(43.383412460437341,5.42457383380506),
+		new google.maps.LatLng(43.390234290549913,5.439819323601976),
+		new google.maps.LatLng(43.386973564359806,5.447505381533793),
+		new google.maps.LatLng(43.361053894325991,5.463686091148949),
+		new google.maps.LatLng(43.345474096641517,5.452204427764784),
+		new google.maps.LatLng(43.335727306703781,5.454958468131022),
+		new google.maps.LatLng(43.323005012249837,5.466645382848089),
+		new google.maps.LatLng(43.314729508774157,5.475104148909094),
+		new google.maps.LatLng(43.315350276652673,5.49781057591644),
+		new google.maps.LatLng(43.321596081612704,5.51374939094617),
+		new google.maps.LatLng(43.320763993486246,5.522810628113824),
+		new google.maps.LatLng(43.298673469647227,5.530284973035355),
+		new google.maps.LatLng(43.288015348118265,5.518421010896978),
+		new google.maps.LatLng(43.288595049448546,5.514010988081057),
+		new google.maps.LatLng(43.28138012482146,5.505738512395604),
+		new google.maps.LatLng(43.274890920678359,5.506134049221221),
+		new google.maps.LatLng(43.267695840171527,5.514442579264482),
+		new google.maps.LatLng(43.263444248590559,5.51305039249773),
+		new google.maps.LatLng(43.244327867749917,5.519641387315469),
+		new google.maps.LatLng(43.238652922813053,5.524095949972257),
+		new google.maps.LatLng(43.235511049352134,5.522210649245527),
+		new google.maps.LatLng(43.234612416185051,5.512890483104896),
+		new google.maps.LatLng(43.229620536453332,5.507343888487378),
+		new google.maps.LatLng(43.214159173396048,5.517008194842828),
+		new google.maps.LatLng(43.197902898446394,5.510186058946408),
+		new google.maps.LatLng(43.201286904029146,5.509016872324551),
+		new google.maps.LatLng(43.201004677264486,5.4947962153779),
+		new google.maps.LatLng(43.210187409841694,5.458577853521496),
+		new google.maps.LatLng(43.208497829044759,5.449770779762462),
+		new google.maps.LatLng(43.205103968107807,5.448630313564558),
+		new google.maps.LatLng(43.208135927972648,5.43035381907201),
+		new google.maps.LatLng(43.205226527389982,5.423268336857936),
+		new google.maps.LatLng(43.212362346034318,5.396696737403804),
+		new google.maps.LatLng(43.209584286635632,5.381534950670763),
+		new google.maps.LatLng(43.207803324026251,5.362663331701621),
+		new google.maps.LatLng(43.214413967129573,5.340528672267841),
+		new google.maps.LatLng(43.230475487066919,5.350139572324477),
+		new google.maps.LatLng(43.248236714841518,5.373330583985266),
+		new google.maps.LatLng(43.258694645062036,5.373711535928131),
+		new google.maps.LatLng(43.268314734348536,5.367986667220954),
+		new google.maps.LatLng(43.282217196721518,5.347862812274424),
+		new google.maps.LatLng(43.293855846562877,5.357269252321336),
+		new google.maps.LatLng(43.293591286527466,5.371008366340329)];
+
+		pathZSP = [new google.maps.LatLng(43.301593900457782,5.375021899598047),
+		new google.maps.LatLng(43.316725673757134,5.369137441511612),
+		new google.maps.LatLng(43.334814095225205,5.354777491103132),
+		new google.maps.LatLng(43.336266357096569,5.345515525225727),
+		new google.maps.LatLng(43.339477152288602,5.337717765640301),
+		new google.maps.LatLng(43.341636524053335,5.333995143969294),
+		new google.maps.LatLng(43.347250277540198,5.335764086607702),
+		new google.maps.LatLng(43.35955476480553,5.313493306530384),
+		new google.maps.LatLng(43.360450986090484,5.303969859650236),
+		new google.maps.LatLng(43.353657472043352,5.282250636130829),
+		new google.maps.LatLng(43.366086023904586,5.278845022710742),
+		new google.maps.LatLng(43.374982897424744,5.283305582360426),
+		new google.maps.LatLng(43.380468891254139,5.278797321327975),
+		new google.maps.LatLng(43.387064532044839,5.300135756269961),
+		new google.maps.LatLng(43.3720238306108,5.31918823936611),
+		new google.maps.LatLng(43.371445464110352,5.332279390349889),
+		new google.maps.LatLng(43.376528130426252,5.337395913017613),
+		new google.maps.LatLng(43.376703033570742,5.353825447060562),
+		new google.maps.LatLng(43.382502197279649,5.350372962010059),
+		new google.maps.LatLng(43.388603020357948,5.371478393074058),
+		new google.maps.LatLng(43.383781168704694,5.377116634588627),
+		new google.maps.LatLng(43.370558860678585,5.377977284279147),
+		new google.maps.LatLng(43.372075887262007,5.391635976136481),
+		new google.maps.LatLng(43.378663508753235,5.415168826725397),
+		new google.maps.LatLng(43.383412460437341,5.42457383380506),
+		new google.maps.LatLng(43.390234290549913,5.439819323601976),
+		new google.maps.LatLng(43.386973564359806,5.447505381533793),
+		new google.maps.LatLng(43.361053894325991,5.463686091148949),
+		new google.maps.LatLng(43.345474096641517,5.452204427764784),
+		new google.maps.LatLng(43.335727306703781,5.454958468131022),
+		new google.maps.LatLng(43.323005012249837,5.466645382848089),
+		new google.maps.LatLng(43.318511036582194,5.459661138577253),
+		new google.maps.LatLng(43.322766045399575,5.431502164700163),
+		new google.maps.LatLng(43.314982695704835,5.410528505495336),
+		new google.maps.LatLng(43.316464883718524,5.393642528492316),
+		new google.maps.LatLng(43.316412029412248,5.393184281155429),
+		new google.maps.LatLng(43.309397466573571,5.390502166127308),
+		new google.maps.LatLng(43.301593900457782,5.375021899598047)];
+
+		polygon = new google.maps.Polygon({
+			paths: pathZSP,
+			strokeColor: "#A50F15",
+			strokeOpacity: 0.8,
+			strokeWeight: 2,
+			fillColor: "#DE2D26",
+			fillOpacity: 0.33,
+			map: map,
+			clickable:false,
+			zIndex:2,
+		});
+
+		polygon = new google.maps.Polygon({
+			paths: pathMarseille,
+			strokeColor: "#444444",
+			strokeOpacity: 0.8,
+			strokeWeight: 4,
+			fillColor: "#444444",
+			fillOpacity: 0,
+			map: map,
+			clickable:false,
+			zIndex:3,
+		});
+
+		layer = new google.maps.FusionTablesLayer({
+			query: {
+				select: "lieu",
+				from: "1ToS5n4tk6xQ7-9RKs5SIOzPm-u52-xmBD_vx55A"
+			},
+			map: map,
+			suppressInfoWindows: true,
+			zIndex:10
+		});
+
+		google.maps.event.addListener(layer, 'click', function(e) {
+			var date = new Date($.datepicker.parseDate('dd/mm/yy',e.row.date.value));
+			$('#date').html($.datepicker.formatDate('d MM yy',date));
+			$('#description').html(e.row.description.value);
+			if(e.row.morts.value > 1) $('#morts').html(" - "+e.row.morts.value+" morts")
+			else if(e.row.morts.value == 1) $('#morts').html(" - "+e.row.morts.value+" mort")
+			else $('#morts').html("")
+		});
+	}
+
+	function filterMap(debut, fin) {
+		var where = "date >= '"+debut+"' AND date <= '"+fin+"'" 
+		if (where) {
+			if (!layer.getMap()) {
+				layer.setMap(map);
+			}
+			layer.setOptions({
+				query: {
+					select: "lieu",
+					from: "1ToS5n4tk6xQ7-9RKs5SIOzPm-u52-xmBD_vx55A",
+					where: where
+				}
+			});	
+			layer.setMap(map)
+		} else {
+			layer.setMap(null);
+		}
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+	$(document).ready(function() {
+		$(function() {
+			$.datepicker.setDefaults($.datepicker.regional["fr"]);
+			var minDate = new Date(2010, 0, 1);
+			var maxDate = new Date(2012, 10, 2);
+			$('#slider').slider({
+				values: [minDate.getTime(),maxDate.getTime()],
+				min: minDate.getTime(),
+				max: maxDate.getTime(),
+				range: true,
+				slide: function(event, ui) {
+					var debut = new Date(ui.values[0]);
+					var fin = new Date(ui.values[1]);
+					filterMap(
+						$.datepicker.formatDate('dd/mm/yy',debut),
+						$.datepicker.formatDate('dd/mm/yy',fin)
+					)
+					var jourDebut = $.datepicker.formatDate('d',debut);
+					var jourFin = $.datepicker.formatDate('d',fin);
+					if(jourDebut == 1) $('#from').html("1<sup>er</sup> "+$.datepicker.formatDate('MM yy',debut));
+					else $('#from').html($.datepicker.formatDate('d MM yy',debut));
+					if(jourFin == 1) $('#to').html("1<sup>er</sup> "+$.datepicker.formatDate('MM yy',fin));
+					else $('#to').html($.datepicker.formatDate('d MM yy', fin));
+				}
+			});
+		});
+	});
+	</script>
+</head>
+<body>
+	<div id="map-canvas"></div>
+	<div id="column">
+		<p id="typologie"><strong id="date"></strong><strong id="morts"></strong></p>
+		<div id="description">Nous avons réuni sur une carte <a href="http://www.lemonde.fr/societe/article/2012/05/11/a-marseille-la-macabre-serie-des-reglements-de-comptes_1699964_3224.html" target="_blank">les règlements de comptes commis à Marseille</a> et dans sa très proche banlieue depuis le 1<sup>er</sup> janvier 2010. La liste n'est pas forcément exhaustive : certains assassinats peuvent ne pas apparaître immédiatement comme des règlements de comptes, et ce qui semble être un règlement de comptes peut se révéler être la conclusion d'un différend d'ordre privé. Les points communs : le passé judiciaire des hommes impliqués, et la très grande violence des crimes commis dans des lieux publics à toute heure du jour et de la nuit.</div>
+		<div id="tuto">Chaque règlement de comptes est indiqué par un point rouge. La zone délimitée <span style="color:#DE2D26">en rouge</span> est la zone de sécurité prioritaire instaurée par le ministère de l'intérieur sur la commune de Marseille.<br /><strong><em>Naviguez dans la carte et cliquez sur les points de couleur pour en savoir plus sur le règlement de comptes en question.</em></strong></div>
+		<div id="credits">crédits : Laurent Borredon et Alexandre Léchenet<br />source : AFP et <a href="http://www.laprovence.com/" target="_blank" style="color:#036">La Provence</a></div>
+	</body>
+	</html>
