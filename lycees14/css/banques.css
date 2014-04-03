@@ -1,0 +1,124 @@
+
+/* NAVIGATION */
+nav {width: 990px; margin: 0 auto}
+nav .tt17_capital {margin: 0;}
+nav a {display: block; float: left; color: #AFC1CF; font-weight: bold; padding: 8px 15px; text-align: center;  }
+.actif {color: #0386c3}
+
+p{
+padding:10 5 10 5;
+}
+
+.top{
+background-color:#2e3942;
+border: solid #e9edf0;
+border-width:1px;
+border-right: 1px solid #AFC1CF;
+}
+
+.ssmenu{
+height:100px;
+padding-top:10px;
+}
+
+/*NAV CONTENT*/
+.colG{
+	float:left;
+	margin-left:15px;
+	width: 940px;
+}
+
+/*TABLES*/
+div.dataTables_wrapper {
+	background-color: #719ba7;
+}
+
+div.dataTables_length {
+	padding: 0px 6px 6px 6px;
+	float: left;
+}
+
+div.dataTables_filter {
+	padding: 0px 18px 6px 6px;
+	float: right;
+}
+
+div.dataTables_info {
+	padding: 20px 0px 0px 0px;
+	float: right;
+}
+
+div.dataTables_paginate {
+	padding: 9px 6px 6px 6px;
+	float: left;
+}
+
+table.display {
+	font-size:12px;
+    width: 991px;
+}
+table.display td,
+table.display th {
+    padding: 5px;
+    border: 1px solid #fefefe;
+}
+div.dataTables_scrollHead{
+	text-align: center;
+		clear:both;
+}
+th.sorting_asc,th.sorting,th.sorting_desc{
+	text-align: center;
+	font-weight:bold;
+	color:#AFC1CF;
+	font-size:13px;
+	background-color:#2e3942;
+
+}
+table.display tbody td {
+    text-align: center;
+    background: #efefef;
+}
+         
+table.display tbody tr.odd td {
+    background: #fefefe;
+}
+div.dataTables_wrapper {
+    background-color: #fefefe;
+}
+a.paginate_button,
+a.paginate_active {
+    display: inline-block;
+    background-color: #efefef;
+    padding: 2px 6px;
+    margin-left: 2px;
+    cursor: pointer;
+    *cursor: hand;
+}
+ 
+a.paginate_active {
+    background-color: transparent;
+    border: 1px solid black;
+}
+ 
+a.paginate_button_disabled {
+    color: #3d6672;
+}
+.paging_full_numbers a:active {
+    outline: none
+}
+.paging_full_numbers a:hover {
+    text-decoration: none;
+}
+ 
+div.dataTables_paginate span>a {
+    width: 15px;
+    text-align: center;
+}
+ 
+div.dataTables_info {
+    padding: 9px 6px 6px 6px;
+}
+
+.sorting { background: url('../images/sort_both.png') no-repeat center right; }
+.sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }

@@ -1,0 +1,146 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>La Russie et l'Europe</title>
+    <link href="./lemonde.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="./jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type='text/css'>
+body {
+width:1000px;
+}
+  .wax-legend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .wax-legend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .wax-legend .legend-scale ul li {
+	display: block;
+	float: left;
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+	padding-right: 5px;
+	width:330px;
+    }
+  .wax-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .wax-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    }
+  .wax-legend a {
+    color: #777;
+    }
+#vmap_desc {
+	margin:5px;
+	height: 600px;
+	overflow: auto;
+}
+.wax-legend {
+	margin: 5px;
+}
+</style>
+	
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="./jqvmap/jquery.vmap.js" type="text/javascript"></script>
+    <script src="./jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+    <script src="./jqvmap/maps/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <script src="./data.js" type="text/javascript"></script>
+
+	<style>body{background:#fff}</style>
+	
+    <script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('#vmap').vectorMap(
+		{
+			map: 'europe_en',
+			backgroundColor: '#D1E5F0',
+			borderColor: '#e0e0e0',
+			borderOpacity: 1,
+			borderWidth: 1,
+			color: '#e0e0e0',
+			enableZoom: true,
+			hoverColor: '#D1E5F0',
+			hoverOpacity: 0.8,
+			normalizeFunction: 'linear',
+			scaleColors: ['#b6d6ff', '#005ace'],
+			selectedColor: '#e0e0e0',
+			selectedRegion: null,
+			showTooltip: false,
+			onRegionClick: function(element, code, region)
+			{
+				if(data[code]) {
+					html = "<h2 class=\"tt26_capital\">"+data[code].nom+'</h2>'
+
+					html += "<p class=\"desc\" style=\"margin-top:5px;\">"+data[code].texte+'</strong></p><hr />'					
+
+					if(data[code].gaz == "na" || code=="ru") {}
+					else html += "<li>Le gaz russe représente <strong>"+data[code].gaz.toString().replace('.',',')+' %</strong> de la consommation nationale de gaz (2011).</li>'
+					if(data[code].echanges == "na" || code=="ru") {}
+					else html += "<li><strong>"+data[code].echanges.toString().replace('.',',')+' %</strong> du commerce extérieur est effectué avec la Russie (2012).</li>'
+					if(data[code].ide == "na" || code=="ru") {}
+					else html += "<li><strong>"+data[code].ide+' </strong> des investissements directs étrangers sont des investissements russes (2012).</li>'
+					
+				}
+				else {
+					html = "Aucune information pour ce pays."
+				}
+				$("#vmap_desc").html(html)
+			}
+		});
+		couleurs = {};
+		$.each(data, function(index,value) {
+			couleurs[index] = value.couleur;
+		});
+		$("#vmap").vectorMap('set','colors',couleurs);
+		
+		
+	});
+    </script>
+  </head>
+  <body>
+    <div id="vmap" style="width: 650px; height: 500px;float:left"></div>
+<div id="vmap_desc" style="float:right;width:340px;margin:0;height:320px">Depuis l'annexion de la Crimée par la Russie, les vingt-huit pays de l'UE peinent à s'entendre sur des sanctions économiques contre Moscou.<br />Chaque Etat membre a ses raisons de craindre les conséquences de telles sanctions pour son économie. La Russie est le troisième partenaire commercial de l'UE, derrière les Etats-Unis et la Chine. Elle représente environ 12 % des importations des Vingt-Huit (principalement de produits énergétiques – pétrole et gaz) et 7 % des exportations (essentiellement de produits manufacturés – automobile et chimie).
+<br /><br /></div>
+  <div class='wax-legend' style="float:right;width:330px;height:200px">
+<div class='legend-scale'>
+	<em>Cliquez sur un pays d'Europe pour en savoir plus sur ses liens économiques avec la Russie.</em><br /><br />
+	<p style="margin-bottom:2px"><strong>Part du gaz russe dans la demande nationale</strong></p>
+	<ul class='legend-labels'>
+		<li><span style='background:#a6bddb;'></span>entre 0 % et 15 %</li>
+		<li><span style='background:#74a9cf;'></span>entre 15 % et 35 %</li>
+		<li><span style='background:#3690c0;'></span>entre 35 % et 55 %</li>
+		<li><span style='background:#0570b0;'></span>entre 55 % et 80 %</li>
+		<li><span style='background:#034e7b;'></span>plus de 80 %</li>
+	</ul>
+</div>
+</div>
+  
+  	
+  	<div style="font-size:x-small;width:650px;text-align:right,clear:both">Sources : Agence internationale de l'énergie, Organisation de coopération et de développement économique, FMI, Eurostat</div>
+
+
+
+	</body>
+</html>
