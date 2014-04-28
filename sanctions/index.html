@@ -1,0 +1,153 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Sanctions contre la Russie : quelles divisions entre les européens ?</title>
+    <link href="./lemonde.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="./jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="http://s1.lemde.fr/medias/web/css/fonts.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type='text/css'>
+body {
+width:1000px;
+}
+  .wax-legend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .wax-legend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .wax-legend .legend-scale ul li {
+	display: block;
+	float: left;
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+	padding-right: 5px;
+	width:330px;
+    }
+  .wax-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .wax-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    }
+  .wax-legend a {
+    color: #777;
+    }
+#vmap_desc {
+	margin:5px;
+	height: 600px;
+	overflow: auto;
+}
+.wax-legend {
+	margin: 5px;
+}
+</style>
+	
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="./jqvmap/jquery.vmap.js" type="text/javascript"></script>
+    <script src="./jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+    <script src="./jqvmap/maps/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <script src="./data.js" type="text/javascript"></script>
+
+	<style>body{background:#fff}</style>
+	
+    <script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('#vmap').vectorMap(
+		{
+			map: 'europe_en',
+			backgroundColor: '#D1E5F0',
+			borderColor: '#e0e0e0',
+			borderOpacity: 1,
+			borderWidth: 1,
+			color: '#e0e0e0',
+			enableZoom: true,
+			hoverColor: '#D1E5F0',
+			hoverOpacity: 0.8,
+			normalizeFunction: 'linear',
+			scaleColors: ['#b6d6ff', '#005ace'],
+			selectedColor: '#e0e0e0',
+			selectedRegion: null,
+			showTooltip: false,
+			onRegionClick: function(element, code, region)
+			{
+				if(data[code]&&code!='ru') {
+					html = "<h2 class=\"tt26_capital\">"+data[code].pays+'</h2>'
+
+					html += "<li>"+data[code].position+'</li>'
+					
+					if(data[code].otan == "oui") html += "<li>Pays <strong>membre de l'OTAN</strong></li>"
+					else html += "<li>Pays <strong>non membre de l'OTAN</strong></li>"
+					html += "<li>"+data[code].dependance+'.</li><hr />'
+
+					html += "<p class=\"desc\" style=\"margin-top:5px;\">"+data[code].texte+'</strong></p>'					
+
+
+				}
+				else if(code='ru') {
+					html = "<h2 class=\"tt26_capital\">"+data[code].pays+'</h2>'
+				}
+				else {
+					html = "Aucune information pour ce pays."
+				}
+				$("#vmap_desc").html(html)
+			}
+		});
+		couleurs = {};
+		$.each(data, function(index,value) {
+			couleurs[index] = value.couleur;
+		});
+		$("#vmap").vectorMap('set','colors',couleurs);
+		
+		
+	});
+    </script>
+  </head>
+  <body>
+    <div id="vmap" style="width: 650px; height: 500px;float:left"></div>
+<div id="vmap_desc" style="float:right;width:340px;margin:0;height:410px;overflow:hidden" class="article"><p style="margin-top:5px">Le 6 mars, les dirigeants de l'Union européenne (UE) se sont mis d'accord sur <a href="http://www.consilium.europa.eu/uedocs/cms_data/docs/pressdata/EN/foraff/141614.pdf" target="_blank">un programme de sanctions contre la Russie</a>. Deux des trois étapes prévues ont déjà été mises en œuvre. La dernière prévoit l'adoption de sanctions économiques et commerciales, si la Russie continue de <em>« déstabiliser la situation en Ukraine »</em>.</p>
+<p>Mais, alors que l’accord de désescalade signé le par l'UE, la Russie, les Etats-Unis et l'Ukraine le 17 avril n'a pas suffi à mettre un terme aux affrontements dans l'est du pays, les Vingt-huit ne parviennent pas à se mettre d’accord et laissent pour l’instant aux Etats-Unis, moins exposés aux contrecoups économiques, le soin d’appliquer ces sanctions.</p>
+<p class="lire">Voir notre carte : <a target="_blank" href="http://www.lemonde.fr/europe/visuel/2014/03/26/europe-et-russie-des-economies-dependantes_4390088_3214.html">Russie-UE : quelles dépendances économiques ?</a></p>
+<p>Les divisions entre les Européens s’expliquent par des intérêts économiques nombreux et différents, mais aussi par des facteurs politiques et de sécurité.</p>
+<br /><br /></div>
+  <div class='wax-legend' style="float:right;width:340px;height:200px;margin:0">
+  <hr />Sur cette carte figurent en rouge, les pays défavorables à des sanctions économiques contre la Russie ; et en vert, les pays favorables. Les pays ne s'étant pas prononcés sont en jaune. <strong>Cliquez sur un pays pour en savoir plus</strong>.
+<!--<div class='legend-scale'>
+	<em>Cliquez sur un pays d'Europe pour en savoir plus sur ses liens économiques avec la Russie.</em><br /><br />
+	<p style="margin-bottom:2px"><strong>Part du gaz russe dans la demande nationale</strong></p>
+	<ul class='legend-labels'>
+		<li><span style='background:#a6bddb;'></span>entre 0 % et 15 %</li>
+		<li><span style='background:#74a9cf;'></span>entre 15 % et 35 %</li>
+		<li><span style='background:#3690c0;'></span>entre 35 % et 55 %</li>
+		<li><span style='background:#0570b0;'></span>entre 55 % et 80 %</li>
+		<li><span style='background:#034e7b;'></span>plus de 80 %</li>
+	</ul>
+</div>-->
+</div>
+  
+  	
+  	<!--<div style="font-size:x-small;width:650px;text-align:right,clear:both">Sources :</div>-->
+
+
+
+	</body>
+</html>
